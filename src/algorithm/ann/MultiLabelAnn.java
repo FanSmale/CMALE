@@ -1,4 +1,4 @@
-package machinelearning.ann;
+package algorithm.ann;
 
 import java.util.Arrays;
 
