@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Ann layer.
  * 
- * @author Fan Min minfanphd@163.com.
+ * @author Fan Min. minfanphd@163.com, minfan@swpu.edu.cn.
  */
 public class FullConnectAnnLayer extends GeneralAnnLayer {
 
