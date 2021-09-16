@@ -243,12 +243,20 @@ public class MultiLabelAnn {
 	 ********************
 	 */
 	public static void main(String[] args) {
-		MultiLabelData tempDataset = new MultiLabelData("D:/data/multilabel/binaryiris.arff", 4, 1);
-		int[] tempFullConnectLayerNodes = { 4, 8, 8 };
-		int[] tempParallelLayerNodes = { 2, 2 };
-		//MultiLabelData tempDataset = new MultiLabelData("D:/data/multilabel/flags.arff", 14, 12);
-		//int[] tempFullConnectLayerNodes = { 14, 14, 14 };
+		//Iris with one label and binary class
+		//MultiLabelData tempDataset = new MultiLabelData("data/binaryiris.arff", 4, 1);
+		//int[] tempFullConnectLayerNodes = { 4, 8, 8 };
 		//int[] tempParallelLayerNodes = { 2, 2 };
+		
+		//Iris with three labels
+		//MultiLabelData tempDataset = new MultiLabelData("data/mliris.arff", 4, 3);
+		//int[] tempFullConnectLayerNodes = { 4, 8, 8 };
+		//int[] tempParallelLayerNodes = { 4, 4, 2 };
+
+		//Flag with multi-label
+		MultiLabelData tempDataset = new MultiLabelData("data/flags.arff", 14, 12);
+		int[] tempFullConnectLayerNodes = { 14, 14, 14 };
+		int[] tempParallelLayerNodes = { 7, 2 };
 
 		MultiLabelAnn tempNetwork = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes,
 				tempParallelLayerNodes, 0.02, 0.6, "sssss");
