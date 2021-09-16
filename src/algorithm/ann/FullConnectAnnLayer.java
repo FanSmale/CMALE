@@ -124,7 +124,7 @@ public class FullConnectAnnLayer extends GeneralAnnLayer {
 	 *            For 3-class data, it is [0, 0, 1], [0, 1, 0] or [1, 0, 0].
 	 ********************
 	 */
-	public double[] getLastLayerErrors(double[] paraTarget) {
+	public double[] getLastLayerErrors(int[] paraTarget) {
 		double[] resultErrors = new double[numOutput];
 		for (int i = 0; i < numOutput; i++) {
 			resultErrors[i] = (paraTarget[i] - activatedOutput[i]);

@@ -79,7 +79,7 @@ public class MultiLabelAnn {
 
 		// Initialize layers.
 		layers = new GeneralAnnLayer[numLayers - 1];
-		System.out.println("numLayers = " + numLayers);
+		// System.out.println("numLayers = " + numLayers);
 		for (int i = 0; i < paraFullConnectLayerNumNodes.length - 1; i++) {
 			// System.out.println("Building full connect layer " + i);
 			layers[i] = new FullConnectAnnLayer(paraFullConnectLayerNumNodes[i],
@@ -90,11 +90,10 @@ public class MultiLabelAnn {
 		// System.out.println(
 		// "Building ParallelAnnLayer " + (paraFullConnectLayerNumNodes.length -
 		// 1));
-		layers[paraFullConnectLayerNumNodes.length - 1] = new ParallelAnnLayer(tempNumParts,
-				paraFullConnectLayerNumNodes[paraFullConnectLayerNumNodes.length - 1]
-						/ tempNumParts,
-				paraParallelLayerNumNodes[0],
-				paraActivators.charAt(paraFullConnectLayerNumNodes.length), paraLearningRate,
+		layers[paraFullConnectLayerNumNodes.length - 1] = new FullConnectAnnLayer(
+				paraFullConnectLayerNumNodes[paraFullConnectLayerNumNodes.length - 1],
+				paraParallelLayerNumNodes[0] * tempNumParts,
+				paraActivators.charAt(paraFullConnectLayerNumNodes.length - 1), paraLearningRate,
 				paraMobp);
 
 		for (int i = 0; i < paraParallelLayerNumNodes.length - 1; i++) {
@@ -115,7 +114,7 @@ public class MultiLabelAnn {
 	 */
 	public void train() {
 		double[] tempInput = new double[dataset.getNumConditions()];
-		double[] tempTarget = new double[dataset.getNumLabels()];
+		int[] tempTarget = new int[dataset.getNumLabels()];
 		for (int i = 0; i < dataset.getNumInstances(); i++) {
 			// Fill the data.
 			for (int j = 0; j < tempInput.length; j++) {
@@ -144,19 +143,26 @@ public class MultiLabelAnn {
 		double[] tempInput;
 
 		double tempNumCorrect = 0;
-		double[] tempPrediction;
+		double[] tempPredictions;
+		// int[] tempLabelPrediction = new int[dataset.getNumLabels()];
+		int tempLabelPrediction;
 
 		for (int i = 0; i < dataset.getNumInstances(); i++) {
 			tempInput = dataset.getData(i);
 
-			tempPrediction = forward(tempInput);
+			tempPredictions = forward(tempInput);
 			//System.out.println("tempInput = " + Arrays.toString(tempInput) + "\r\n prediction = "
-			//		+ Arrays.toString(tempPrediction));
+			//		+ Arrays.toString(tempPredictions));
 			// tempPredictedClass = argmax(tempPrediction);
 
 			for (int j = 0; j < dataset.getNumLabels(); j++) {
-				// System.out.println("i = " + i + ", j = " + j);
-				if ((int) (tempPrediction[j] + 0.5) == dataset.getLabel(i, j)) {
+				if (tempPredictions[2 * j] > tempPredictions[2 * j + 1]) {
+					tempLabelPrediction = 0;
+				} else {
+					tempLabelPrediction = 1;
+				} // Of if
+					// System.out.println("i = " + i + ", j = " + j);
+				if (tempLabelPrediction == dataset.getLabel(i, j)) {
 					tempNumCorrect++;
 				} // Of if
 			} // Of for j
@@ -182,7 +188,7 @@ public class MultiLabelAnn {
 		double[] resultArray = paraInput;
 		// System.out.println("numLayers = " + numLayers);
 		for (int i = 0; i < layers.length; i++) {
-			System.out.println("layer = " + i + ", resultArray = " + Arrays.toString(resultArray));
+			//System.out.println("layer = " + i + ", resultArray = " + Arrays.toString(resultArray));
 			resultArray = layers[i].forward(resultArray);
 		} // Of for i
 
@@ -198,13 +204,26 @@ public class MultiLabelAnn {
 	 *            For 3-class data, it is [0, 0, 1], [0, 1, 0] or [1, 0, 0].
 	 ********************
 	 */
-	public void backPropagation(double[] paraTarget, boolean[] paraLabelKnownArray) {
-		System.out.println("backPropagation paraTarget = " + Arrays.toString(paraTarget));
-		double[] tempErrors = layers[layers.length - 1].getLastLayerErrors(paraTarget);
-		System.out.println("original error = " + Arrays.toString(tempErrors));
+	public void backPropagation(int[] paraTarget, boolean[] paraLabelKnownArray) {
+		// System.out.println("backPropagation paraTarget = " +
+		// Arrays.toString(paraTarget));
+		// Pre-processing.
+		int[] tempTarget = new int[paraTarget.length * 2];
+		for (int i = 0; i < paraTarget.length; i++) {
+			if (paraTarget[i] == 0) {
+				tempTarget[2 * i] = 1;
+				tempTarget[2 * i + 1] = 0;
+			} else {
+				tempTarget[2 * i] = 0;
+				tempTarget[2 * i + 1] = 1;
+			} // Of if
+		} // Of for i
+
+		double[] tempErrors = layers[layers.length - 1].getLastLayerErrors(tempTarget);
+		//System.out.println("original error = " + Arrays.toString(tempErrors));
 		for (int i = layers.length - 1; i >= 0; i--) {
 			tempErrors = layers[i].backPropagation(tempErrors);
-			System.out.println("layer  " + i + ", error = " + Arrays.toString(tempErrors));
+			//System.out.println("layer " + i + ", error = " + Arrays.toString(tempErrors));
 		} // Of for i
 	}// Of backPropagation
 
@@ -224,13 +243,17 @@ public class MultiLabelAnn {
 	 ********************
 	 */
 	public static void main(String[] args) {
-		MultiLabelData tempDataset = new MultiLabelData("D:/data/multilabel/flags.arff", 14, 12);
-		int[] tempFullConnectLayerNodes = { 14, 14, 24 };
-		int[] tempParallelLayerNodes = { 2, 1 };
-		MultiLabelAnn tempNetwork = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes,
-				tempParallelLayerNodes, 0.01, 0.1, "ssssss");
+		MultiLabelData tempDataset = new MultiLabelData("D:/data/multilabel/binaryiris.arff", 4, 1);
+		int[] tempFullConnectLayerNodes = { 4, 8, 8 };
+		int[] tempParallelLayerNodes = { 2, 2 };
+		//MultiLabelData tempDataset = new MultiLabelData("D:/data/multilabel/flags.arff", 14, 12);
+		//int[] tempFullConnectLayerNodes = { 14, 14, 14 };
+		//int[] tempParallelLayerNodes = { 2, 2 };
 
-		for (int round = 0; round < 10; round++) {
+		MultiLabelAnn tempNetwork = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes,
+				tempParallelLayerNodes, 0.02, 0.6, "sssss");
+
+		for (int round = 0; round < 20000; round++) {
 			if (round % 1000 == 999) {
 				System.out.println("Round: " + round);
 			} // Of if
@@ -238,7 +261,7 @@ public class MultiLabelAnn {
 		} // Of for n
 
 		double tempAccuray = 0;
-		//tempAccuray = tempNetwork.test();
+		tempAccuray = tempNetwork.test();
 		System.out.println("The accuracy is: " + tempAccuray);
 		System.out.println("FullAnn ends.");
 	}// Of main

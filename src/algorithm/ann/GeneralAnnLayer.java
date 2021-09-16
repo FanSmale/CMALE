@@ -109,6 +109,6 @@ public abstract class GeneralAnnLayer {
 	 *            For 3-class data, it is [0, 0, 1], [0, 1, 0] or [1, 0, 0].
 	 ********************
 	 */
-	public abstract double[] getLastLayerErrors(double[] paraTarget);
+	public abstract double[] getLastLayerErrors(int[] paraTarget);
 
 }//Of class GeneralAnnLayer
