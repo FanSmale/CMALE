@@ -3,7 +3,7 @@ package algorithm.ann;
 /**
  * Activator.
  * 
- * @author Fan Min minfanphd@163.com.
+ * @author Fan Min. minfanphd@163.com, minfan@swpu.edu.cn.
  */
 
 public class Activator {

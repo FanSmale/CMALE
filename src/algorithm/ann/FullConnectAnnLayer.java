@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Ann layer.
  * 
- * @author Fan Min minfanphd@163.com.
+ * @author Fan Min. minfanphd@163.com, minfan@swpu.edu.cn.
  */
 public class FullConnectAnnLayer extends GeneralAnnLayer {
 
@@ -22,24 +22,12 @@ public class FullConnectAnnLayer extends GeneralAnnLayer {
 	/**
 	 * The weight matrix.
 	 */
-	double[][] weights, deltaWeights;
-
-	double[] offset, deltaOffset, errors;
+	double[][] weights;
 
 	/**
-	 * The inputs.
+	 * The delta weight matrix.
 	 */
-	double[] input;
-
-	/**
-	 * The outputs.
-	 */
-	double[] output;
-
-	/**
-	 * The output after activate.
-	 */
-	double[] activatedOutput;
+	double[][] deltaWeights;
 
 	/**
 	 *********************
@@ -64,32 +52,12 @@ public class FullConnectAnnLayer extends GeneralAnnLayer {
 			} // Of for j
 		} // Of for i
 
-		offset = new double[numOutput];
-		deltaOffset = new double[numOutput];
 		errors = new double[numInput];
 
 		input = new double[numInput];
 		output = new double[numOutput];
 		activatedOutput = new double[numOutput];
 	}// Of the first constructor
-
-	/**
-	 ********************
-	 * Set parameters for the activator.
-	 * 
-	 * @param paraAlpha
-	 *            Alpha. Only valid for certain types.
-	 * @param paraBeta
-	 *            Beta.
-	 * @param paraAlpha
-	 *            Alpha.
-	 ********************
-	 */
-	public void setParameters(double paraAlpha, double paraBeta, double paraGamma) {
-		activator.setAlpha(paraAlpha);
-		activator.setBeta(paraBeta);
-		activator.setGamma(paraGamma);
-	}// Of setParameters
 
 	/**
 	 ********************
@@ -142,12 +110,6 @@ public class FullConnectAnnLayer extends GeneralAnnLayer {
 				errors[i] += paraErrors[j] * weights[i][j];
 				deltaWeights[i][j] = mobp * deltaWeights[i][j] + learningRate * paraErrors[j] * input[i];
 				weights[i][j] += deltaWeights[i][j];
-
-				if (i == numInput - 1) {
-					// Offset adjusting
-					deltaOffset[j] = mobp * deltaOffset[j] + learningRate * paraErrors[j];
-					offset[j] += deltaOffset[j];
-				} // Of if
 			} // Of for j
 		} // Of for i
 

@@ -2,6 +2,11 @@ package algorithm.ann;
 
 import java.util.Random;
 
+/**
+ * General ANN.
+ * 
+ * @author Fan Min. minfanphd@163.com, minfan@swpu.edu.cn.
+ */
 public abstract class GeneralAnnLayer {
 	/**
 	 * The learning rate.

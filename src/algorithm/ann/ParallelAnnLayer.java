@@ -8,7 +8,7 @@ import java.util.Random;
  * 
  * @author minfanphd
  */
-public class ParallelAnnLayer extends GeneralAnnLayer{
+public class ParallelAnnLayer extends GeneralAnnLayer {
 	/**
 	 * Number of parts.
 	 */
@@ -35,16 +35,6 @@ public class ParallelAnnLayer extends GeneralAnnLayer{
 	double[][][] deltaWeights;
 
 	/**
-	 * The offset matrix.
-	 */
-	double[][] offsetMatrix;
-
-	/**
-	 * The delta offset matrix.
-	 */
-	double[][] deltaOffsetMatrix;
-
-	/**
 	 *********************
 	 * The first constructor.
 	 * 
@@ -52,10 +42,10 @@ public class ParallelAnnLayer extends GeneralAnnLayer{
 	 *            The activator.
 	 *********************
 	 */
-	public ParallelAnnLayer(int paraNumParts, int paraNumInputEachPart, int paraNumOutputEachPart,
-			char paraActivator, double paraLearningRate, double paraMobp) {
+	public ParallelAnnLayer(int paraNumParts, int paraNumInputEachPart, int paraNumOutputEachPart, char paraActivator,
+			double paraLearningRate, double paraMobp) {
 		super(paraActivator, paraLearningRate, paraMobp);
-		
+
 		numParts = paraNumParts;
 		numInputEachPart = paraNumInputEachPart;
 		numOutputEachPart = paraNumOutputEachPart;
@@ -70,8 +60,6 @@ public class ParallelAnnLayer extends GeneralAnnLayer{
 			} // Of for j
 		} // Of for i
 
-		offsetMatrix = new double[numParts][numOutputEachPart];
-		deltaOffsetMatrix = new double[numParts][numOutputEachPart];
 		errors = new double[numParts * numInputEachPart];
 
 		input = new double[numParts * numInputEachPart];
@@ -89,8 +77,6 @@ public class ParallelAnnLayer extends GeneralAnnLayer{
 	 ********************
 	 */
 	public double[] forward(double[] paraInput) {
-		// System.out.println("Ann layer forward " +
-		// Arrays.toString(paraInput));
 		// Copy data.
 		for (int i = 0; i < numParts * numInputEachPart; i++) {
 			input[i] = paraInput[i];
@@ -101,12 +87,10 @@ public class ParallelAnnLayer extends GeneralAnnLayer{
 			for (int j = 0; j < numOutputEachPart; j++) {
 				output[i * numOutputEachPart + j] = weights[i][numInputEachPart][j];
 				for (int k = 0; k < numInputEachPart; k++) {
-					output[i * numOutputEachPart + j] += input[i * numInputEachPart + k]
-							* weights[i][k][j];
+					output[i * numOutputEachPart + j] += input[i * numInputEachPart + k] * weights[i][k][j];
 				} // Of for j
 
-				activatedOutput[i * numOutputEachPart + j] = activator
-						.activate(output[i * numOutputEachPart + j]);
+				activatedOutput[i * numOutputEachPart + j] = activator.activate(output[i * numOutputEachPart + j]);
 			} // Of for i
 		} // Of for i
 
@@ -132,19 +116,10 @@ public class ParallelAnnLayer extends GeneralAnnLayer{
 			for (int j = 0; j < numInputEachPart; j++) {
 				errors[i * numInputEachPart + j] = 0;
 				for (int k = 0; k < numOutputEachPart; k++) {
-					errors[i * numInputEachPart + j] += paraErrors[j * numOutputEachPart + k]
-							* weights[i][j][k];
+					errors[i * numInputEachPart + j] += paraErrors[j * numOutputEachPart + k] * weights[i][j][k];
 					deltaWeights[i][j][k] = mobp * deltaWeights[i][j][k]
-							+ learningRate * paraErrors[j * numOutputEachPart + k]
-									* input[i * numInputEachPart + j];
+							+ learningRate * paraErrors[j * numOutputEachPart + k] * input[i * numInputEachPart + j];
 					weights[i][j][k] += deltaWeights[i][j][k];
-
-					if (j == numInputEachPart - 1) {
-						// Offset adjusting
-						deltaOffsetMatrix[i][k] = mobp * deltaOffsetMatrix[i][k]
-								+ learningRate * paraErrors[j * numOutputEachPart + k];
-						offsetMatrix[i][k] += deltaOffsetMatrix[i][k];
-					} // Of if
 				} // Of for j
 			} // Of for i
 
