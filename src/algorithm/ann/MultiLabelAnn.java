@@ -1,5 +1,6 @@
 package algorithm.ann;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import data.MultiLabelData;
@@ -42,7 +43,7 @@ public class MultiLabelAnn {
 	 * For random number generation.
 	 */
 	Random random = new Random();
-	
+
 	/**
 	 * The layers.
 	 */
@@ -65,9 +66,10 @@ public class MultiLabelAnn {
 	 ********************
 	 */
 	public MultiLabelAnn(MultiLabelData paraDataset, int[] paraFullConnectLayerNumNodes,
-			int paraNumParts, int[] paraParallelLayerNumNodes, double paraLearningRate,
-			double paraMobp, String paraActivators) {
+			int[] paraParallelLayerNumNodes, double paraLearningRate, double paraMobp,
+			String paraActivators) {
 		dataset = paraDataset;
+		int tempNumParts = paraDataset.getNumLabels();
 
 		// Step 2. Accept parameters.
 		numLayers = paraFullConnectLayerNumNodes.length + paraParallelLayerNumNodes.length;
@@ -77,16 +79,32 @@ public class MultiLabelAnn {
 
 		// Initialize layers.
 		layers = new GeneralAnnLayer[numLayers - 1];
-		for (int i = 0; i < paraFullConnectLayerNumNodes.length; i++) {
+		System.out.println("numLayers = " + numLayers);
+		for (int i = 0; i < paraFullConnectLayerNumNodes.length - 1; i++) {
+			// System.out.println("Building full connect layer " + i);
 			layers[i] = new FullConnectAnnLayer(paraFullConnectLayerNumNodes[i],
 					paraFullConnectLayerNumNodes[i + 1], paraActivators.charAt(i), paraLearningRate,
 					paraMobp);
 		} // Of for i
 
-		for (int i = 0; i < paraParallelLayerNumNodes.length; i++) {
-			layers[paraFullConnectLayerNumNodes.length + i] = new ParallelAnnLayer(paraNumParts,
+		// System.out.println(
+		// "Building ParallelAnnLayer " + (paraFullConnectLayerNumNodes.length -
+		// 1));
+		layers[paraFullConnectLayerNumNodes.length - 1] = new ParallelAnnLayer(tempNumParts,
+				paraFullConnectLayerNumNodes[paraFullConnectLayerNumNodes.length - 1]
+						/ tempNumParts,
+				paraParallelLayerNumNodes[0],
+				paraActivators.charAt(paraFullConnectLayerNumNodes.length), paraLearningRate,
+				paraMobp);
+
+		for (int i = 0; i < paraParallelLayerNumNodes.length - 1; i++) {
+			// System.out.println(
+			// "Building ParallelAnnLayer " +
+			// (paraFullConnectLayerNumNodes.length + i));
+			layers[paraFullConnectLayerNumNodes.length + i] = new ParallelAnnLayer(tempNumParts,
 					paraParallelLayerNumNodes[i], paraParallelLayerNumNodes[i + 1],
-					paraActivators.charAt(i), paraLearningRate, paraMobp);
+					paraActivators.charAt(paraFullConnectLayerNumNodes.length + i),
+					paraLearningRate, paraMobp);
 		} // Of for i
 	}// Of the first constructor
 
@@ -97,7 +115,7 @@ public class MultiLabelAnn {
 	 */
 	public void train() {
 		double[] tempInput = new double[dataset.getNumConditions()];
-		double[] tempTarget = new double[dataset.getNumLabels() * 2];
+		double[] tempTarget = new double[dataset.getNumLabels()];
 		for (int i = 0; i < dataset.getNumInstances(); i++) {
 			// Fill the data.
 			for (int j = 0; j < tempInput.length; j++) {
@@ -105,15 +123,8 @@ public class MultiLabelAnn {
 			} // Of for j
 
 			// Fill the class label.
-			// Arrays.fill(tempTarget, 0);
 			for (int j = 0; j < dataset.getNumLabels(); j++) {
-				if (dataset.getLabel(i, j) == 0) {
-					tempTarget[dataset.getLabel(i, j * 2)] = 1;
-					tempTarget[dataset.getLabel(i, j * 2 + 1)] = 0;
-				} else {
-					tempTarget[dataset.getLabel(i, j * 2)] = 0;
-					tempTarget[dataset.getLabel(i, j * 2 + 1)] = 1;
-				} // Of if
+				tempTarget[j] = dataset.getLabel(i, j);
 			} // Of for j
 
 			// Train with this instance.
@@ -121,7 +132,7 @@ public class MultiLabelAnn {
 			backPropagation(tempTarget, dataset.getLabelKnown(i));
 		} // Of for i
 	}// Of train
-	
+
 	/**
 	 ********************
 	 * Test using the dataset.
@@ -134,17 +145,17 @@ public class MultiLabelAnn {
 
 		double tempNumCorrect = 0;
 		double[] tempPrediction;
-		int tempPredictedClass = -1;
 
 		for (int i = 0; i < dataset.getNumInstances(); i++) {
 			tempInput = dataset.getData(i);
 
 			tempPrediction = forward(tempInput);
-			// System.out.println("prediction: " +
-			// Arrays.toString(tempPrediction));
+			//System.out.println("tempInput = " + Arrays.toString(tempInput) + "\r\n prediction = "
+			//		+ Arrays.toString(tempPrediction));
 			// tempPredictedClass = argmax(tempPrediction);
 
 			for (int j = 0; j < dataset.getNumLabels(); j++) {
+				// System.out.println("i = " + i + ", j = " + j);
 				if ((int) (tempPrediction[j] + 0.5) == dataset.getLabel(i, j)) {
 					tempNumCorrect++;
 				} // Of if
@@ -155,7 +166,7 @@ public class MultiLabelAnn {
 				+ (dataset.getNumInstances() * dataset.getNumLabels()));
 
 		return tempNumCorrect / dataset.getNumInstances() / dataset.getNumLabels();
-	}// Of test	
+	}// Of test
 
 	/**
 	 ********************
@@ -169,7 +180,9 @@ public class MultiLabelAnn {
 	 */
 	public double[] forward(double[] paraInput) {
 		double[] resultArray = paraInput;
-		for (int i = 0; i < numLayers - 1; i++) {
+		// System.out.println("numLayers = " + numLayers);
+		for (int i = 0; i < layers.length; i++) {
+			System.out.println("layer = " + i + ", resultArray = " + Arrays.toString(resultArray));
 			resultArray = layers[i].forward(resultArray);
 		} // Of for i
 
@@ -186,12 +199,13 @@ public class MultiLabelAnn {
 	 ********************
 	 */
 	public void backPropagation(double[] paraTarget, boolean[] paraLabelKnownArray) {
-		double[] tempErrors = layers[numLayers - 2].getLastLayerErrors(paraTarget);
-		for (int i = numLayers - 2; i >= 0; i--) {
+		System.out.println("backPropagation paraTarget = " + Arrays.toString(paraTarget));
+		double[] tempErrors = layers[layers.length - 1].getLastLayerErrors(paraTarget);
+		System.out.println("original error = " + Arrays.toString(tempErrors));
+		for (int i = layers.length - 1; i >= 0; i--) {
 			tempErrors = layers[i].backPropagation(tempErrors);
+			System.out.println("layer  " + i + ", error = " + Arrays.toString(tempErrors));
 		} // Of for i
-
-		return;
 	}// Of backPropagation
 
 	/**
@@ -211,16 +225,20 @@ public class MultiLabelAnn {
 	 */
 	public static void main(String[] args) {
 		MultiLabelData tempDataset = new MultiLabelData("D:/data/multilabel/flags.arff", 14, 12);
-		int[] tempFullConnectLayerNodes = { 4, 8, 8, 12 };
-		int[] tempParallelLayerNodes = { 3, 3, 2 };
-		MultiLabelAnn tempNetwork = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes, 3,
-				tempParallelLayerNodes, 0.01, 0.6, "sss");
+		int[] tempFullConnectLayerNodes = { 14, 14, 24 };
+		int[] tempParallelLayerNodes = { 2, 1 };
+		MultiLabelAnn tempNetwork = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes,
+				tempParallelLayerNodes, 0.01, 0.1, "ssssss");
 
-		for (int round = 0; round < 5000; round++) {
+		for (int round = 0; round < 10; round++) {
+			if (round % 1000 == 999) {
+				System.out.println("Round: " + round);
+			} // Of if
 			tempNetwork.train();
 		} // Of for n
 
-		double tempAccuray = tempNetwork.test();
+		double tempAccuray = 0;
+		//tempAccuray = tempNetwork.test();
 		System.out.println("The accuracy is: " + tempAccuray);
 		System.out.println("FullAnn ends.");
 	}// Of main

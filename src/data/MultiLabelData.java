@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.util.Arrays;
 
 import weka.core.Instances;
+import util.SimpleTools;
 
 /**
  * Multi-label data.
@@ -91,6 +92,8 @@ public class MultiLabelData {
 				dataMatrix[i][j] = dataset.instance(i).value(j);
 			}//Of for j
 		}//Of for i
+        //Normalize it.
+        SimpleTools.normalize(dataMatrix);
         
         //Label matrix initialization.
         labelMatrix = new int[numInstances][numLabels];

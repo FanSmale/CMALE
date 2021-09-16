@@ -7,6 +7,44 @@ package util;
 public class SimpleTools {
 	/**
 	 ********************************** 
+	 * Normalize the data
+	 * 
+	 * @param paraMatrix
+	 *            the original matrix. It will be changed.
+	 ********************************** 
+	 */
+	public static void normalize(double[][] paraMatrix){
+		for(int j = 0; j < paraMatrix[0].length; j ++) {
+			double tempMin = 1e20;
+			double tempMax = -1e20;
+			
+			//The min and max values.
+			for (int i = 0; i < paraMatrix.length; i++) {
+				if (tempMin > paraMatrix[i][j]) {
+					tempMin = paraMatrix[i][j];
+				}//Of if
+				if (tempMax < paraMatrix[i][j]) {
+					tempMax = paraMatrix[i][j];
+				}//Of if
+			}//Of for i
+			
+			//Handle the extreme case.
+			if (tempMin == tempMax) {
+				for (int i = 0; i < paraMatrix.length; i++) {
+					paraMatrix[i][j] = 0;
+				}//Of for i
+				continue;
+			}//Of if
+			
+			//Now change.
+			for (int i = 0; i < paraMatrix.length; i++) {
+				paraMatrix[i][j] = (paraMatrix[i][j] - tempMin) / (tempMax - tempMin);
+			}//Of for i
+		}//Of for j
+	}//Of normalize
+
+	/**
+	 ********************************** 
 	 * Merge sort in descendant order to obtain an index array. The original
 	 * array is unchanged. The method should be tested further. <br>
 	 * Examples: input [1.2, 2.3, 0.4, 0.5], output [1, 0, 3, 2]. <br>

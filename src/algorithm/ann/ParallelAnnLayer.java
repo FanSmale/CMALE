@@ -116,9 +116,11 @@ public class ParallelAnnLayer extends GeneralAnnLayer {
 			for (int j = 0; j < numInputEachPart; j++) {
 				errors[i * numInputEachPart + j] = 0;
 				for (int k = 0; k < numOutputEachPart; k++) {
-					errors[i * numInputEachPart + j] += paraErrors[j * numOutputEachPart + k] * weights[i][j][k];
+					//System.out.println("i * numInputEachPart + j = " + (i * numInputEachPart + j));
+					//System.out.println("j * numOutputEachPart + k = " + (i * numOutputEachPart + k));
+					errors[i * numInputEachPart + j] += paraErrors[i * numOutputEachPart + k] * weights[i][j][k];
 					deltaWeights[i][j][k] = mobp * deltaWeights[i][j][k]
-							+ learningRate * paraErrors[j * numOutputEachPart + k] * input[i * numInputEachPart + j];
+							+ learningRate * paraErrors[i * numOutputEachPart + k] * input[i * numInputEachPart + j];
 					weights[i][j][k] += deltaWeights[i][j][k];
 				} // Of for j
 			} // Of for i
@@ -139,6 +141,7 @@ public class ParallelAnnLayer extends GeneralAnnLayer {
 		for (int i = 0; i < resultErrors.length; i++) {
 			resultErrors[i] = (paraTarget[i] - activatedOutput[i]);
 		} // Of for i
+		System.out.println("Last layer errors: " + Arrays.toString(resultErrors));
 
 		return resultErrors;
 	}// Of getLastLayerErrors
