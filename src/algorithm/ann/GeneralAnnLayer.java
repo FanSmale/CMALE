@@ -107,8 +107,10 @@ public abstract class GeneralAnnLayer {
 	 * 
 	 * @param paraTarget
 	 *            For 3-class data, it is [0, 0, 1], [0, 1, 0] or [1, 0, 0].
+	 * @paraLabelKnownArray Which labels are known.
+	 * @return Error array.
 	 ********************
 	 */
-	public abstract double[] getLastLayerErrors(int[] paraTarget);
+	public abstract double[] getLastLayerErrors(int[] paraTarget, boolean[] paraLabelKnownArray);
 
 }//Of class GeneralAnnLayer

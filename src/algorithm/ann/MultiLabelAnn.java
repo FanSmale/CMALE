@@ -1,5 +1,6 @@
 package algorithm.ann;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import data.MultiLabelData;
@@ -115,19 +116,37 @@ public class MultiLabelAnn {
 		double[] tempInput = new double[dataset.getNumConditions()];
 		int[] tempTarget = new int[dataset.getNumLabels()];
 		for (int i = 0; i < dataset.getNumInstances(); i++) {
-			// Fill the data.
+			//Step 1. Ignore this one if we know no label of it.
+			boolean[] tempLabelKnownArray = dataset.getLabelKnown(i);
+			boolean tempHasKnown = false;
+			for (int j = 0; j < tempLabelKnownArray.length; j++) {
+				if (tempLabelKnownArray[j]) {
+					tempHasKnown = true;
+					break;
+				}//Of if
+			}//Of for j
+			if (!tempHasKnown) {
+				continue;
+			}//Of if
+			
+			// Step 2. Fill the data.
 			for (int j = 0; j < tempInput.length; j++) {
 				tempInput[j] = dataset.getData(i, j);
 			} // Of for j
 
-			// Fill the class label.
+			// Step 3. Fill the class label. Unknown labels are 
 			for (int j = 0; j < dataset.getNumLabels(); j++) {
-				tempTarget[j] = dataset.getLabel(i, j);
+				if (tempLabelKnownArray[j]) {
+					tempTarget[j] = dataset.getLabel(i, j);
+				} else {
+					//Use to handle possible bug of the code. 
+					tempTarget[j] = -10;
+				}//Of if
 			} // Of for j
 
-			// Train with this instance.
+			// Step 4. Train with this instance.
 			forward(tempInput);
-			backPropagation(tempTarget, dataset.getLabelKnown(i));
+			backPropagation(tempTarget, tempLabelKnownArray);
 		} // Of for i
 	}// Of train
 
@@ -218,7 +237,8 @@ public class MultiLabelAnn {
 			} // Of if
 		} // Of for i
 
-		double[] tempErrors = layers[layers.length - 1].getLastLayerErrors(tempTarget);
+		double[] tempErrors = layers[layers.length - 1].getLastLayerErrors(tempTarget, paraLabelKnownArray);
+		//System.out.println("paraLabelKnownArray error = " + Arrays.toString(paraLabelKnownArray));
 		//System.out.println("original error = " + Arrays.toString(tempErrors));
 		for (int i = layers.length - 1; i >= 0; i--) {
 			tempErrors = layers[i].backPropagation(tempErrors);
@@ -249,18 +269,20 @@ public class MultiLabelAnn {
 		
 		//Iris with three labels
 		//MultiLabelData tempDataset = new MultiLabelData("data/mliris.arff", 4, 3);
+		//tempDataset.randomizeLabelKnownMatrix(0.2);
 		//int[] tempFullConnectLayerNodes = { 4, 8, 8 };
-		//int[] tempParallelLayerNodes = { 4, 4, 2 };
+		//int[] tempParallelLayerNodes = { 4, 2 };
 
 		//Flag with multi-label
 		MultiLabelData tempDataset = new MultiLabelData("data/flags.arff", 14, 12);
-		int[] tempFullConnectLayerNodes = { 14, 14 };
-		int[] tempParallelLayerNodes = { 2 };
+		tempDataset.randomizeLabelKnownMatrix(0.8);
+		int[] tempFullConnectLayerNodes = { 14, 14, 14 };
+		int[] tempParallelLayerNodes = { 4, 2 };
 
 		MultiLabelAnn tempNetwork = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes,
 				tempParallelLayerNodes, 0.02, 0.6, "sssss");
 
-		for (int round = 0; round < 20000; round++) {
+		for (int round = 0; round < 30000; round++) {
 			if (round % 1000 == 999) {
 				System.out.println("Round: " + round);
 			} // Of if

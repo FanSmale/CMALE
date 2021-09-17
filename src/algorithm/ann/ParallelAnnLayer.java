@@ -140,17 +140,18 @@ public class ParallelAnnLayer extends GeneralAnnLayer {
 
 	/**
 	 ********************
-	 * I am the last layer, set the errors.
-	 * 
-	 * @param paraTarget
-	 *            For 3-class data, it is [0, 0, 1], [0, 1, 0] or [1, 0, 0].
+	 * Implement the method defined in the super-class.
 	 ********************
 	 */
-	public double[] getLastLayerErrors(int[] paraTarget) {
+	public double[] getLastLayerErrors(int[] paraTarget, boolean[] paraLabelKnownArray){
 		double[] resultErrors = new double[numParts * 2];
 
 		for (int i = 0; i < resultErrors.length; i++) {
-			resultErrors[i] = (paraTarget[i] - activatedOutput[i]);
+			if (paraLabelKnownArray[i / 2]) {
+				resultErrors[i] = (paraTarget[i] - activatedOutput[i]);
+			} else {
+				resultErrors[i] = 0;
+			}//Of if
 		} // Of for i
 
 		return resultErrors;

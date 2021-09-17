@@ -2,6 +2,7 @@ package data;
 
 import java.io.FileReader;
 import java.util.Arrays;
+import java.util.Random;
 
 import weka.core.Instances;
 import util.SimpleTools;
@@ -11,6 +12,11 @@ import util.SimpleTools;
  * @author Fan Min. minfanphd@163.com, minfan@swpu.edu.cn.
  */
 public class MultiLabelData {
+	/**
+	 * For random number generation.
+	 */
+	Random random = new Random();
+
     /**
      * The data.
      */
@@ -176,6 +182,24 @@ public class MultiLabelData {
 	 */
 	public void setLabelKnown(int paraRow, int paraColumn) {
 		labelKnownMatrix[paraRow][paraColumn] = true;
+	}//Of setLabelKnown
+
+	/**
+	 ********************** 
+	 * Set a proportion of labels as known. For test only.
+	 ********************** 
+	 */
+	public void randomizeLabelKnownMatrix(double paraProportion) {
+		for (int i = 0; i < numInstances; i++) {
+			for (int j = 0; j < numLabels; j++) {
+				if (random.nextDouble() < paraProportion) {
+					labelKnownMatrix[i][j] = true;
+				} else {
+					labelKnownMatrix[i][j] = false;
+				}//Of if
+			}//Of for j
+		}//Of for i
+		//System.out.println("labelKnownMatrix = " + Arrays.deepToString(labelKnownMatrix));
 	}//Of setLabelKnown
 
 	/**
