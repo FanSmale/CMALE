@@ -113,6 +113,10 @@ public class FullConnectAnnLayer extends GeneralAnnLayer {
 			} // Of for j
 		} // Of for i
 
+		for (int j = 0; j < numOutput; j++) {
+			deltaWeights[numInput][j] = mobp * deltaWeights[numInput][j] + learningRate * paraErrors[j];
+			weights[numInput][j] += deltaWeights[numInput][j];
+		} // Of for j
 		return errors;
 	}// Of backPropagation
 

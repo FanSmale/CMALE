@@ -77,7 +77,7 @@ public class ParallelAnnLayer extends GeneralAnnLayer {
 	 ********************
 	 */
 	public double[] forward(double[] paraInput) {
-		//System.out.println("Parallel ANN forward");
+		// System.out.println("Parallel ANN forward");
 		// Copy data.
 		for (int i = 0; i < numParts * numInputEachPart; i++) {
 			input[i] = paraInput[i];
@@ -107,25 +107,33 @@ public class ParallelAnnLayer extends GeneralAnnLayer {
 	 ********************
 	 */
 	public double[] backPropagation(double[] paraErrors) {
-		//System.out.println("Parallel ANN backPropagation");
 		// Step 1. Adjust the errors.
 		for (int i = 0; i < paraErrors.length; i++) {
 			paraErrors[i] = activator.derive(output[i], activatedOutput[i]) * paraErrors[i];
 		} // Of for i
 
 		// Step 2. Compute current errors.
-		for (int i = 0; i < numParts; i++)
+		for (int i = 0; i < numParts; i++) {
 			for (int j = 0; j < numInputEachPart; j++) {
 				errors[i * numInputEachPart + j] = 0;
 				for (int k = 0; k < numOutputEachPart; k++) {
-					//System.out.println("i * numInputEachPart + j = " + (i * numInputEachPart + j));
-					//System.out.println("j * numOutputEachPart + k = " + (i * numOutputEachPart + k));
+					// System.out.println("i * numInputEachPart + j = " + (i *
+					// numInputEachPart + j));
+					// System.out.println("j * numOutputEachPart + k = " + (i *
+					// numOutputEachPart + k));
 					errors[i * numInputEachPart + j] += paraErrors[i * numOutputEachPart + k] * weights[i][j][k];
 					deltaWeights[i][j][k] = mobp * deltaWeights[i][j][k]
 							+ learningRate * paraErrors[i * numOutputEachPart + k] * input[i * numInputEachPart + j];
 					weights[i][j][k] += deltaWeights[i][j][k];
-				} // Of for j
-			} // Of for i
+				} // Of for k
+			} // Of for j
+			
+			for (int k = 0; k < numOutputEachPart; k++) {
+				deltaWeights[i][numInputEachPart][k] = mobp * deltaWeights[i][numInputEachPart][k]
+						+ learningRate * paraErrors[i * numOutputEachPart + k];
+				weights[i][numInputEachPart][k] += deltaWeights[i][numInputEachPart][k];
+			} // Of for k
+		} // Of for i
 
 		return errors;
 	}// Of backPropagation
@@ -140,11 +148,10 @@ public class ParallelAnnLayer extends GeneralAnnLayer {
 	 */
 	public double[] getLastLayerErrors(int[] paraTarget) {
 		double[] resultErrors = new double[numParts * 2];
-		
+
 		for (int i = 0; i < resultErrors.length; i++) {
 			resultErrors[i] = (paraTarget[i] - activatedOutput[i]);
 		} // Of for i
-		//System.out.println("Last layer errors: " + Arrays.toString(resultErrors));
 
 		return resultErrors;
 	}// Of getLastLayerErrors

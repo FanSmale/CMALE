@@ -1,6 +1,5 @@
 package algorithm.ann;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import data.MultiLabelData;
@@ -255,8 +254,8 @@ public class MultiLabelAnn {
 
 		//Flag with multi-label
 		MultiLabelData tempDataset = new MultiLabelData("data/flags.arff", 14, 12);
-		int[] tempFullConnectLayerNodes = { 14, 14, 14 };
-		int[] tempParallelLayerNodes = { 7, 2 };
+		int[] tempFullConnectLayerNodes = { 14, 14 };
+		int[] tempParallelLayerNodes = { 2 };
 
 		MultiLabelAnn tempNetwork = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes,
 				tempParallelLayerNodes, 0.02, 0.6, "sssss");
