@@ -2,6 +2,8 @@ package algorithm.ann;
 
 import java.util.Arrays;
 
+import data.MultiLabelData;
+
 /**
  * Ann layer.
  * 
@@ -37,8 +39,8 @@ public class FullConnectAnnLayer extends GeneralAnnLayer {
 	 *            The activator.
 	 *********************
 	 */
-	public FullConnectAnnLayer(int paraNumInput, int paraNumOutput, char paraActivator, double paraLearningRate,
-			double paraMobp) {
+	public FullConnectAnnLayer(int paraNumInput, int paraNumOutput, char paraActivator,
+			double paraLearningRate, double paraMobp) {
 		super(paraActivator, paraLearningRate, paraMobp);
 
 		numInput = paraNumInput;
@@ -108,13 +110,15 @@ public class FullConnectAnnLayer extends GeneralAnnLayer {
 			errors[i] = 0;
 			for (int j = 0; j < numOutput; j++) {
 				errors[i] += paraErrors[j] * weights[i][j];
-				deltaWeights[i][j] = mobp * deltaWeights[i][j] + learningRate * paraErrors[j] * input[i];
+				deltaWeights[i][j] = mobp * deltaWeights[i][j]
+						+ learningRate * paraErrors[j] * input[i];
 				weights[i][j] += deltaWeights[i][j];
 			} // Of for j
 		} // Of for i
 
 		for (int j = 0; j < numOutput; j++) {
-			deltaWeights[numInput][j] = mobp * deltaWeights[numInput][j] + learningRate * paraErrors[j];
+			deltaWeights[numInput][j] = mobp * deltaWeights[numInput][j]
+					+ learningRate * paraErrors[j];
 			weights[numInput][j] += deltaWeights[numInput][j];
 		} // Of for j
 		return errors;
@@ -125,16 +129,17 @@ public class FullConnectAnnLayer extends GeneralAnnLayer {
 	 * Implement the method defined in the super-class.
 	 ********************
 	 */
-	public double[] getLastLayerErrors(int[] paraTarget, boolean[] paraLabelKnownArray){
+	public double[] getLastLayerErrors(int[] paraTarget) {
 		double[] resultErrors = new double[numOutput];
+
 		for (int i = 0; i < resultErrors.length; i++) {
-			if (paraLabelKnownArray[i / 2]) {
-				resultErrors[i] = (paraTarget[i] - activatedOutput[i]);
-			} else {
+			if (paraTarget[i] == MultiLabelData.INVALID_LABEL) {
 				resultErrors[i] = 0;
-			}//Of if
+			} else {
+				resultErrors[i] = (paraTarget[i] - activatedOutput[i]);
+			} // Of if
 		} // Of for i
-		
+
 		return resultErrors;
 	}// Of getLastLayerErrors
 

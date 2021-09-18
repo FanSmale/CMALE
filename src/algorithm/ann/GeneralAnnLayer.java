@@ -111,6 +111,7 @@ public abstract class GeneralAnnLayer {
 	 * @return Error array.
 	 ********************
 	 */
-	public abstract double[] getLastLayerErrors(int[] paraTarget, boolean[] paraLabelKnownArray);
+	public abstract double[] getLastLayerErrors(int[] paraTarget);
+	//, boolean[] paraLabelKnownArray
 
 }//Of class GeneralAnnLayer

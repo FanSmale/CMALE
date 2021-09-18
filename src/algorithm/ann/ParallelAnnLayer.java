@@ -3,6 +3,8 @@ package algorithm.ann;
 import java.util.Arrays;
 import java.util.Random;
 
+import data.MultiLabelData;
+
 /**
  * An ANN layer runs with a number of parts, each for a label.
  * 
@@ -143,15 +145,19 @@ public class ParallelAnnLayer extends GeneralAnnLayer {
 	 * Implement the method defined in the super-class.
 	 ********************
 	 */
-	public double[] getLastLayerErrors(int[] paraTarget, boolean[] paraLabelKnownArray){
+	public double[] getLastLayerErrors(int[] paraTarget){
 		double[] resultErrors = new double[numParts * 2];
 
 		for (int i = 0; i < resultErrors.length; i++) {
-			if (paraLabelKnownArray[i / 2]) {
-				resultErrors[i] = (paraTarget[i] - activatedOutput[i]);
-			} else {
+			if (paraTarget[i] == MultiLabelData.INVALID_LABEL) {
 				resultErrors[i] = 0;
+			} else {
+				resultErrors[i] = (paraTarget[i] - activatedOutput[i]);
 			}//Of if
+			
+			if ((resultErrors[i] < -10) || (resultErrors[i] > 10)){
+				System.out.println("resultErrors[i] = " + resultErrors[i]);
+			}
 		} // Of for i
 
 		return resultErrors;

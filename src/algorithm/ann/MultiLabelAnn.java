@@ -113,40 +113,20 @@ public class MultiLabelAnn {
 	 ********************
 	 */
 	public void train() {
-		double[] tempInput = new double[dataset.getNumConditions()];
-		int[] tempTarget = new int[dataset.getNumLabels()];
-		for (int i = 0; i < dataset.getNumInstances(); i++) {
-			// Step 1. Ignore this one if we know no label of it.
-			boolean[] tempLabelKnownArray = dataset.getLabelKnown(i);
-			boolean tempHasKnown = false;
-			for (int j = 0; j < tempLabelKnownArray.length; j++) {
-				if (tempLabelKnownArray[j]) {
-					tempHasKnown = true;
-					break;
-				} // Of if
-			} // Of for j
-			if (!tempHasKnown) {
-				continue;
-			} // Of if
+		double[] tempInput;
+		int[] tempTarget;
+		int tempInstance;
+		for (int i = 0; i < dataset.getNumQueriedInstances(); i++) {
+			tempInstance = dataset.getQueriedInstanceIndex(i);
+			// Step 1. Fill the data.
+			tempInput = dataset.getData(tempInstance);
 
-			// Step 2. Fill the data.
-			for (int j = 0; j < tempInput.length; j++) {
-				tempInput[j] = dataset.getData(i, j);
-			} // Of for j
-
-			// Step 3. Fill the class label. Unknown labels are
-			for (int j = 0; j < dataset.getNumLabels(); j++) {
-				if (tempLabelKnownArray[j]) {
-					tempTarget[j] = dataset.getLabel(i, j);
-				} else {
-					// Use to handle possible bug of the code.
-					tempTarget[j] = -10;
-				} // Of if
-			} // Of for j
+			// Step 3. Fill the class label. Unknown labels are INVALID_VALUE.
+			tempTarget = dataset.getQueriedLabel(tempInstance);
 
 			// Step 4. Train with this instance.
 			forward(tempInput);
-			backPropagation(tempTarget, tempLabelKnownArray);
+			backPropagation(tempTarget);
 		} // Of for i
 	}// Of train
 
@@ -160,37 +140,22 @@ public class MultiLabelAnn {
 	public double test() {
 		double[] tempInput;
 
-		double tempNumCorrect = 0;
 		double[] tempPredictions;
-		// int[] tempLabelPrediction = new int[dataset.getNumLabels()];
-		int tempLabelPrediction;
 
 		for (int i = 0; i < dataset.getNumInstances(); i++) {
 			tempInput = dataset.getData(i);
-
 			tempPredictions = forward(tempInput);
-			// System.out.println("tempInput = " + Arrays.toString(tempInput) +
-			// "\r\n prediction = "
-			// + Arrays.toString(tempPredictions));
-			// tempPredictedClass = argmax(tempPrediction);
 
 			for (int j = 0; j < dataset.getNumLabels(); j++) {
 				if (tempPredictions[2 * j] > tempPredictions[2 * j + 1]) {
-					tempLabelPrediction = 0;
+					dataset.setPredictedLabel(i, j, 0);
 				} else {
-					tempLabelPrediction = 1;
-				} // Of if
-					// System.out.println("i = " + i + ", j = " + j);
-				if (tempLabelPrediction == dataset.getLabel(i, j)) {
-					tempNumCorrect++;
+					dataset.setPredictedLabel(i, j, 1);
 				} // Of if
 			} // Of for j
 		} // Of for i
 
-		System.out.println("Correct: " + tempNumCorrect + " out of "
-				+ (dataset.getNumInstances() * dataset.getNumLabels()));
-
-		return tempNumCorrect / dataset.getNumInstances() / dataset.getNumLabels();
+		return dataset.computeAccuracy();
 	}// Of test
 
 	/**
@@ -224,7 +189,7 @@ public class MultiLabelAnn {
 	 *            For 3-class data, it is [0, 0, 1], [0, 1, 0] or [1, 0, 0].
 	 ********************
 	 */
-	public void backPropagation(int[] paraTarget, boolean[] paraLabelKnownArray) {
+	public void backPropagation(int[] paraTarget) {
 		// System.out.println("backPropagation paraTarget = " +
 		// Arrays.toString(paraTarget));
 		// Pre-processing.
@@ -233,20 +198,23 @@ public class MultiLabelAnn {
 			if (paraTarget[i] == 0) {
 				tempTarget[2 * i] = 1;
 				tempTarget[2 * i + 1] = 0;
-			} else {
+			} else if (paraTarget[i] == 1) {
 				tempTarget[2 * i] = 0;
 				tempTarget[2 * i + 1] = 1;
+			} else {
+				tempTarget[2 * i] = MultiLabelData.INVALID_LABEL;
+				tempTarget[2 * i + 1] = MultiLabelData.INVALID_LABEL;
 			} // Of if
 		} // Of for i
 
-		double[] tempErrors = layers[layers.length - 1].getLastLayerErrors(tempTarget,
-				paraLabelKnownArray);
+		double[] tempErrors = layers[layers.length - 1].getLastLayerErrors(tempTarget);
 		// System.out.println("paraLabelKnownArray error = " +
 		// Arrays.toString(paraLabelKnownArray));
 		// System.out.println("original error = " +
 		// Arrays.toString(tempErrors));
 		for (int i = layers.length - 1; i >= 0; i--) {
 			tempErrors = layers[i].backPropagation(tempErrors);
+
 			// System.out.println("layer " + i + ", error = " +
 			// Arrays.toString(tempErrors));
 		} // Of for i
@@ -275,22 +243,23 @@ public class MultiLabelAnn {
 		// int[] tempParallelLayerNodes = { 2, 2 };
 
 		// Iris with three labels
-		// MultiLabelData tempDataset = new MultiLabelData("data/mliris.arff",
-		// 4, 3);
-		// tempDataset.randomizeLabelKnownMatrix(0.2);
-		// int[] tempFullConnectLayerNodes = { 4, 8, 8 };
-		// int[] tempParallelLayerNodes = { 4, 2 };
+		MultiLabelData tempDataset = new MultiLabelData("data/mliris.arff", 4, 3);
+		tempDataset.randomQuery(0.3);
+		System.out.println("Number of queries: " + tempDataset.getNumQueriedLabels());
+		int[] tempFullConnectLayerNodes = { 4, 8, 8 };
+		int[] tempParallelLayerNodes = { 4, 2 };
 
 		// Flag with multi-label
-		MultiLabelData tempDataset = new MultiLabelData("data/flags.arff", 14, 12);
-		tempDataset.randomizeLabelKnownMatrix(0.8);
-		int[] tempFullConnectLayerNodes = { 14, 14, 14 };
-		int[] tempParallelLayerNodes = { 8, 2 };
+		// MultiLabelData tempDataset = new MultiLabelData("data/flags.arff",
+		// 14, 12);
+		// tempDataset.randomQuery(0.8);
+		// int[] tempFullConnectLayerNodes = { 14, 14, 14 };
+		// int[] tempParallelLayerNodes = { 8, 2 };
 
 		MultiLabelAnn tempNetwork = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes,
 				tempParallelLayerNodes, 0.02, 0.6, "sssss");
 
-		for (int round = 0; round < 30000; round++) {
+		for (int round = 0; round < 20000; round++) {
 			if (round % 1000 == 999) {
 				System.out.println("Round: " + round);
 			} // Of if
@@ -300,6 +269,8 @@ public class MultiLabelAnn {
 		double tempAccuray = 0;
 		tempAccuray = tempNetwork.test();
 		System.out.println("The accuracy is: " + tempAccuray);
+		System.out.println("The total cost is: " + tempDataset.computeTotalCost());
+		
 		System.out.println("FullAnn ends.");
 	}// Of main
 }// Of class FullAnn

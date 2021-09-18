@@ -150,7 +150,7 @@ public class FullConnectAnn {
 	 ********************
 	 */
 	public void backPropagation(int[] paraTarget) {
-		double[] tempErrors = layers[numLayers - 2].getLastLayerErrors(paraTarget, null);
+		double[] tempErrors = layers[numLayers - 2].getLastLayerErrors(paraTarget);
 		for (int i = numLayers - 2; i >= 0; i--) {
 			tempErrors = layers[i].backPropagation(tempErrors);
 		} // Of for i
