@@ -116,32 +116,32 @@ public class MultiLabelAnn {
 		double[] tempInput = new double[dataset.getNumConditions()];
 		int[] tempTarget = new int[dataset.getNumLabels()];
 		for (int i = 0; i < dataset.getNumInstances(); i++) {
-			//Step 1. Ignore this one if we know no label of it.
+			// Step 1. Ignore this one if we know no label of it.
 			boolean[] tempLabelKnownArray = dataset.getLabelKnown(i);
 			boolean tempHasKnown = false;
 			for (int j = 0; j < tempLabelKnownArray.length; j++) {
 				if (tempLabelKnownArray[j]) {
 					tempHasKnown = true;
 					break;
-				}//Of if
-			}//Of for j
+				} // Of if
+			} // Of for j
 			if (!tempHasKnown) {
 				continue;
-			}//Of if
-			
+			} // Of if
+
 			// Step 2. Fill the data.
 			for (int j = 0; j < tempInput.length; j++) {
 				tempInput[j] = dataset.getData(i, j);
 			} // Of for j
 
-			// Step 3. Fill the class label. Unknown labels are 
+			// Step 3. Fill the class label. Unknown labels are
 			for (int j = 0; j < dataset.getNumLabels(); j++) {
 				if (tempLabelKnownArray[j]) {
 					tempTarget[j] = dataset.getLabel(i, j);
 				} else {
-					//Use to handle possible bug of the code. 
+					// Use to handle possible bug of the code.
 					tempTarget[j] = -10;
-				}//Of if
+				} // Of if
 			} // Of for j
 
 			// Step 4. Train with this instance.
@@ -169,8 +169,9 @@ public class MultiLabelAnn {
 			tempInput = dataset.getData(i);
 
 			tempPredictions = forward(tempInput);
-			//System.out.println("tempInput = " + Arrays.toString(tempInput) + "\r\n prediction = "
-			//		+ Arrays.toString(tempPredictions));
+			// System.out.println("tempInput = " + Arrays.toString(tempInput) +
+			// "\r\n prediction = "
+			// + Arrays.toString(tempPredictions));
 			// tempPredictedClass = argmax(tempPrediction);
 
 			for (int j = 0; j < dataset.getNumLabels(); j++) {
@@ -206,7 +207,8 @@ public class MultiLabelAnn {
 		double[] resultArray = paraInput;
 		// System.out.println("numLayers = " + numLayers);
 		for (int i = 0; i < layers.length; i++) {
-			//System.out.println("layer = " + i + ", resultArray = " + Arrays.toString(resultArray));
+			// System.out.println("layer = " + i + ", resultArray = " +
+			// Arrays.toString(resultArray));
 			resultArray = layers[i].forward(resultArray);
 		} // Of for i
 
@@ -237,12 +239,16 @@ public class MultiLabelAnn {
 			} // Of if
 		} // Of for i
 
-		double[] tempErrors = layers[layers.length - 1].getLastLayerErrors(tempTarget, paraLabelKnownArray);
-		//System.out.println("paraLabelKnownArray error = " + Arrays.toString(paraLabelKnownArray));
-		//System.out.println("original error = " + Arrays.toString(tempErrors));
+		double[] tempErrors = layers[layers.length - 1].getLastLayerErrors(tempTarget,
+				paraLabelKnownArray);
+		// System.out.println("paraLabelKnownArray error = " +
+		// Arrays.toString(paraLabelKnownArray));
+		// System.out.println("original error = " +
+		// Arrays.toString(tempErrors));
 		for (int i = layers.length - 1; i >= 0; i--) {
 			tempErrors = layers[i].backPropagation(tempErrors);
-			//System.out.println("layer " + i + ", error = " + Arrays.toString(tempErrors));
+			// System.out.println("layer " + i + ", error = " +
+			// Arrays.toString(tempErrors));
 		} // Of for i
 	}// Of backPropagation
 
@@ -262,22 +268,24 @@ public class MultiLabelAnn {
 	 ********************
 	 */
 	public static void main(String[] args) {
-		//Iris with one label and binary class
-		//MultiLabelData tempDataset = new MultiLabelData("data/binaryiris.arff", 4, 1);
-		//int[] tempFullConnectLayerNodes = { 4, 8, 8 };
-		//int[] tempParallelLayerNodes = { 2, 2 };
-		
-		//Iris with three labels
-		//MultiLabelData tempDataset = new MultiLabelData("data/mliris.arff", 4, 3);
-		//tempDataset.randomizeLabelKnownMatrix(0.2);
-		//int[] tempFullConnectLayerNodes = { 4, 8, 8 };
-		//int[] tempParallelLayerNodes = { 4, 2 };
+		// Iris with one label and binary class
+		// MultiLabelData tempDataset = new
+		// MultiLabelData("data/binaryiris.arff", 4, 1);
+		// int[] tempFullConnectLayerNodes = { 4, 8, 8 };
+		// int[] tempParallelLayerNodes = { 2, 2 };
 
-		//Flag with multi-label
+		// Iris with three labels
+		// MultiLabelData tempDataset = new MultiLabelData("data/mliris.arff",
+		// 4, 3);
+		// tempDataset.randomizeLabelKnownMatrix(0.2);
+		// int[] tempFullConnectLayerNodes = { 4, 8, 8 };
+		// int[] tempParallelLayerNodes = { 4, 2 };
+
+		// Flag with multi-label
 		MultiLabelData tempDataset = new MultiLabelData("data/flags.arff", 14, 12);
 		tempDataset.randomizeLabelKnownMatrix(0.8);
 		int[] tempFullConnectLayerNodes = { 14, 14, 14 };
-		int[] tempParallelLayerNodes = { 4, 2 };
+		int[] tempParallelLayerNodes = { 8, 2 };
 
 		MultiLabelAnn tempNetwork = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes,
 				tempParallelLayerNodes, 0.02, 0.6, "sssss");
