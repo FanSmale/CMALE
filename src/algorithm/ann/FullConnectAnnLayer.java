@@ -3,6 +3,7 @@ package algorithm.ann;
 import java.util.Arrays;
 
 import data.MultiLabelData;
+import util.SimpleTools;
 
 /**
  * Ann layer.
@@ -50,7 +51,7 @@ public class FullConnectAnnLayer extends GeneralAnnLayer {
 		deltaWeights = new double[numInput + 1][numOutput];
 		for (int i = 0; i < numInput + 1; i++) {
 			for (int j = 0; j < numOutput; j++) {
-				weights[i][j] = random.nextDouble();
+				weights[i][j] = SimpleTools.random.nextDouble();
 			} // Of for j
 		} // Of for i
 

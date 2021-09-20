@@ -1,9 +1,9 @@
 package algorithm.ann;
 
 import java.util.Arrays;
-import java.util.Random;
 
 import data.MultiLabelData;
+import util.SimpleTools;
 
 /**
  * Full ANN with a number of layers.
@@ -38,11 +38,6 @@ public class MultiLabelAnn {
 	 * Learning rate.
 	 */
 	public double learningRate;
-
-	/**
-	 * For random number generation.
-	 */
-	Random random = new Random();
 
 	/**
 	 * The layers.
@@ -132,6 +127,59 @@ public class MultiLabelAnn {
 
 	/**
 	 ********************
+	 * Train emphasizing on some instances. For example, if there are 100
+	 * queried instances, we want to emphasize on 3 instances with 20 times,
+	 * then we need to re-train these 3 instances for every 5 normal instances.
+	 * This method is useful for incremental learning, where newly labelled
+	 * instances should be emphasized.
+	 * 
+	 * @param paraTimes
+	 *            The additional training times of the emphasized instances.
+	 * @param paraEmphasizedInstances
+	 *            Emphasized instances, the original indices.
+	 ********************
+	 */
+	public void emphasizedTrain(int paraTimes, int[] paraEmphasizedInstances) {
+		double[] tempInput;
+		int[] tempTarget;
+		int tempInstance;
+		int tempNumQueriedInstance = dataset.getNumQueriedInstances();
+		for (int i = 0; i < tempNumQueriedInstance; i++) {
+			tempInstance = dataset.getQueriedInstanceIndex(i);
+			// Step 1. Fill the data.
+			tempInput = dataset.getData(tempInstance);
+
+			// Step 3. Fill the class label. Unknown labels are INVALID_VALUE.
+			tempTarget = dataset.getQueriedLabel(tempInstance);
+
+			// Step 4. Train with this instance.
+			forward(tempInput);
+			backPropagation(tempTarget);
+
+			// Step 5. Judge emphasized train or not.
+			if (tempNumQueriedInstance % paraTimes != 0) {
+				continue;
+			} // Of if
+
+			// Step 6. Train emphasized instances.
+			for (int j = 0; j < paraEmphasizedInstances.length; j++) {
+				// Step 6.1 Fill the data.
+				tempInstance = paraEmphasizedInstances[j];
+				tempInput = dataset.getData(tempInstance);
+
+				// Step 6.2 Fill the class label. Unknown labels are
+				// INVALID_VALUE.
+				tempTarget = dataset.getQueriedLabel(tempInstance);
+
+				// Step 6.3 Train with this instance.
+				forward(tempInput);
+				backPropagation(tempTarget);
+			} // Of for j
+		} // Of for i
+	}// Of emphasizedTrain
+
+	/**
+	 ********************
 	 * Test using the dataset.
 	 * 
 	 * @return The precision.
@@ -157,6 +205,81 @@ public class MultiLabelAnn {
 
 		return dataset.computeAccuracy();
 	}// Of test
+
+	/**
+	 ********************
+	 * Compute label uncertainty matrix.
+	 * 
+	 * @return The matrix.
+	 ********************
+	 */
+	public double[][] computeLabelUncertaintyMatrix() {
+		double[][] resultMatrix = new double[dataset.getNumInstances()][dataset.getNumLabels()];
+		double[] tempInput;
+		double[] tempPredictions;
+
+		for (int i = 0; i < dataset.getNumInstances(); i++) {
+			tempInput = dataset.getData(i);
+			tempPredictions = forward(tempInput);
+
+			for (int j = 0; j < dataset.getNumLabels(); j++) {
+				// Queried label.
+				if (dataset.getQueriedLabel(i, j) != MultiLabelData.INVALID_LABEL) {
+					resultMatrix[i][j] = 0;
+					continue;
+				} // Of if
+
+				if (tempPredictions[2 * j] > tempPredictions[2 * j + 1]) {
+					resultMatrix[i][j] = 1 - tempPredictions[2 * j] + tempPredictions[2 * j + 1];
+				} else {
+					resultMatrix[i][j] = 1 + tempPredictions[2 * j] - tempPredictions[2 * j + 1];
+				} // Of if
+			} // Of for j
+		} // Of for i
+
+		return resultMatrix;
+	}// Of computeLabelUncertaintyMatrix
+
+	/**
+	 ********************
+	 * Get the most uncertain labels of an instance. Note that the result is a
+	 * little complex since Java only supports one return value.
+	 * 
+	 * @return The instance index and the label indices in one array.
+	 ********************
+	 */
+	public int[] getMostUncertainLabelIndices(int paraNumLabels) {
+		int[] resultArray = new int[1 + paraNumLabels];
+		double[][] tempMatrix = computeLabelUncertaintyMatrix();
+
+		double tempMax = -1;
+		double tempTotal;
+		int[] tempSortedIndices;
+		for (int i = 0; i < tempMatrix.length; i++) {
+			tempSortedIndices = SimpleTools.mergeSortToIndices(tempMatrix[i]);
+			if (dataset.getLabelQueried(i, tempSortedIndices[paraNumLabels - 1])) {
+				//No enough unknown labels to query.
+				continue;
+			}//Of if
+			
+			tempTotal = 0;
+			for (int j = 0; j < paraNumLabels; j++) {
+				tempTotal += tempMatrix[i][tempSortedIndices[j]];
+			}//Of for j
+			
+			if (tempMax < tempTotal) {
+				tempMax = tempTotal;
+				
+				resultArray[0] = i;
+				for (int j = 0; j < paraNumLabels; j++) {
+					resultArray[j + 1] = tempSortedIndices[j];
+				}//Of for j
+			} // Of if
+		} // Of for i
+
+		System.out.println("Most uncertain: " + Arrays.toString(resultArray) + ": " + tempMax);
+		return resultArray;
+	}// Of getMostUncertainLabelIndices
 
 	/**
 	 ********************
@@ -244,7 +367,7 @@ public class MultiLabelAnn {
 
 		// Iris with three labels
 		MultiLabelData tempDataset = new MultiLabelData("data/mliris.arff", 4, 3);
-		tempDataset.randomQuery(0.3);
+		tempDataset.randomQuery(120);
 		System.out.println("Number of queries: " + tempDataset.getNumQueriedLabels());
 		int[] tempFullConnectLayerNodes = { 4, 8, 8 };
 		int[] tempParallelLayerNodes = { 4, 2 };
@@ -256,21 +379,26 @@ public class MultiLabelAnn {
 		// int[] tempFullConnectLayerNodes = { 14, 14, 14 };
 		// int[] tempParallelLayerNodes = { 8, 2 };
 
-		MultiLabelAnn tempNetwork = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes,
-				tempParallelLayerNodes, 0.02, 0.6, "sssss");
+		MultiLabelAnn tempAnn = new MultiLabelAnn(tempDataset, tempFullConnectLayerNodes,
+				tempParallelLayerNodes, 0.05, 0.6, "sssss");
 
-		for (int round = 0; round < 20000; round++) {
+		for (int round = 0; round < 10000; round++) {
 			if (round % 1000 == 999) {
 				System.out.println("Round: " + round);
 			} // Of if
-			tempNetwork.train();
+			tempAnn.train();
 		} // Of for n
 
-		double tempAccuray = 0;
-		tempAccuray = tempNetwork.test();
+		double tempAccuray = tempAnn.test();
+		System.out.println("The label scarcity array is: "
+				+ Arrays.toString(tempDataset.computeLabelScarcityArray()));
+		System.out.println("The label uncertainty matrix is: "
+				+ Arrays.deepToString(tempAnn.computeLabelUncertaintyMatrix()));
+
 		System.out.println("The accuracy is: " + tempAccuray);
+		System.out.println("The training accuracy is: " + tempDataset.computeTrainingAccuracy());
 		System.out.println("The total cost is: " + tempDataset.computeTotalCost());
-		
+
 		System.out.println("FullAnn ends.");
 	}// Of main
 }// Of class FullAnn

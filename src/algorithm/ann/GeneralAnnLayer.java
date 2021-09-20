@@ -44,11 +44,6 @@ public abstract class GeneralAnnLayer {
 	Activator activator;
 
 	/**
-	 * Random instance.
-	 */
-	Random random = new Random();
-
-	/**
 	 *********************
 	 * The first constructor.
 	 * 

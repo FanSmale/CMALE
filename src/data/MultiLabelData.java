@@ -2,7 +2,6 @@ package data;
 
 import java.io.FileReader;
 import java.util.Arrays;
-import java.util.Random;
 
 import weka.core.Instances;
 import util.SimpleTools;
@@ -13,11 +12,6 @@ import util.SimpleTools;
  * @author Fan Min. minfanphd@163.com, minfan@swpu.edu.cn.
  */
 public class MultiLabelData {
-	/**
-	 * For random number generation.
-	 */
-	Random random = new Random();
-
 	/**
 	 * The invalid label.
 	 */
@@ -75,13 +69,17 @@ public class MultiLabelData {
 	int numQueriedInstances;
 
 	/**
-	 * The number of queried labels.
+	 * The total number of queried labels across all instances and all labels.
 	 */
 	int numQueriedLabels;
 
 	/**
-	 * Does respective instances have label queried. If not, the instance cannot
-	 * be used for train.
+	 * The number of queried for each label.
+	 */
+	double[] labelQueryCountArray;
+
+	/**
+	 * Store queried instances, e.g., [3, 6, 9, 10, 12, -1, -1].
 	 */
 	int[] queriedInstanceArray;
 
@@ -99,6 +97,11 @@ public class MultiLabelData {
 	 * Mis-classification cost for FN, i.e., prediction 1 as 0.
 	 */
 	double fnCost = 2;
+
+	/**
+	 * The cost detail information.
+	 */
+	String costDetail = "";
 
 	/**
 	 * Manhattan distance.
@@ -163,8 +166,32 @@ public class MultiLabelData {
 		hasLabelQueriedArray = new boolean[numInstances];
 		labelQueriedMatrix = new boolean[numInstances][numLabels];
 		numQueriedInstances = 0;
+
+		labelQueryCountArray = new double[numLabels];
+		Arrays.fill(labelQueryCountArray, 0);
+
 		queriedInstanceArray = new int[numInstances];
+		Arrays.fill(queriedInstanceArray, -1);
 	}// Of the first constructor
+
+	/**
+	 ********************** 
+	 * Reset variables in learning.
+	 ********************** 
+	 */
+	public void reset() {
+		for (int i = 0; i < numInstances; i++) {
+			Arrays.fill(predictedLabelMatrix[i], -1);
+			Arrays.fill(labelQueriedMatrix[i], false);
+		} // Of for i
+
+		Arrays.fill(hasLabelQueriedArray, false);
+		Arrays.fill(labelQueryCountArray, 0);
+		Arrays.fill(queriedInstanceArray, -1);
+
+		numQueriedInstances = 0;
+		numQueriedLabels = 0;
+	}// Of reset
 
 	/**
 	 ********************** 
@@ -237,6 +264,15 @@ public class MultiLabelData {
 	public int getLabel(int paraRow, int paraColumn) {
 		return labelMatrix[paraRow][paraColumn];
 	}// Of getLabel
+
+	/**
+	 ********************** 
+	 * Getter.
+	 ********************** 
+	 */
+	public String getCostDetail() {
+		return costDetail;
+	}// Of getCostDetail
 
 	/**
 	 ********************** 
@@ -341,23 +377,19 @@ public class MultiLabelData {
 
 	/**
 	 ********************** 
-	 * Randomly query a proportion of labels.
+	 * Randomly query a number of labels.
+	 * 
+	 * @param paraNumQueriedLabels
+	 *            The number of queried labels.
 	 ********************** 
 	 */
-	public void randomQuery(double paraProportion) {
-		int[] tempArray = new int[1];
-		for (int i = 0; i < numInstances; i++) {
-			for (int j = 0; j < numLabels; j++) {
-				if (random.nextDouble() < paraProportion) {
-					tempArray[0] = j;
-					queryLabels(i, tempArray);
-				} // Of if
-			} // Of for j
+	public void randomQuery(int paraNumQueriedLabels) {
+		int[] tempLabelArray = new int[1];
+		int[] tempArray = SimpleTools.getRandomOrder(numInstances * numLabels);
+		for (int i = 0; i < paraNumQueriedLabels; i++) {
+			tempLabelArray[0] = tempArray[i] % numLabels;
+			queryLabels(tempArray[i] / numLabels, tempLabelArray);
 		} // Of for i
-
-		System.out.println(
-				"After query " + numQueriedInstances + " instances, the query instances are ");
-		System.out.println(Arrays.toString(queriedInstanceArray));
 	}// Of randomQuery
 
 	/**
@@ -371,12 +403,47 @@ public class MultiLabelData {
 
 	/**
 	 ********************** 
-	 * Get the label quried status.
+	 * Get the label queried status.
 	 ********************** 
 	 */
 	public boolean getLabelQueried(int paraRow, int paraColumn) {
 		return labelQueriedMatrix[paraRow][paraColumn];
 	}// Of getLabelQueried
+
+	/**
+	 ********************** 
+	 * Compute the label scarcity.
+	 ********************** 
+	 */
+	public double[] computeLabelScarcityArray() {
+		double[] resultArray = new double[numLabels];
+		for (int i = 0; i < resultArray.length; i++) {
+			resultArray[i] = labelQueryCountArray[i] / numInstances;
+		} // Of for i
+		return resultArray;
+	}// Of computeLabelScarcityArray
+
+	/**
+	 ********************** 
+	 * Get scare labels.
+	 * 
+	 * @param paraLength
+	 *            The length of the array.
+	 ********************** 
+	 */
+	public int[] getScareLabels(int paraLength) {
+		// System.out.println("labelQueryCountArray = " +
+		// Arrays.toString(labelQueryCountArray));
+		int[] tempIndices = SimpleTools.mergeSortToIndices(labelQueryCountArray);
+
+		int[] resultArray = new int[paraLength];
+		for (int i = 0; i < paraLength; i++) {
+			// Scare labels instead of frequently queried ones.
+			resultArray[i] = tempIndices[numLabels - 1 - i];
+		} // Of for i
+
+		return resultArray;
+	}// Of getScareLabels
 
 	/**
 	 ********************** 
@@ -414,6 +481,9 @@ public class MultiLabelData {
 			} // Of if
 
 			labelQueriedMatrix[paraInstance][paraLabelIndices[j]] = true;
+
+			// Update label query count array.
+			labelQueryCountArray[paraLabelIndices[j]]++;
 		} // Of for j
 
 		// Update the queried instance array.
@@ -447,14 +517,38 @@ public class MultiLabelData {
 			for (int j = 0; j < labelMatrix[0].length; j++) {
 				// It is correct.
 				if (predictedLabelMatrix[i][j] == labelMatrix[i][j]) {
-					tempCorrect ++;
+					tempCorrect++;
 				} // Of if
 			} // Of for j
 		} // Of for i
 
 		return tempCorrect / numInstances / numLabels;
 	}// Of computeAccuracy
-	
+
+	/**
+	 ********************** 
+	 * Compute accuracy on the training set, i.e., queried labels.
+	 ********************** 
+	 */
+	public double computeTrainingAccuracy() {
+		double tempCorrect = 0;
+		double tempTotalQuery = 0;
+
+		for (int i = 0; i < labelMatrix.length; i++) {
+			for (int j = 0; j < labelMatrix[0].length; j++) {
+				if (labelQueriedMatrix[i][j]) {
+					tempTotalQuery++;
+					// It is correct.
+					if (predictedLabelMatrix[i][j] == labelMatrix[i][j]) {
+						tempCorrect++;
+					} // Of if
+				} // Of if
+			} // Of for j
+		} // Of for i
+
+		return tempCorrect / tempTotalQuery;
+	}// Of computeTrainingAccuracy
+
 	/**
 	 ********************** 
 	 * Compute the total cost.
@@ -475,10 +569,10 @@ public class MultiLabelData {
 
 				if ((predictedLabelMatrix[i][j] == 0) && (labelMatrix[i][j] == 1)) {
 					tempTotalMisclassificationCost += fnCost;
-					tempNumFn ++;
+					tempNumFn++;
 				} else if ((predictedLabelMatrix[i][j] == 1) && (labelMatrix[i][j] == 0)) {
 					tempTotalMisclassificationCost += fpCost;
-					tempNumFp ++;
+					tempNumFp++;
 				} else {
 					System.out.println("Error occurred in MultiLabelData.computeTotalCost()\r\n"
 							+ "The label at [" + i + "][" + j + "] has not been predicted.\r\n"
@@ -488,10 +582,9 @@ public class MultiLabelData {
 			} // Of for j
 		} // Of for i
 
-		System.out.println("FP = " + tempNumFp + ", FN = "
-				+ tempNumFn);
-		System.out.println("Teacher cost = " + tempTotalTeacherCost + ", misclassification cost = "
-				+ tempTotalMisclassificationCost);
+		costDetail = "FP = " + tempNumFp + ", FN = " + tempNumFn + ", teacher cost = "
+				+ tempTotalTeacherCost + ", misclassification cost = "
+				+ tempTotalMisclassificationCost;
 		return tempTotalTeacherCost + tempTotalMisclassificationCost;
 	}// Of computeTotalCost
 
@@ -506,7 +599,7 @@ public class MultiLabelData {
 	 ********************** 
 	 */
 	public double distance(int paraI, int paraJ) {
-		int resultDistance = 0;
+		double resultDistance = 0;
 		double tempDifference;
 		switch (distanceMeasure) {
 		case MANHATTAN:
@@ -530,6 +623,7 @@ public class MultiLabelData {
 		default:
 			System.out.println("Unsupported distance measure: " + distanceMeasure);
 		}// of switch
+
 		return resultDistance;
 	}// Of distance
 

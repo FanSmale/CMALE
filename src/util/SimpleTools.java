@@ -1,10 +1,14 @@
 package util;
 
+import java.util.Random;
+
 /**
  * Simple tools.
  * @author Fan Min. minfanphd@163.com, minfan@swpu.edu.cn.
  */
 public class SimpleTools {
+	public static Random random = new Random();
+	
 	/**
 	 ********************************** 
 	 * Normalize the data
@@ -135,5 +139,35 @@ public class SimpleTools {
 
 		return resultMatrix[tempIndex % 2];
 	}// Of mergeSortToIndices
-	
+
+	/**
+	 ********************************** 
+	 * Get a random order index array.
+	 * 
+	 * @param paraLength
+	 *            The length of the array.
+	 * @return A random order.
+	 ********************************** 
+	 */
+	public static int[] getRandomOrder(int paraLength) {
+		// Step 1. Initialize
+		int[] resultArray = new int[paraLength];
+		for (int i = 0; i < paraLength; i++) {
+			resultArray[i] = i;
+		} // Of for i
+
+		// Step 2. Swap many times
+		int tempFirst, tempSecond;
+		int tempValue;
+		for (int i = 0; i < paraLength * 10; i++) {
+			tempFirst = random.nextInt(paraLength);
+			tempSecond = random.nextInt(paraLength);
+
+			tempValue = resultArray[tempFirst];
+			resultArray[tempFirst] = resultArray[tempSecond];
+			resultArray[tempSecond] = tempValue;
+		} // Of for i
+
+		return resultArray;
+	}// Of getRandomOrder	
 }//Of class SimpleTools

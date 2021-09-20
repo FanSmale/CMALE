@@ -2,7 +2,6 @@ package algorithm.ann;
 
 import java.io.FileReader;
 import java.util.Arrays;
-import java.util.Random;
 
 import weka.core.Instances;
 
@@ -39,10 +38,6 @@ public class FullConnectAnn {
 	 */
 	public double learningRate;
 
-	/**
-	 * For random number generation.
-	 */
-	Random random = new Random();
 	/**
 	 * The layers.
 	 */

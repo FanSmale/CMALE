@@ -1,9 +1,9 @@
 package algorithm.ann;
 
 import java.util.Arrays;
-import java.util.Random;
 
 import data.MultiLabelData;
+import util.SimpleTools;
 
 /**
  * An ANN layer runs with a number of parts, each for a label.
@@ -57,7 +57,7 @@ public class ParallelAnnLayer extends GeneralAnnLayer {
 		for (int i = 0; i < numParts; i++) {
 			for (int j = 0; j < numInputEachPart + 1; j++) {
 				for (int k = 0; k < numOutputEachPart; k++) {
-					weights[i][j][k] = random.nextDouble();
+					weights[i][j][k] = SimpleTools.random.nextDouble();
 				} // Of for k
 			} // Of for j
 		} // Of for i
