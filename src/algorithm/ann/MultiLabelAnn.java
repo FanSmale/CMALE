@@ -23,13 +23,6 @@ public class MultiLabelAnn {
 	int numLayers;
 
 	/**
-	 * The number of nodes for each layer, e.g., [3, 4, 6, 2] means that there
-	 * are 3 input nodes (conditional attributes), 2 hidden layers with 4 and 6
-	 * nodes, respectively, and 2 class values (binary classification). int[]
-	 * layerNumNodes;
-	 */
-
-	/**
 	 * Momentum coefficient.
 	 */
 	public double mobp;

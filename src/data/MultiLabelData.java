@@ -150,7 +150,7 @@ public class MultiLabelData {
 			} // Of for j
 		} // Of for i
 
-		// Normalize it.
+		// Normalize it. Important code.
 		SimpleTools.normalize(dataMatrix);
 
 		// Label matrix initialization.

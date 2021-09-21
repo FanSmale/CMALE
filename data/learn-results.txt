@@ -1,49 +1,695 @@
 Here is the whole process of learn(): 
 Cold start: 
-Query instance #7 with labels #[2]
-Query instance #78 with labels #[1]
-Query instance #116 with labels #[0]
-Query instance #133 with labels #[2]
-Query instance #129 with labels #[1]
-Query instance #101 with labels #[0]
-Query instance #142 with labels #[2]
-Query instance #72 with labels #[1]
-Query instance #108 with labels #[0]
-Query instance #114 with labels #[2]
-Query instance #106 with labels #[1]
-Query instance #55 with labels #[0]
-Query instance #51 with labels #[2]
-Query instance #87 with labels #[1]
-Query instance #134 with labels #[0]
-Query instance #62 with labels #[2]
-Query instance #77 with labels #[1]
-Query instance #83 with labels #[0]
-Query instance #98 with labels #[2]
-Query instance #109 with labels #[1]
-Query instance #54 with labels #[0]
-Query instance #59 with labels #[2]
-Query instance #41 with labels #[1]
-Query instance #22 with labels #[0]
-Query instance #115 with labels #[2]
-Query instance #128 with labels #[1]
-Query instance #147 with labels #[0]
-Query instance #112 with labels #[2]
-Query instance #124 with labels #[1]
-Query instance #127 with labels #[0]
-Learning process: 
-Query instance #84 with labels #[2]
-Query instance #81 with labels #[0]
-Query instance #72 with labels #[2]
-Query instance #123 with labels #[1]
-Query instance #98 with labels #[0]
-Query instance #126 with labels #[1]
-Query instance #133 with labels #[1]
-Query instance #44 with labels #[0]
-Query instance #43 with labels #[0]
-Query instance #84 with labels #[1]
-The label scarcity array is: [0.09333333333333334, 0.09333333333333334, 0.08]
-The label uncertainty matrix is: [[0.0342486007445546, 0.01952255953492283, 0.002302473350932523], [0.03467760535824893, 0.02036569435998075, 0.002307901375492674], [0.03411291571671771, 0.019190632037837045, 0.0023044744278740035], [0.03569510527084996, 0.022556924577621873, 0.002313978210674042], [0.034280648771175426, 0.019592765438955835, 0.002302499916518221], [0.03825122536401593, 0.028684220397393177, 0.0023194884433527223], [0.03564344512968576, 0.02248246721562469, 0.0023118825822205135], [0.03504669557970763, 0.02119948434222826, 0.0], [0.03524977477895519, 0.021545633853092563, 0.002313424016063822], [0.03450430645853941, 0.02000376783371436, 0.002306757238419035], [0.03451247200284524, 0.020109436340076482, 0.0023021712957711693], [0.03609982147870394, 0.023507586425758942, 0.002313862079362278], [0.034028631901797834, 0.01899955365853362, 0.0023049094676569144], [0.03284765449903182, 0.016607165566632637, 0.002299948181750632], [0.03272152314571386, 0.01651463150934049, 0.0022895008550649996], [0.0354868733606698, 0.022304490739519095, 0.0023031393311986736], [0.03465836624645824, 0.020447235223110264, 0.002301548942172627], [0.035020899422923746, 0.021165520247274687, 0.002306450063851106], [0.036543838764614756, 0.02462341508412584, 0.00231138297313794], [0.03560166264692621, 0.022464061658941138, 0.0023081437307789256], [0.03617630810728667, 0.023718776416599967, 0.0023123951533165245], [0.03673040515927395, 0.02501533332200119, 0.0023140424082108415], [0.0, 0.016181033008190376, 0.0022940080499689575], [0.04161094887312333, 0.0372805196678239, 0.0023368944547501433], [0.03977290274922585, 0.032371270450621645, 0.0023309284778827775], [0.03611573112470712, 0.023512401755998228, 0.0023152289551472724], [0.03830604263978732, 0.02872429136408884, 0.0023232183044831845], [0.03479491441233773, 0.020680479514904024, 0.002305206707750323], [0.03421964577075143, 0.019458954084328406, 0.00230246238963686], [0.036394095088718714, 0.024143291111392844, 0.0023166993377343767], [0.03632089391060067, 0.02397273891359871, 0.0023164757374439125], [0.03651435129471381, 0.02450227988065813, 0.0023135130061964077], [0.03380162125111619, 0.018650061943687665, 0.0022971955121673803], [0.03366066626273201, 0.01838808872574399, 0.0022949167258253704], [0.03450430645853941, 0.02000376783371436, 0.002306757238419035], [0.03338694775901552, 0.01773268699293943, 0.0022992234265493787], [0.033457684010910316, 0.01792348977293235, 0.0022967456474962426], [0.03450430645853941, 0.02000376783371436, 0.002306757238419035], [0.03446704935717049, 0.019888422868370753, 0.0023086176797449563], [0.03494632756240945, 0.02098948489763794, 0.002306804049230531], [0.03444500914067328, 0.019933541882038417, 0.002303599303964808], [0.03568064549537364, 0.0, 0.002318108284001791], [0.034363138513734626, 0.019690682915562502, 0.0023070131624816715], [0.0, 0.03841262607052807, 0.0023374068213735475], [0.0, 0.03997133704843209, 0.002338313674316927], [0.03565957575719869, 0.022488706331208412, 0.0023132445044632003], [0.03545414960468862, 0.02213248733487009, 0.0023076564801311275], [0.03485151560117561, 0.020735166812465133, 0.002308957710253112], [0.034598606358195894, 0.02028657795450821, 0.00230292499077539], [0.034429381907899126, 0.01987687015728231, 0.0023047418152391643], [0.016949257528829968, 0.007132206793283413, 0.0034204402351236314], [0.01679737390104283, 0.007115891756324211, 0.0], [0.016572451154515885, 0.007209631179047604, 0.0035433633364062903], [0.016943819757998135, 0.007150914826863364, 0.003447890992889186], [0.0, 0.007148572016806964, 0.003493431438597226], [0.0, 0.007363555641444308, 0.0036902160414284046], [0.015889294158644415, 0.007871664889056107, 0.004084040365231753], [0.023598954534730897, 0.009392906111226784, 0.0032310892302064454], [0.016916660361438598, 0.007128819989318802, 0.003431607491331679], [0.01684930547317687, 0.007135030397566244, 0.0], [0.019516821742171203, 0.00807095262274049, 0.0033415454423374614], [0.016830620162481838, 0.007120988292680264, 0.0034468495448665036], [0.018758019376822997, 0.007799909819213968, 0.0], [0.01600453885982065, 0.007712752192921446, 0.003971648026482923], [0.01897295213784183, 0.00786848097277415, 0.003340154178408332], [0.01715887950015714, 0.007206990858508178, 0.0034105907821887797], [0.014858114500797085, 0.010334941046824975, 0.00609228494536221], [0.017928622188520097, 0.007500213001582767, 0.0033899189587936578], [0.01638108114220739, 0.007335287984336136, 0.0036687216555620016], [0.017929059255795785, 0.0075017963545825905, 0.003392229610174276], [0.01307282449772722, 0.005219628025996207, 0.004497973152399304], [0.017713586393083652, 0.007416847709045271, 0.003391591226079029], [0.013695902096024372, 0.0, 0.0], [0.016596498830253333, 0.0071924573015687, 0.003541450214296843], [0.01723521278308291, 0.007238537509155041, 0.003412351857084719], [0.01706874486946234, 0.007175531458923801, 0.0034173297719823567], [0.016718285988429435, 0.007128543403188581, 0.003474308413923148], [0.013670838917964563, 0.0, 0.03484714022878081], [0.016341288807754012, 0.0, 0.003696637122205401], [0.028671832511017552, 0.010881488789836746, 0.00314627400047888], [0.01819852599308567, 0.0076004726320989535, 0.003382026489625584], [0.0, 0.008253713375357075, 0.003313211710384121], [0.017982209714576244, 0.007517669400991522, 0.0033839621589393677], [0.0, 0.003055948503538875, 0.002240972705106148], [0.013754093952460328, 0.0, 0.0], [0.016252871086164418, 0.0074724661846998774, 0.00376008803319424], [0.016727975833243085, 0.007128460276654924, 0.0034683453432918527], [0.01689796985090075, 0.0, 0.003443324384893705], [0.016994042822734087, 0.0071598420118011985, 0.0034332513940995646], [0.016981136407136, 0.007160124648113553, 0.003441747862407489], [0.016536236912165797, 0.007230589861007997, 0.00358187369951906], [0.01649856624984687, 0.0072602541750500516, 0.003593810100594971], [0.017513765061868865, 0.007347079719342231, 0.0034077380276246565], [0.02454300758043771, 0.009682560871102641, 0.0032139568931734445], [0.01681925155284459, 0.007128294615324937, 0.0034607033989008705], [0.01704706166926246, 0.007176950801169313, 0.0034301640241760165], [0.01690512551535283, 0.007136176866483712, 0.003442470182454092], [0.017074090357208794, 0.007181527302465018, 0.0034229625730028586], [0.0, 0.01492137495547008, 0.0], [0.017022404510525748, 0.00716882134576402, 0.0034323373305270794], [0.013092200171820292, 0.002671941029599322, 0.0018464583087749453], [0.0, 0.0026908924302007546, 0.0018508136431808486], [0.013089695802144533, 0.0026745659875506995, 0.001843909680979805], [0.013087509517737933, 0.0026795728408928947, 0.001842024506943818], [0.01309036094162487, 0.0026727554743858012, 0.0018421444948023558], [0.013091371502550426, 0.002671946606700725, 0.0018446576097567169], [0.013079037284818153, 0.0, 0.0020309527306267006], [0.013089238815827282, 0.0026742874336408754, 0.0018411436045122631], [0.0, 0.00267809468350819, 0.0018394889562697303], [0.013092447050866035, 0.0, 0.0018482290979023874], [0.013082616916616765, 0.002983087885682928, 0.002180428293711123], [0.013085810502714734, 0.002711997128679605, 0.0018766612728969845], [0.013088352636728882, 0.0026863864912605433, 0.0], [0.013086102193508562, 0.0026849777343494075, 0.0018436917346977832], [0.01308929972590082, 0.002673883742390004, 0.0], [0.013089559291026912, 0.0026768705344041785, 0.0], [0.0, 0.002703754377342873, 0.0018693261246416348], [0.013092635952897617, 0.0026710768158633366, 0.0018485083122383728], [0.013092291437647582, 0.002671742434246013, 0.0018467217290907278], [0.013069731916612074, 0.004467895593505467, 0.0036814354962798612], [0.01309045738642121, 0.0026735059297340836, 0.0018453344124045312], [0.013086023271798924, 0.0026946036112530172, 0.0018557650459248842], [0.013090978305694414, 0.0026722095870183853, 0.0018434516872921636], [0.013072716214058224, 0.0, 0.007618180572807165], [0.01308977026104929, 0.0, 0.0018449930411671422], [0.013088362937387786, 0.0026844156043027353, 0.0018525070792599907], [0.013091400058048184, 0.0, 0.03635971979526975], [0.0, 0.0044068329573029325, 0.0036635147964879655], [0.013089081683843602, 0.0, 0.0018402681513159935], [0.013082701808128708, 0.0, 0.0020734576385533776], [0.01308870176366191, 0.002677261933832238, 0.001844055805591438], [0.01309088671829578, 0.0026753983800302814, 0.0018505954903429434], [0.013089585369223354, 0.0026735188025859913, 0.0018407680987951869], [0.013091342073578469, 0.0, 0.0], [0.0, 0.0027023886482337714, 0.0018571050358907604], [0.013090681110640677, 0.0026731141536617403, 0.0018458375032315288], [0.013091177457105169, 0.0026721775031005052, 0.0018446042416976338], [0.013086934581110965, 0.0026956627266956495, 0.0018608964783803916], [0.013072351683395204, 0.006802656057882809, 0.006088629794139155], [0.013087324011988935, 0.002723904777313771, 0.0018977422234698338], [0.013090643915738116, 0.0026727706632186676, 0.001844431852553563], [0.013085622501973397, 0.0028428741284206704, 0.002032448635694961], [0.013085970586306953, 0.0026908924302007546, 0.0], [0.013091084950927732, 0.0026721860338919396, 0.0018444378570475761], [0.013091513313879751, 0.0026718757890639468, 0.001845806554592988], [0.013088274381800536, 0.0026986035095823073, 0.0018705568840430287], [0.013080584923891934, 0.002969922338525891, 0.002154699736304444], [0.0, 0.002766536903005038, 0.0019411147532079065], [0.013090292608808271, 0.0026734573113232967, 0.0018441386954888284], [0.013084739415572928, 0.0027416685833734217, 0.001907803016272247]]
-The accuracy is: 0.991111111111111
-The training accuracy is: 1.0
-The total cost is: 46.0
-FP = 2, FN = 2, teacher cost = 40.0, misclassification cost = 6.0
+Query instance #38 with labels #[11, 10]
+Query instance #19 with labels #[9, 8]
+Query instance #123 with labels #[7, 6]
+Query instance #101 with labels #[5, 4]
+Query instance #45 with labels #[3, 2]
+Query instance #5 with labels #[1, 0]
+Query instance #72 with labels #[11, 10]
+Query instance #16 with labels #[9, 8]
+Query instance #183 with labels #[7, 6]
+Query instance #149 with labels #[5, 4]
+Query instance #46 with labels #[3, 2]
+Query instance #80 with labels #[1, 0]
+Query instance #106 with labels #[11, 10]
+Query instance #184 with labels #[9, 8]
+Query instance #29 with labels #[7, 6]
+Query instance #73 with labels #[5, 4]
+Query instance #117 with labels #[3, 2]
+Query instance #20 with labels #[1, 0]
+Query instance #170 with labels #[11, 10]
+Query instance #12 with labels #[9, 8]
+Query instance #53 with labels #[7, 6]
+Query instance #133 with labels #[5, 4]
+Query instance #50 with labels #[3, 2]
+Query instance #96 with labels #[1, 0]
+Query instance #99 with labels #[11, 10]
+Query instance #54 with labels #[9, 8]
+Query instance #83 with labels #[7, 6]
+Query instance #0 with labels #[5, 4]
+Query instance #150 with labels #[3, 2]
+Query instance #151 with labels #[1, 0]
+Query instance #153 with labels #[11, 10]
+Query instance #141 with labels #[9, 8]
+Query instance #81 with labels #[7, 6]
+Query instance #51 with labels #[5, 4]
+Query instance #98 with labels #[3, 2]
+Query instance #105 with labels #[1, 0]
+Query instance #23 with labels #[11, 10]
+Query instance #174 with labels #[9, 8]
+Query instance #132 with labels #[7, 6]
+Query instance #142 with labels #[5, 4]
+Query instance #178 with labels #[3, 2]
+Query instance #37 with labels #[1, 0]
+Query instance #68 with labels #[11, 10]
+Query instance #109 with labels #[9, 8]
+Query instance #152 with labels #[7, 6]
+Query instance #115 with labels #[5, 4]
+Query instance #124 with labels #[3, 2]
+Query instance #78 with labels #[1, 0]
+Query instance #14 with labels #[11, 10]
+Query instance #145 with labels #[9, 8]
+Query instance #122 with labels #[7, 6]
+Query instance #89 with labels #[5, 4]
+Query instance #180 with labels #[3, 2]
+Query instance #100 with labels #[1, 0]
+Query instance #127 with labels #[11, 10]
+Query instance #2 with labels #[9, 8]
+Query instance #188 with labels #[7, 6]
+Query instance #172 with labels #[5, 4]
+Query instance #118 with labels #[3, 2]
+Query instance #121 with labels #[1, 0]
+Query instance #57 with labels #[11, 10]
+Query instance #119 with labels #[9, 8]
+Query instance #93 with labels #[7, 6]
+Query instance #92 with labels #[5, 4]
+Query instance #59 with labels #[3, 2]
+Query instance #43 with labels #[1, 0]
+Query instance #97 with labels #[11, 10]
+Query instance #190 with labels #[9, 8]
+Query instance #35 with labels #[7, 6]
+Query instance #173 with labels #[5, 4]
+Query instance #148 with labels #[3, 2]
+Query instance #70 with labels #[1, 0]
+Query instance #139 with labels #[11, 10]
+Query instance #168 with labels #[9, 8]
+Query instance #140 with labels #[7, 6]
+Query instance #120 with labels #[5, 4]
+Query instance #60 with labels #[3, 2]
+Query instance #47 with labels #[1, 0]
+Query instance #49 with labels #[11, 10]
+Query instance #90 with labels #[9, 8]
+Query instance #111 with labels #[7, 6]
+Query instance #28 with labels #[5, 4]
+Query instance #48 with labels #[3, 2]
+Query instance #144 with labels #[1, 0]
+Query instance #64 with labels #[11, 10]
+Query instance #157 with labels #[9, 8]
+Query instance #164 with labels #[7, 6]
+Query instance #134 with labels #[5, 4]
+Query instance #116 with labels #[3, 2]
+Query instance #36 with labels #[1, 0]
+Query instance #31 with labels #[11, 10]
+Query instance #185 with labels #[9, 8]
+Query instance #181 with labels #[7, 6]
+Query instance #18 with labels #[5, 4]
+Query instance #25 with labels #[3, 2]
+Query instance #75 with labels #[1, 0]
+Query instance #44 with labels #[11, 10]
+Query instance #79 with labels #[9, 8]
+Query instance #158 with labels #[7, 6]
+Query instance #125 with labels #[5, 4]
+Query instance #58 with labels #[3, 2]
+Query instance #187 with labels #[1, 0]
+Query instance #136 with labels #[11, 10]
+Query instance #156 with labels #[9, 8]
+Query instance #88 with labels #[7, 6]
+Query instance #135 with labels #[5, 4]
+Query instance #191 with labels #[3, 2]
+Query instance #154 with labels #[1, 0]
+Query instance #175 with labels #[11, 10]
+Query instance #56 with labels #[9, 8]
+Query instance #103 with labels #[7, 6]
+Query instance #108 with labels #[5, 4]
+Query instance #24 with labels #[3, 2]
+Query instance #176 with labels #[1, 0]
+Query instance #3 with labels #[11, 10]
+Query instance #186 with labels #[9, 8]
+Query instance #34 with labels #[7, 6]
+Query instance #17 with labels #[5, 4]
+Query instance #112 with labels #[3, 2]
+Query instance #65 with labels #[1, 0]
+Query instance #161 with labels #[11, 10]
+Query instance #171 with labels #[9, 8]
+Query instance #85 with labels #[7, 6]
+Query instance #71 with labels #[5, 4]
+Query instance #61 with labels #[3, 2]
+Query instance #160 with labels #[1, 0]
+Query instance #189 with labels #[11, 10]
+Query instance #74 with labels #[9, 8]
+Query instance #6 with labels #[7, 6]
+Query instance #15 with labels #[5, 4]
+Query instance #32 with labels #[3, 2]
+Query instance #163 with labels #[1, 0]
+Query instance #94 with labels #[11, 10]
+Query instance #138 with labels #[9, 8]
+Query instance #126 with labels #[7, 6]
+Query instance #166 with labels #[5, 4]
+Query instance #67 with labels #[3, 2]
+Query instance #27 with labels #[1, 0]
+Query instance #10 with labels #[11, 10]
+Query instance #7 with labels #[9, 8]
+Query instance #76 with labels #[7, 6]
+Query instance #69 with labels #[5, 4]
+Query instance #177 with labels #[3, 2]
+Query instance #39 with labels #[1, 0]
+Query instance #137 with labels #[11, 10]
+Query instance #82 with labels #[9, 8]
+Query instance #113 with labels #[7, 6]
+Query instance #86 with labels #[5, 4]
+Query instance #30 with labels #[3, 2]
+Query instance #11 with labels #[1, 0]
+Regular round: 1199, training accuracy = 0.7133333333333334.
+Regular round: 1399, training accuracy = 0.7133333333333334.
+Regular round: 1599, training accuracy = 0.7133333333333334.
+Regular round: 1799, training accuracy = 0.7366666666666667.
+Regular round: 1999, training accuracy = 0.7366666666666667.
+Regular round: 2199, training accuracy = 0.7366666666666667.
+Regular round: 2399, training accuracy = 0.7366666666666667.
+Regular round: 2599, training accuracy = 0.7533333333333333.
+Regular round: 2799, training accuracy = 0.7666666666666667.
+Regular round: 2999, training accuracy = 0.7733333333333333.
+Regular round: 3199, training accuracy = 0.7866666666666666.
+Regular round: 3399, training accuracy = 0.7866666666666666.
+Regular round: 3599, training accuracy = 0.7966666666666666.
+Regular round: 3799, training accuracy = 0.8033333333333333.
+Regular round: 3999, training accuracy = 0.8433333333333334.
+Regular round: 4199, training accuracy = 0.8766666666666667.
+Regular round: 4399, training accuracy = 0.9033333333333333.
+Regular round: 4599, training accuracy = 0.92.
+Regular round: 4799, training accuracy = 0.9266666666666666.
+Regular round: 4999, training accuracy = 0.9333333333333333.
+Regular round: 5199, training accuracy = 0.9366666666666666.
+Regular round: 5399, training accuracy = 0.9433333333333334.
+Regular round: 5599, training accuracy = 0.95.
+Regular round: 5799, training accuracy = 0.95.
+Regular round: 5999, training accuracy = 0.95.
+Regular round: 6199, training accuracy = 0.95.
+Regular round: 6399, training accuracy = 0.9533333333333334.
+Regular round: 6599, training accuracy = 0.9533333333333334.
+Regular round: 6799, training accuracy = 0.9533333333333334.
+Regular round: 6999, training accuracy = 0.9633333333333334.
+Regular round: 7199, training accuracy = 0.9733333333333334.
+Regular round: 7399, training accuracy = 0.9733333333333334.
+Regular round: 7599, training accuracy = 0.9833333333333333.
+Regular round: 7799, training accuracy = 0.9833333333333333.
+Regular round: 7999, training accuracy = 0.9833333333333333.
+Regular round: 8199, training accuracy = 0.9833333333333333.
+Regular round: 8399, training accuracy = 0.9866666666666667.
+Regular round: 8599, training accuracy = 0.9866666666666667.
+Regular round: 8799, training accuracy = 0.99.
+Regular round: 8999, training accuracy = 0.99.
+Regular round: 9199, training accuracy = 0.9933333333333333.
+Query and learning process: 
+Query instance #56 with labels #[4, 2]
+Emphasized train. Before retrain, training accuracy = 0.9900662251655629
+Regular round: 199, training accuracy = 0.9933774834437086
+Query instance #82 with labels #[5, 7]
+Emphasized train. Before retrain, training accuracy = 0.993421052631579
+Regular round: 199, training accuracy = 0.993421052631579
+Query instance #60 with labels #[7, 1]
+Emphasized train. Before retrain, training accuracy = 0.9901960784313726
+Regular round: 199, training accuracy = 0.9934640522875817
+Query instance #136 with labels #[1, 5]
+Emphasized train. Before retrain, training accuracy = 0.9935064935064936
+Regular round: 199, training accuracy = 0.9935064935064936
+Query instance #98 with labels #[0, 7]
+Emphasized train. Before retrain, training accuracy = 0.9903225806451613
+Regular round: 199, training accuracy = 0.9935483870967742
+Query instance #151 with labels #[2, 4]
+Emphasized train. Before retrain, training accuracy = 0.9871794871794872
+Regular round: 199, training accuracy = 0.9935897435897436
+Query instance #22 with labels #[7, 0]
+Emphasized train. Before retrain, training accuracy = 0.9936305732484076
+Regular round: 199, training accuracy = 0.9936305732484076
+Query instance #20 with labels #[2, 8]
+Emphasized train. Before retrain, training accuracy = 0.990506329113924
+Regular round: 199, training accuracy = 0.9936708860759493
+Query instance #5 with labels #[6, 3]
+Emphasized train. Before retrain, training accuracy = 0.9874213836477987
+Regular round: 199, training accuracy = 0.9937106918238994
+Query instance #96 with labels #[8, 7]
+Emphasized train. Before retrain, training accuracy = 0.990625
+Regular round: 199, training accuracy = 0.99375
+Query instance #97 with labels #[6, 9]
+Emphasized train. Before retrain, training accuracy = 0.9906832298136646
+Regular round: 199, training accuracy = 0.9937888198757764
+Query instance #22 with labels #[4, 11]
+Emphasized train. Before retrain, training accuracy = 0.9907407407407407
+Regular round: 199, training accuracy = 0.9938271604938271
+Query instance #37 with labels #[8, 4]
+Emphasized train. Before retrain, training accuracy = 0.99079754601227
+Regular round: 199, training accuracy = 0.9938650306748467
+Query instance #53 with labels #[0, 3]
+Emphasized train. Before retrain, training accuracy = 0.9939024390243902
+Regular round: 199, training accuracy = 0.9939024390243902
+Query instance #154 with labels #[3, 5]
+Emphasized train. Before retrain, training accuracy = 0.990909090909091
+Regular round: 199, training accuracy = 0.9939393939393939
+Query instance #26 with labels #[7, 10]
+Emphasized train. Before retrain, training accuracy = 0.9909638554216867
+Regular round: 199, training accuracy = 0.9939759036144579
+Query instance #29 with labels #[2, 3]
+Emphasized train. Before retrain, training accuracy = 0.9910179640718563
+Regular round: 199, training accuracy = 0.9940119760479041
+Query instance #159 with labels #[7, 3]
+Emphasized train. Before retrain, training accuracy = 0.9940476190476191
+Regular round: 199, training accuracy = 0.9940476190476191
+Query instance #167 with labels #[9, 4]
+Emphasized train. Before retrain, training accuracy = 0.9940828402366864
+Regular round: 199, training accuracy = 0.9940828402366864
+Query instance #178 with labels #[6, 1]
+Emphasized train. Before retrain, training accuracy = 0.9882352941176471
+Regular round: 199, training accuracy = 0.9941176470588236
+Query instance #128 with labels #[5, 7]
+Emphasized train. Before retrain, training accuracy = 0.9883040935672515
+Regular round: 199, training accuracy = 0.9941520467836257
+Query instance #62 with labels #[3, 6]
+Emphasized train. Before retrain, training accuracy = 0.9883720930232558
+Regular round: 199, training accuracy = 0.9941860465116279
+Query instance #77 with labels #[9, 7]
+Emphasized train. Before retrain, training accuracy = 0.9913294797687862
+Regular round: 199, training accuracy = 0.9942196531791907
+Query instance #189 with labels #[6, 8]
+Emphasized train. Before retrain, training accuracy = 0.9913793103448276
+Regular round: 199, training accuracy = 0.9942528735632183
+Query instance #60 with labels #[5, 9]
+Emphasized train. Before retrain, training accuracy = 0.9885714285714285
+Regular round: 199, training accuracy = 0.9942857142857143
+Query instance #64 with labels #[4, 9]
+Emphasized train. Before retrain, training accuracy = 0.9914772727272727
+Regular round: 199, training accuracy = 0.9943181818181818
+Query instance #34 with labels #[9, 4]
+Emphasized train. Before retrain, training accuracy = 0.9887005649717514
+Regular round: 199, training accuracy = 0.9943502824858758
+Query instance #66 with labels #[11, 6]
+Emphasized train. Before retrain, training accuracy = 0.9887640449438202
+Regular round: 199, training accuracy = 0.9943820224719101
+Query instance #0 with labels #[9, 6]
+Emphasized train. Before retrain, training accuracy = 0.994413407821229
+Regular round: 199, training accuracy = 0.994413407821229
+Query instance #187 with labels #[9, 11]
+Emphasized train. Before retrain, training accuracy = 0.9916666666666667
+Regular round: 199, training accuracy = 0.9944444444444445
+Query instance #63 with labels #[2, 4]
+Emphasized train. Before retrain, training accuracy = 0.994475138121547
+Regular round: 199, training accuracy = 0.994475138121547
+Query instance #182 with labels #[3, 2]
+Emphasized train. Before retrain, training accuracy = 0.989010989010989
+Regular round: 199, training accuracy = 0.9945054945054945
+Query instance #128 with labels #[3, 8]
+Emphasized train. Before retrain, training accuracy = 0.994535519125683
+Regular round: 199, training accuracy = 0.994535519125683
+Query instance #111 with labels #[2, 4]
+Emphasized train. Before retrain, training accuracy = 0.9918478260869565
+Regular round: 199, training accuracy = 0.9945652173913043
+Query instance #26 with labels #[4, 0]
+Emphasized train. Before retrain, training accuracy = 0.9918918918918919
+Regular round: 199, training accuracy = 0.9945945945945946
+Query instance #179 with labels #[0, 4]
+Emphasized train. Before retrain, training accuracy = 0.9919354838709677
+Regular round: 199, training accuracy = 0.9946236559139785
+Query instance #122 with labels #[1, 8]
+Emphasized train. Before retrain, training accuracy = 0.9893048128342246
+Regular round: 199, training accuracy = 0.9946524064171123
+Query instance #63 with labels #[3, 11]
+Emphasized train. Before retrain, training accuracy = 0.9946808510638298
+Regular round: 199, training accuracy = 0.9946808510638298
+Query instance #45 with labels #[0, 10]
+Emphasized train. Before retrain, training accuracy = 0.9947089947089947
+Regular round: 199, training accuracy = 0.9947089947089947
+Query instance #153 with labels #[4, 2]
+Emphasized train. Before retrain, training accuracy = 0.9921052631578947
+Regular round: 199, training accuracy = 0.9947368421052631
+Query instance #157 with labels #[4, 2]
+Emphasized train. Before retrain, training accuracy = 0.9921465968586387
+Regular round: 199, training accuracy = 0.9947643979057592
+Query instance #104 with labels #[8, 2]
+Emphasized train. Before retrain, training accuracy = 0.9947916666666666
+Regular round: 199, training accuracy = 0.9947916666666666
+Query instance #131 with labels #[5, 7]
+Emphasized train. Before retrain, training accuracy = 0.9896373056994818
+Regular round: 199, training accuracy = 0.9948186528497409
+Query instance #127 with labels #[6, 1]
+Emphasized train. Before retrain, training accuracy = 0.9896907216494846
+Regular round: 199, training accuracy = 0.9948453608247423
+Query instance #49 with labels #[9, 1]
+Emphasized train. Before retrain, training accuracy = 0.9923076923076923
+Regular round: 199, training accuracy = 0.9948717948717949
+Query instance #95 with labels #[0, 4]
+Emphasized train. Before retrain, training accuracy = 0.9948979591836735
+Regular round: 199, training accuracy = 0.9948979591836735
+Query instance #99 with labels #[2, 7]
+Emphasized train. Before retrain, training accuracy = 0.9923857868020305
+Regular round: 199, training accuracy = 0.9949238578680203
+Query instance #57 with labels #[4, 7]
+Emphasized train. Before retrain, training accuracy = 0.9949494949494949
+Regular round: 199, training accuracy = 0.9949494949494949
+Query instance #131 with labels #[3, 8]
+Emphasized train. Before retrain, training accuracy = 0.992462311557789
+Regular round: 199, training accuracy = 0.9949748743718593
+Query instance #111 with labels #[1, 11]
+Emphasized train. Before retrain, training accuracy = 0.99
+Regular round: 199, training accuracy = 0.995
+Query instance #177 with labels #[7, 6]
+Emphasized train. Before retrain, training accuracy = 0.9900497512437811
+Regular round: 199, training accuracy = 0.9950248756218906
+Query instance #137 with labels #[3, 5]
+Emphasized train. Before retrain, training accuracy = 0.9925742574257426
+Regular round: 199, training accuracy = 0.995049504950495
+Query instance #171 with labels #[0, 10]
+Emphasized train. Before retrain, training accuracy = 0.9926108374384236
+Regular round: 199, training accuracy = 0.9950738916256158
+Query instance #64 with labels #[2, 0]
+Emphasized train. Before retrain, training accuracy = 0.9926470588235294
+Regular round: 199, training accuracy = 0.9950980392156863
+Query instance #119 with labels #[3, 7]
+Emphasized train. Before retrain, training accuracy = 0.9926829268292683
+Regular round: 199, training accuracy = 0.9951219512195122
+Query instance #171 with labels #[11, 4]
+Emphasized train. Before retrain, training accuracy = 0.9902912621359223
+Regular round: 199, training accuracy = 0.9951456310679612
+Query instance #99 with labels #[6, 3]
+Emphasized train. Before retrain, training accuracy = 0.9903381642512077
+Regular round: 199, training accuracy = 0.9951690821256038
+Query instance #119 with labels #[6, 5]
+Emphasized train. Before retrain, training accuracy = 0.9903846153846154
+Regular round: 199, training accuracy = 0.9951923076923077
+Query instance #186 with labels #[11, 2]
+Emphasized train. Before retrain, training accuracy = 0.992822966507177
+Regular round: 199, training accuracy = 0.9952153110047847
+Query instance #63 with labels #[9, 7]
+Emphasized train. Before retrain, training accuracy = 0.9904761904761905
+Regular round: 199, training accuracy = 0.9952380952380953
+Query instance #31 with labels #[9, 5]
+Emphasized train. Before retrain, training accuracy = 0.9928909952606635
+Regular round: 199, training accuracy = 0.995260663507109
+Query instance #187 with labels #[7, 4]
+Emphasized train. Before retrain, training accuracy = 0.9929245283018868
+Regular round: 199, training accuracy = 0.9952830188679245
+Query instance #121 with labels #[5, 7]
+Emphasized train. Before retrain, training accuracy = 0.9929577464788732
+Regular round: 199, training accuracy = 0.9953051643192489
+Query instance #106 with labels #[5, 6]
+Emphasized train. Before retrain, training accuracy = 0.9953271028037384
+Regular round: 199, training accuracy = 0.9953271028037384
+Query instance #103 with labels #[8, 2]
+Emphasized train. Before retrain, training accuracy = 0.9930232558139535
+Regular round: 199, training accuracy = 0.9953488372093023
+Query instance #179 with labels #[2, 9]
+Emphasized train. Before retrain, training accuracy = 0.9930555555555556
+Regular round: 199, training accuracy = 0.9953703703703703
+Query instance #190 with labels #[4, 0]
+Emphasized train. Before retrain, training accuracy = 0.9907834101382489
+Regular round: 199, training accuracy = 0.9953917050691244
+Query instance #56 with labels #[11, 10]
+Emphasized train. Before retrain, training accuracy = 0.9954128440366973
+Regular round: 199, training accuracy = 0.9954128440366973
+Query instance #89 with labels #[9, 1]
+Emphasized train. Before retrain, training accuracy = 0.9908675799086758
+Regular round: 199, training accuracy = 0.9954337899543378
+Query instance #15 with labels #[9, 1]
+Emphasized train. Before retrain, training accuracy = 0.990909090909091
+Regular round: 199, training accuracy = 0.9954545454545455
+Query instance #26 with labels #[9, 2]
+Emphasized train. Before retrain, training accuracy = 0.9909502262443439
+Regular round: 199, training accuracy = 0.995475113122172
+Query instance #163 with labels #[3, 6]
+Emphasized train. Before retrain, training accuracy = 0.9932432432432432
+Regular round: 199, training accuracy = 0.9954954954954955
+Query instance #159 with labels #[1, 6]
+Emphasized train. Before retrain, training accuracy = 0.9910313901345291
+Regular round: 199, training accuracy = 0.9955156950672646
+Query instance #189 with labels #[9, 1]
+Emphasized train. Before retrain, training accuracy = 0.9955357142857143
+Regular round: 199, training accuracy = 0.9955357142857143
+Query instance #81 with labels #[4, 9]
+Emphasized train. Before retrain, training accuracy = 0.9911111111111112
+Regular round: 199, training accuracy = 0.9955555555555555
+Query instance #172 with labels #[6, 0]
+Emphasized train. Before retrain, training accuracy = 0.9911504424778761
+Regular round: 199, training accuracy = 0.995575221238938
+Query instance #171 with labels #[7, 2]
+Emphasized train. Before retrain, training accuracy = 0.9911894273127754
+Regular round: 199, training accuracy = 0.9955947136563876
+Query instance #27 with labels #[9, 7]
+Emphasized train. Before retrain, training accuracy = 0.993421052631579
+Regular round: 199, training accuracy = 0.9956140350877193
+Query instance #114 with labels #[0, 6]
+Emphasized train. Before retrain, training accuracy = 0.9912663755458515
+Regular round: 199, training accuracy = 0.9956331877729258
+Query instance #158 with labels #[4, 1]
+Emphasized train. Before retrain, training accuracy = 0.9956521739130435
+Regular round: 199, training accuracy = 0.9956521739130435
+Query instance #169 with labels #[0, 10]
+Emphasized train. Before retrain, training accuracy = 0.9935064935064936
+Regular round: 199, training accuracy = 0.9956709956709957
+Query instance #51 with labels #[10, 0]
+Emphasized train. Before retrain, training accuracy = 0.9935344827586207
+Regular round: 199, training accuracy = 0.9956896551724138
+Query instance #54 with labels #[7, 3]
+Emphasized train. Before retrain, training accuracy = 0.9935622317596566
+Regular round: 199, training accuracy = 0.9957081545064378
+Query instance #170 with labels #[2, 3]
+Emphasized train. Before retrain, training accuracy = 0.9957264957264957
+Regular round: 199, training accuracy = 0.9957264957264957
+Query instance #190 with labels #[11, 10]
+Emphasized train. Before retrain, training accuracy = 0.9957446808510638
+Regular round: 199, training accuracy = 0.9957446808510638
+Query instance #161 with labels #[7, 3]
+Emphasized train. Before retrain, training accuracy = 0.9936440677966102
+Regular round: 199, training accuracy = 0.9957627118644068
+Query instance #2 with labels #[2, 10]
+Emphasized train. Before retrain, training accuracy = 0.9936708860759493
+Regular round: 199, training accuracy = 0.9957805907172996
+Query instance #118 with labels #[10, 4]
+Emphasized train. Before retrain, training accuracy = 0.9936974789915967
+Regular round: 199, training accuracy = 0.9957983193277311
+Query instance #78 with labels #[3, 2]
+Emphasized train. Before retrain, training accuracy = 0.9937238493723849
+Regular round: 199, training accuracy = 0.99581589958159
+Query instance #109 with labels #[6, 5]
+Emphasized train. Before retrain, training accuracy = 0.9958333333333333
+Regular round: 199, training accuracy = 0.9958333333333333
+Query instance #17 with labels #[3, 9]
+Emphasized train. Before retrain, training accuracy = 0.991701244813278
+Regular round: 199, training accuracy = 0.995850622406639
+Query instance #71 with labels #[3, 9]
+Emphasized train. Before retrain, training accuracy = 0.993801652892562
+Regular round: 199, training accuracy = 0.9958677685950413
+Query instance #75 with labels #[6, 9]
+Emphasized train. Before retrain, training accuracy = 0.9958847736625515
+Regular round: 199, training accuracy = 0.9958847736625515
+Query instance #88 with labels #[2, 8]
+Emphasized train. Before retrain, training accuracy = 0.9959016393442623
+Regular round: 199, training accuracy = 0.9959016393442623
+Query instance #34 with labels #[10, 2]
+Emphasized train. Before retrain, training accuracy = 0.9938775510204082
+Regular round: 199, training accuracy = 0.9959183673469387
+Query instance #0 with labels #[2, 10]
+Emphasized train. Before retrain, training accuracy = 0.9939024390243902
+Regular round: 199, training accuracy = 0.9959349593495935
+Query instance #134 with labels #[6, 11]
+Emphasized train. Before retrain, training accuracy = 0.9939271255060729
+Regular round: 199, training accuracy = 0.9959514170040485
+Query instance #108 with labels #[8, 3]
+Emphasized train. Before retrain, training accuracy = 0.9939516129032258
+Regular round: 199, training accuracy = 0.9959677419354839
+Query instance #53 with labels #[10, 2]
+Emphasized train. Before retrain, training accuracy = 0.9939759036144579
+Regular round: 199, training accuracy = 0.9959839357429718
+Query instance #14 with labels #[6, 0]
+Emphasized train. Before retrain, training accuracy = 0.996
+Regular round: 199, training accuracy = 0.996
+Query instance #57 with labels #[9, 2]
+Emphasized train. Before retrain, training accuracy = 0.9940239043824701
+Regular round: 199, training accuracy = 0.9960159362549801
+Query instance #123 with labels #[1, 5]
+Emphasized train. Before retrain, training accuracy = 0.9940476190476191
+Regular round: 199, training accuracy = 0.996031746031746
+Query instance #10 with labels #[1, 5]
+Emphasized train. Before retrain, training accuracy = 0.9940711462450593
+Regular round: 199, training accuracy = 0.9960474308300395
+Query instance #23 with labels #[1, 9]
+Emphasized train. Before retrain, training accuracy = 0.9921259842519685
+Regular round: 199, training accuracy = 0.9960629921259843
+Query instance #179 with labels #[6, 10]
+Emphasized train. Before retrain, training accuracy = 0.9921568627450981
+Regular round: 199, training accuracy = 0.996078431372549
+Query instance #145 with labels #[2, 10]
+Emphasized train. Before retrain, training accuracy = 0.9921875
+Regular round: 199, training accuracy = 0.99609375
+Query instance #117 with labels #[9, 5]
+Emphasized train. Before retrain, training accuracy = 0.9941634241245136
+Regular round: 199, training accuracy = 0.9961089494163424
+Query instance #95 with labels #[2, 10]
+Emphasized train. Before retrain, training accuracy = 0.9941860465116279
+Regular round: 199, training accuracy = 0.9961240310077519
+Query instance #190 with labels #[2, 7]
+Emphasized train. Before retrain, training accuracy = 0.9922779922779923
+Regular round: 199, training accuracy = 0.9961389961389961
+Query instance #62 with labels #[7, 8]
+Emphasized train. Before retrain, training accuracy = 0.9942307692307693
+Regular round: 199, training accuracy = 0.9961538461538462
+Query instance #185 with labels #[10, 4]
+Emphasized train. Before retrain, training accuracy = 0.9961685823754789
+Regular round: 199, training accuracy = 0.9961685823754789
+Query instance #181 with labels #[5, 8]
+Emphasized train. Before retrain, training accuracy = 0.9942748091603053
+Regular round: 199, training accuracy = 0.9961832061068703
+Query instance #61 with labels #[10, 4]
+Emphasized train. Before retrain, training accuracy = 0.9961977186311787
+Regular round: 199, training accuracy = 0.9961977186311787
+Query instance #22 with labels #[10, 8]
+Emphasized train. Before retrain, training accuracy = 0.9943181818181818
+Regular round: 199, training accuracy = 0.9924242424242424
+Query instance #182 with labels #[1, 7]
+Emphasized train. Before retrain, training accuracy = 0.9905660377358491
+Regular round: 199, training accuracy = 0.9924528301886792
+Query instance #8 with labels #[1, 8]
+Emphasized train. Before retrain, training accuracy = 0.9906015037593985
+Regular round: 199, training accuracy = 0.9943609022556391
+Query instance #184 with labels #[2, 10]
+Emphasized train. Before retrain, training accuracy = 0.9925093632958801
+Regular round: 199, training accuracy = 0.9943820224719101
+Query instance #8 with labels #[7, 9]
+Emphasized train. Before retrain, training accuracy = 0.9944029850746269
+Regular round: 199, training accuracy = 0.9944029850746269
+Query instance #139 with labels #[3, 7]
+Emphasized train. Before retrain, training accuracy = 0.9907063197026023
+Regular round: 199, training accuracy = 0.9944237918215614
+Query instance #180 with labels #[5, 1]
+Emphasized train. Before retrain, training accuracy = 0.9925925925925926
+Regular round: 199, training accuracy = 0.9944444444444445
+Query instance #180 with labels #[8, 9]
+Emphasized train. Before retrain, training accuracy = 0.9907749077490775
+Regular round: 199, training accuracy = 0.9944649446494465
+Query instance #70 with labels #[9, 8]
+Emphasized train. Before retrain, training accuracy = 0.9944852941176471
+Regular round: 199, training accuracy = 0.9944852941176471
+Query instance #136 with labels #[7, 6]
+Emphasized train. Before retrain, training accuracy = 0.9945054945054945
+Regular round: 199, training accuracy = 0.9945054945054945
+Query instance #42 with labels #[1, 5]
+Emphasized train. Before retrain, training accuracy = 0.9927007299270073
+Regular round: 199, training accuracy = 0.9945255474452555
+Query instance #65 with labels #[6, 2]
+Emphasized train. Before retrain, training accuracy = 0.9927272727272727
+Regular round: 199, training accuracy = 0.9945454545454545
+Query instance #158 with labels #[3, 9]
+Emphasized train. Before retrain, training accuracy = 0.9945652173913043
+Regular round: 199, training accuracy = 0.9945652173913043
+Query instance #112 with labels #[7, 11]
+Emphasized train. Before retrain, training accuracy = 0.9909747292418772
+Regular round: 199, training accuracy = 0.9927797833935018
+Query instance #180 with labels #[6, 0]
+Emphasized train. Before retrain, training accuracy = 0.9910071942446043
+Regular round: 199, training accuracy = 0.9928057553956835
+Query instance #48 with labels #[1, 11]
+Emphasized train. Before retrain, training accuracy = 0.9910394265232975
+Regular round: 199, training accuracy = 0.992831541218638
+Query instance #170 with labels #[8, 7]
+Emphasized train. Before retrain, training accuracy = 0.9892857142857143
+Regular round: 199, training accuracy = 0.9928571428571429
+Query instance #160 with labels #[9, 7]
+Emphasized train. Before retrain, training accuracy = 0.9911032028469751
+Regular round: 199, training accuracy = 0.9928825622775801
+Query instance #124 with labels #[8, 9]
+Emphasized train. Before retrain, training accuracy = 0.9929078014184397
+Regular round: 199, training accuracy = 0.9929078014184397
+Query instance #193 with labels #[11, 2]
+Emphasized train. Before retrain, training accuracy = 0.991166077738516
+Regular round: 199, training accuracy = 0.9929328621908127
+Query instance #169 with labels #[11, 3]
+Emphasized train. Before retrain, training accuracy = 0.9929577464788732
+Regular round: 199, training accuracy = 0.9929577464788732
+Query instance #143 with labels #[11, 10]
+Emphasized train. Before retrain, training accuracy = 0.9894736842105263
+Regular round: 199, training accuracy = 0.9929824561403509
+Query instance #74 with labels #[10, 11]
+Emphasized train. Before retrain, training accuracy = 0.9912587412587412
+Regular round: 199, training accuracy = 0.993006993006993
+Query instance #105 with labels #[11, 8]
+Emphasized train. Before retrain, training accuracy = 0.9912891986062717
+Regular round: 199, training accuracy = 0.9930313588850174
+Query instance #167 with labels #[11, 10]
+Emphasized train. Before retrain, training accuracy = 0.9895833333333334
+Regular round: 199, training accuracy = 0.9913194444444444
+Query instance #154 with labels #[6, 7]
+Emphasized train. Before retrain, training accuracy = 0.9896193771626297
+Regular round: 199, training accuracy = 0.9930795847750865
+Query instance #183 with labels #[8, 9]
+Emphasized train. Before retrain, training accuracy = 0.9913793103448276
+Regular round: 199, training accuracy = 0.993103448275862
+Query instance #95 with labels #[11, 9]
+Emphasized train. Before retrain, training accuracy = 0.9914089347079038
+Regular round: 199, training accuracy = 0.9948453608247423
+Query instance #157 with labels #[10, 11]
+Emphasized train. Before retrain, training accuracy = 0.9914383561643836
+Regular round: 199, training accuracy = 0.9931506849315068
+Query instance #35 with labels #[9, 1]
+Emphasized train. Before retrain, training accuracy = 0.9914675767918089
+Regular round: 199, training accuracy = 0.9931740614334471
+Query instance #84 with labels #[6, 10]
+Emphasized train. Before retrain, training accuracy = 0.9914965986394558
+Regular round: 199, training accuracy = 0.9931972789115646
+Query instance #115 with labels #[8, 9]
+Emphasized train. Before retrain, training accuracy = 0.9915254237288136
+Regular round: 199, training accuracy = 0.9932203389830508
+Query instance #3 with labels #[3, 4]
+Emphasized train. Before retrain, training accuracy = 0.9915540540540541
+Regular round: 199, training accuracy = 0.9932432432432432
+Query instance #131 with labels #[6, 0]
+Emphasized train. Before retrain, training accuracy = 0.9932659932659933
+Regular round: 199, training accuracy = 0.9932659932659933
+Query instance #178 with labels #[11, 10]
+Emphasized train. Before retrain, training accuracy = 0.9932885906040269
+Regular round: 199, training accuracy = 0.9932885906040269
+Query instance #140 with labels #[8, 9]
+Emphasized train. Before retrain, training accuracy = 0.9899665551839465
+Regular round: 199, training accuracy = 0.9933110367892977
+Query instance #38 with labels #[9, 8]
+Emphasized train. Before retrain, training accuracy = 0.9933333333333333
+Regular round: 199, training accuracy = 0.9933333333333333
+The label scarcity array is: [0.21649484536082475, 0.23711340206185566, 0.28865979381443296, 0.25773195876288657, 0.25257731958762886, 0.22164948453608246, 0.26804123711340205, 0.28865979381443296, 0.25257731958762886, 0.31443298969072164, 0.25773195876288657, 0.23711340206185566]
+The label uncertainty matrix is: [[7.506233116374092E-4, 7.79262123994951E-12, 0.0, 1.0960901951881602E-4, 0.0, 0.0, 0.0, 1.852880707753357E-7, 0.03076407158280059, 0.0, 0.0, 0.005029992366834959], [2.2934384497904193E-7, 2.0206836887568745E-8, 4.2403685382541443E-4, 9.7024781263702E-10, 3.158428703783251E-10, 0.004051818823899045, 0.00973543435159109, 0.7073821947342904, 1.2680125912890102E-4, 1.1033397000537182E-4, 5.582338359041665E-5, 1.3381168686834435E-14], [7.609975673563251E-4, 1.7592844660115067E-8, 0.0, 1.179673067009916E-6, 2.812765342270028E-7, 0.01206464851134792, 0.008842828389428514, 2.362397128612581E-4, 0.0, 0.0, 0.0, 1.7969056227793658E-11], [3.285173911350768E-5, 0.008684150500799452, 3.7240325992538015E-4, 0.0, 0.0, 1.750876538197943E-7, 1.6423060578141246E-8, 2.7181317141855565E-5, 2.4461858094682043E-8, 0.2548381894349212, 0.0, 0.0], [8.231716682785549E-10, 4.1874131513100195E-4, 2.8875508779557802E-6, 6.041937940654469E-7, 2.046524236470378E-10, 0.24097174805069738, 0.004716024274106367, 1.4485525561713786E-5, 0.0044438033288514145, 0.11291623848956085, 6.098803827766026E-6, 4.371698906461202E-7], [0.0, 0.0, 2.4269904122159707E-6, 0.0, 7.934527575416834E-10, 0.6770429545302274, 0.0, 0.02055432053451378, 2.493066970554095E-4, 5.963615675481648E-4, 0.004041019143265173, 1.60110469628759E-11], [9.361075085333595E-4, 0.012075637259999938, 4.4370527003091874E-9, 8.950076338702548E-10, 3.3562281210050786E-13, 0.013931946311909083, 0.0, 0.0, 0.0255875429456508, 0.10461465921142535, 2.8372119642058987E-7, 4.395219536493559E-9], [3.644248043741461E-4, 0.18427574223057472, 0.061793680432974896, 0.005336947114593316, 1.6615233621693794E-5, 3.982085794440593E-8, 6.677981643887776E-6, 0.0014137735069570606, 0.0, 0.0, 4.5316598206893663E-10, 0.07644207408456861], [7.046921943098565E-5, 0.0, 6.433809704123485E-8, 1.6630587682087247E-11, 2.225789567217648E-12, 7.22988746179043E-5, 1.9235727084115624E-7, 0.0, 0.0, 0.0, 4.916083861932554E-5, 6.502575632692855E-13], [2.066678276012029E-4, 0.269016320699912, 3.690492596888704E-9, 9.747770105505097E-10, 6.060114229628034E-13, 0.04600115283279327, 6.517614375456822E-6, 0.004276401966517129, 0.06114401067238984, 0.08284945716198366, 4.597366206467967E-6, 1.896993639856837E-9], [3.3417745678700867E-4, 0.0, 6.57589559474005E-8, 1.5598966512553414E-9, 3.652117909856916E-12, 0.0, 7.786476263606565E-5, 0.03328709463738799, 0.0014155545599738861, 7.774373892506074E-4, 0.0, 0.0], [0.0, 0.0, 0.0025227673155588364, 2.184748768245908E-9, 8.07525316655886E-9, 0.0011642977942167843, 0.0037021068090622787, 0.266058748169101, 9.229976168998161E-4, 9.241574592422364E-5, 0.001404012503682237, 2.1949819955168825E-14], [9.655069026210962E-4, 0.02886680211117043, 2.5525235692862413E-9, 5.900738729682941E-10, 2.707320910527156E-13, 0.016967787023887237, 6.628495179933507E-6, 0.01822890851034964, 0.0, 0.0, 1.1051009865016864E-6, 2.2874238886461917E-9], [0.006716738243476289, 1.957496171315142E-6, 4.6432126995072905E-4, 1.552146511837486E-9, 3.564730988346887E-9, 1.9295224487070328E-5, 0.007757896929989242, 0.0018887267841302246, 9.606035970165737E-5, 5.569895458410468E-4, 6.950857251157784E-4, 1.35569540054444E-13], [0.0, 5.253399700319886E-8, 0.00897855944013276, 1.1552593470058582E-7, 1.3518864563469626E-8, 0.010881368176738682, 0.0, 9.89177942204562E-5, 0.0012275550044079544, 0.07474778065144805, 0.0, 0.0], [2.2148422061115024E-9, 0.0, 7.069517876021167E-9, 3.144360129280375E-10, 0.0, 0.0, 2.1741147494363356E-4, 6.236968576323054E-5, 0.10403722091678391, 0.0, 2.187667753403029E-6, 1.3639710443637647E-11], [7.716064280827866E-10, 4.312046623071044E-4, 2.7874261772884378E-6, 5.883489261081737E-7, 1.9225327948970594E-10, 0.23801576757331594, 0.0046055686299928435, 1.3844057802137044E-5, 0.0, 0.0, 5.726241171904361E-6, 4.1996395790608847E-7], [4.837275756717887E-5, 0.005486184075342669, 5.909927887626232E-6, 0.0, 0.0, 0.0, 9.869241202054013E-9, 1.6719472809245683E-4, 1.1198419969105089E-10, 0.0, 0.0075417022159852826, 1.3328970825865483E-4], [0.14555770854039118, 2.722514028945045E-4, 0.004130642382495355, 3.996737477581894E-9, 0.0, 0.0, 0.08954849812014257, 8.438751697835938E-6, 6.965887743376081E-4, 0.018319555210373206, 0.002155787588059779, 6.879202200649539E-12], [0.002656760868725994, 7.437901354155861E-11, 8.65350435119705E-6, 6.749264092809071E-5, 0.8639494467637947, 2.1052977139390805E-9, 4.1712633347401606E-11, 2.219088203516413E-10, 0.0, 0.0, 1.5703996667782395E-7, 1.1932878148271076E-5], [0.0, 0.0, 0.0, 3.073589027583518E-8, 2.0729121270648947E-10, 0.03803619823917137, 0.11965103730744098, 0.45308979928628723, 0.0, 5.97492810489042E-4, 2.4807077606481044E-5, 1.8663481486068135E-12], [2.4740259101138954E-4, 0.23327521448712563, 3.323096578756038E-9, 9.2440326174742E-10, 6.410598712038804E-13, 0.03691492701732191, 5.024118392146494E-6, 0.0039011663041848, 0.0798608104496884, 0.10092256689721514, 5.032234308926068E-6, 1.8790269911394685E-9], [0.0, 3.063984897492802E-13, 0.9279494815784064, 4.9360530988267964E-6, 0.0, 9.754981655785144E-8, 0.05349142632753112, 0.0, 0.0, 4.3873001376315557E-7, 0.0, 0.0], [8.457087627672576E-11, 0.0, 2.8161720966084647E-7, 1.0771828029096339E-6, 1.13662091372949E-11, 0.13065882854472133, 0.002040070267204174, 7.157398924428904E-6, 0.0011383774235337318, 0.0, 0.0, 0.0], [0.0019971082282934367, 1.8598064971967417E-10, 0.0, 0.0, 0.1688439969984561, 2.8057374201750918E-9, 6.485034731440464E-12, 1.591455692928527E-10, 5.500198551711133E-5, 3.843592111252292E-13, 4.6978517027176676E-8, 1.2496847415126023E-4], [0.032540454616626274, 6.751736576020962E-14, 0.0, 0.0, 0.45682580874330947, 6.065694132528776E-7, 3.169217954734904E-7, 2.4273082619312208E-4, 0.0015842928241481813, 5.03300956467001E-10, 9.070151664730243E-4, 0.008490664978927816], [0.0, 4.2575646819211236E-6, 0.0, 0.0017541809579780343, 0.0, 2.3900980639091074E-8, 1.4343243665004834E-6, 0.0, 3.3496992780546186E-5, 0.0, 0.0, 0.008671971089325659], [0.0, 0.0, 2.4955148461826033E-6, 2.915590584361543E-9, 1.9310511568042905E-11, 0.00865144153463282, 0.014630407383007958, 0.0, 0.23306985710243552, 0.0, 1.593107104698305E-4, 2.8944097719148762E-11], [1.0943226626203552E-4, 6.236287006099176E-8, 1.0411207235494487E-5, 1.9565105258127623E-10, 0.0, 0.0, 4.892556122025136E-4, 0.6658660437914601, 4.995713240821754E-5, 1.7356771315013564E-4, 2.954619582497143E-4, 9.435760556193491E-14], [3.37556252281189E-4, 1.8543584586897068E-9, 0.0, 0.0, 1.104883351629245E-8, 8.344454356385977E-4, 0.0, 0.0, 0.03640644309346169, 3.3355388146150133E-4, 1.18997968118987E-4, 4.137595783224413E-12], [9.401462040248786E-9, 0.020391816099014005, 0.0, 0.0, 4.438818253494873E-14, 0.0415024749252062, 0.004173818854683547, 2.0124469418991708E-4, 0.011333167752985207, 0.003080358297332105, 3.5070168393554784E-7, 1.6699738207337347E-9], [0.014336600162533773, 1.11392538540671E-5, 4.350287835484897E-4, 1.4717644174954958E-9, 1.6685696004220243E-9, 0.0, 0.013473223462818179, 7.304022007582909E-4, 4.519143550535007E-4, 0.0, 0.0, 0.0], [9.014999146977214E-8, 3.437675181150824E-6, 0.0, 0.0, 7.025752982846509E-8, 5.135696083694574E-4, 3.3152731471197683E-7, 0.12303282188878789, 5.790608741396142E-7, 1.0007960150160145E-5, 1.1306606325611992E-7, 1.1996508755623572E-5], [0.003413020142092068, 5.579243274689321E-11, 1.9513884823796346E-5, 3.111411023190014E-4, 0.7028209724154715, 3.2313032249930984E-9, 1.501245794344186E-10, 3.0754369561743033E-10, 5.766499374904033E-5, 5.9545701702745646E-12, 3.9349718092114924E-7, 4.105849642054199E-6], [3.357590775219546E-7, 4.345574886761201E-4, 0.0, 0.00199993229574466, 0.0, 1.456694907773226E-4, 0.0, 0.0, 1.0396435790038794E-7, 0.0, 0.0, 0.00366794685145877], [2.76872030052502E-9, 0.0, 1.0608263533598468E-8, 4.505274984218614E-9, 2.6815990747446442E-14, 0.021105772149058476, 0.0, 0.0, 0.011330590190052003, 0.0, 1.1487411004405689E-7, 7.035266634315958E-10], [0.0, 0.0, 1.307935641620124E-4, 2.011114098286937E-10, 1.999512217229475E-9, 8.281296720591413E-7, 6.770907876410316E-5, 0.007718399537850008, 8.897090040658375E-5, 5.521933067564877E-5, 2.9035139401345673E-4, 6.325407972571694E-14], [0.0, 0.0, 0.024376591072096665, 0.040134933435143696, 0.0, 9.38426358843003E-9, 1.4039400553222947E-7, 1.4370223375422883E-6, 0.0, 9.341896961556628E-7, 1.3748032168703144E-4, 1.406976396767462E-9], [0.004620895212860731, 0.02904901987868569, 3.340516284450413E-8, 6.041805360302328E-8, 1.6024196211109784E-11, 0.13681006391134365, 4.5436815536009374E-4, 0.0527998630160903, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0017492247026236673, 5.776538330328395E-9, 2.5034823684040778E-8, 7.136762126824792E-7, 0.08078601318065859, 2.516468995990416E-6, 4.044061491770537E-4, 0.007825491721744404, 0.00114321869568422, 2.8581572411197872E-12], [0.0076240507978733805, 8.897133160229143E-7, 0.001759414540402255, 9.850479960197455E-9, 8.29203666623878E-9, 1.5097375286510228E-4, 0.279548249355303, 4.678381493442618E-4, 1.9587415616441128E-4, 0.004309864714568956, 0.0010328926667777225, 5.343381166134063E-13], [3.433875970154505E-7, 0.004168117334275015, 1.1779000294732285E-8, 2.5773671048064935E-9, 7.279154367697133E-14, 0.06992305146902025, 0.003417920884947452, 0.001513646751233999, 0.004349780340043075, 9.737480500018719E-5, 2.7618428165910467E-5, 7.197053969233805E-10], [1.6855699601110025E-6, 0.0, 7.496762171963935E-9, 5.663069986392058E-9, 1.4851580513949234E-12, 0.0, 1.874322859901814E-6, 2.40322878507504E-5, 0.7632822693569623, 0.10976083182687213, 4.690487203069235E-5, 7.886056669998507E-11], [0.0, 0.0, 2.5686118547600216E-9, 2.848844977787085E-10, 1.208993290701799E-13, 0.016024753507791756, 4.9207732340222995E-6, 0.017409337376882994, 0.02951736059777943, 0.04719946888234702, 7.368912086432889E-7, 9.513670220565085E-10], [1.1739301728492717E-6, 9.594189662233718E-10, 0.026941579146174094, 3.2375951530454025E-8, 2.0974408178679832E-7, 8.807937427978141E-4, 0.021197201077875198, 0.21738026918915782, 0.0026315049624716725, 2.4303508485590264E-5, 0.0, 0.0], [0.0, 3.554584054193803E-8, 0.0, 0.0, 9.273117089842169E-10, 0.002849719923877281, 0.024358642893303768, 0.912840111135788, 1.7121817906672184E-4, 4.13573359675512E-4, 0.0, 5.068704682864793E-14], [1.576953985402774E-4, 1.5904836871576645E-7, 0.0, 0.0, 7.80425705134273E-9, 9.296547656245657E-6, 1.4472713731447342E-4, 0.054465924290953, 3.7485475135238627E-4, 2.6481974978342926E-5, 7.560580023734294E-4, 3.096484088246888E-14], [0.0, 0.0, 2.0208600489819063E-4, 2.442784600082877E-9, 3.270704441689487E-8, 0.002315885519748151, 8.01226165234922E-4, 1.0913629931552649E-5, 1.6395515241907077E-4, 8.240512942389616E-5, 0.005255616186374592, 2.3045740108189165E-4], [9.787430830167684E-4, 0.0, 0.0, 0.0, 5.089033395240427E-5, 5.828105509309012E-8, 3.1545237465846476E-4, 0.0054042523903608565, 6.712458333613114E-8, 1.3895891171067376E-7, 2.846354965644093E-9, 0.0], [0.001036569758377913, 0.0, 0.0010052469480814807, 4.827553713551315E-9, 3.0350994864498816E-8, 5.728253342773826E-7, 3.8090483732870973E-4, 0.027518067274155445, 3.476751541647011E-5, 0.0, 0.0, 0.0], [2.3750130132995284E-4, 0.24007046669292031, 0.0, 0.0, 5.341113725407128E-13, 0.030094220873849054, 3.431686107052336E-6, 0.003179550592286806, 0.09353623455875348, 0.10083759087989445, 5.606690337410932E-6, 1.5538325572295559E-9], [0.0, 2.3024472801311104E-13, 8.435050241695219E-4, 4.5908610366948905E-4, 0.0, 0.0, 0.0029061137217329946, 6.0003804164932006E-5, 0.016285655985682324, 7.902898890854715E-7, 0.0, 0.008139139267269465], [1.726016476479381E-5, 0.009317475757638732, 1.2602343878389875E-8, 9.860180626209172E-12, 6.767972308155394E-13, 1.6594239789990972E-4, 4.2785211956762406E-8, 0.0025238771111496527, 0.06007612187606358, 0.06295663882527935, 4.435198015080204E-5, 9.214792851178303E-13], [0.0, 4.3012714742464216E-13, 0.0, 0.0, 2.325916696301219E-5, 3.847763380138147E-7, 0.0, 0.0, 0.2802749822755757, 1.244685909895793E-9, 0.0, 4.4122533879136257E-7], [9.571859042380504E-5, 3.9740198312184835E-16, 0.034160297333274456, 0.0, 1.3676248386511824E-4, 1.5664792293312857E-6, 0.01785510309894267, 0.0, 0.0, 0.0, 0.0035218034515789778, 1.2010878888133646E-8], [6.223559354060637E-4, 7.906415115880422E-4, 8.75809254678297E-5, 2.482572544107813E-8, 1.801216138926031E-8, 8.945760640477474E-6, 5.90903024624711E-4, 0.672746063664761, 5.303806530584587E-4, 1.9805021291208202E-4, 3.108310440578223E-5, 4.2707889190129434E-10], [0.03478758337128743, 5.163084658894998E-8, 0.0, 0.06967854342489954, 0.0, 4.777311879422541E-11, 8.731979583842531E-10, 5.026604527573758E-4, 0.0, 0.0, 0.0, 0.0], [3.369285498631841E-5, 0.005860970191658476, 0.0, 0.768931510397861, 0.0, 2.0730864913609537E-8, 7.0055776446587E-7, 0.0, 4.04414279842058E-11, 0.0, 0.0, 0.0], [1.0850094566959792E-5, 2.7264416618582628E-8, 0.0, 0.0, 1.802526521953714E-10, 0.0041169140019439165, 1.0761957877464457E-4, 0.7258414326844843, 1.0253471902826829E-4, 6.0931891957993756E-5, 1.9828734591577953E-4, 2.0417581888252498E-14], [2.2086824963229082E-11, 0.006567687168791201, 0.0, 0.0, 3.0741115873383E-14, 0.06005703534805402, 5.426934391490261E-5, 4.339821646492936E-7, 0.048879304832818105, 0.37448824998609476, 4.0736801237575896E-8, 1.0067226417686662E-9], [8.159127432158831E-9, 0.0, 0.0, 0.0, 1.160337464228843E-9, 0.0, 8.559770087475105E-4, 0.0, 2.666402354689623E-5, 0.0, 3.029167761381881E-7, 6.0269079300888855E-6], [4.012555851950945E-4, 3.931539435431953E-5, 0.0, 0.0, 0.0, 1.0695388663606309E-7, 5.130133099440215E-6, 5.993470181486771E-6, 3.8740776109325026E-7, 0.06663392854364403, 0.0, 0.05034530656698047], [3.9670258685602647E-4, 6.019396486265267E-13, 0.009524151261465583, 0.0, 2.3949377219154513E-6, 2.5601617074100247E-6, 0.0, 0.0, 0.0, 4.9424937365039057E-8, 0.034494885845530676, 2.1078992675083794E-8], [1.5388824591676208E-6, 2.3010362746360583E-5, 0.0, 0.0, 0.0, 3.993323140771832E-5, 3.001209242281533E-5, 0.0, 4.0544969670541775E-7, 0.0, 3.396623802428684E-5, 0.0], [0.0, 1.3905680016220471E-5, 0.0, 1.823905796928279E-10, 0.0, 2.628165517326586E-6, 0.04079520171421602, 0.009674324841045023, 0.018364971103187064, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 4.9618028048295586E-8, 3.2093351304718046E-7, 8.30470392006788E-4, 0.0, 0.017766885758386475, 0.02228467669688991, 1.5046559643028257E-4, 0.006028859738010409, 3.482669964176169E-13], [3.863742676731847E-7, 0.0011955701962619398, 1.3671007893999419E-5, 3.5986954440857014E-5, 1.7101947963443054E-11, 0.05738839256744954, 0.0, 0.02359117694490598, 2.4299457933141255E-5, 0.5104477650365986, 2.9283463939935472E-6, 0.0], [0.0043378134958770905, 0.00130760577734379, 0.0, 0.0, 2.720482793228359E-12, 0.0583625886971606, 1.9892074029426212E-4, 0.179292760151457, 0.01831389557378238, 0.4289062817690016, 6.847299713411712E-8, 3.39774189682802E-8], [6.542286539833957E-6, 5.485521638697246E-10, 1.0417694603763958E-8, 5.220762914887372E-12, 6.4456198011464845E-12, 0.06042368917627475, 3.5618011702038166E-6, 6.014680324389898E-4, 3.2066665980079204E-5, 7.162368854141121E-5, 0.0, 0.0], [0.002333703465245713, 7.2220598683462946E-6, 1.1199498797322699E-4, 1.5395180612284934E-10, 0.0, 0.0, 3.034764637907617E-5, 0.03393314001006374, 2.5715729432438334E-5, 1.3111239337448843E-5, 2.8362783317491876E-4, 3.4164167532598005E-14], [0.0, 0.0, 1.0279074016474278E-9, 8.299895507875266E-11, 5.396819801006827E-14, 0.0073951098427366135, 6.924200492812473E-7, 0.003724385586734713, 0.0, 0.0, 1.2209523152144346E-6, 4.6155368497488783E-10], [9.142727980717643E-5, 0.002410898926504649, 1.176115926848631E-5, 0.0, 0.0, 0.0, 9.949112200757781E-9, 1.2993997597565698E-4, 3.1450686499567837E-10, 0.0, 0.022391171643678806, 1.3264756968467406E-4], [2.6030980135701946E-6, 3.2923805215641616E-8, 3.3083279302789897E-4, 1.0186999991884889E-9, 3.8223432870002486E-10, 0.002275386728822104, 0.012600242954844814, 0.17192082095846647, 1.2396101623675195E-4, 3.428970114525143E-4, 0.0, 0.0], [8.20332975675982E-8, 2.7164031037885877E-5, 0.016661111133026294, 0.012225332624230423, 0.0, 0.0, 1.1695816459766917E-7, 0.032359507754918325, 6.915971817456068E-8, 7.079662564635214E-6, 5.561751653549245E-9, 5.032025188081457E-5], [6.582354184798336E-5, 1.0365804762126682E-5, 0.1290840601426697, 0.003028518219489776, 4.911218578968977E-5, 6.318296841278936E-8, 9.983981676064957E-6, 2.7791880136129876E-6, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 7.422326291762667E-5, 0.004061432100697575, 5.7299312061239476E-9, 1.5554487987601284E-4, 0.0, 0.8803626482514519, 2.093638159450517E-5, 0.0, 6.695722553987976E-10, 3.251063031687017E-4], [0.0019479564468641557, 8.869267607590948E-6, 1.2986018477943292E-4, 2.4236775850736087E-10, 2.6094808338596224E-9, 9.277730708134868E-7, 0.0, 0.0, 2.9093029004177418E-5, 1.3665286836217483E-5, 2.1899798630118823E-4, 7.013554856629723E-14], [1.1912466632485672E-4, 6.280284621692433E-4, 2.462349709203188E-7, 2.2397817369967122E-11, 1.0744329849854243E-11, 2.5418706420587966E-5, 3.325122581888679E-7, 0.0, 0.00336949036466007, 0.0, 1.4487242433616938E-4, 2.373665214143982E-13], [0.0, 0.0, 0.0, 0.0, 0.05104353923014676, 1.5461691926788035E-9, 5.567659666638747E-10, 6.7363088631238705E-9, 2.4616768315333104E-5, 1.343676281351236E-10, 4.4373914860646776E-7, 1.6168500719310197E-5], [4.2553414680120234E-6, 1.1337842723957748E-9, 7.176202123330595E-9, 3.188800516523707E-12, 2.399086916392814E-12, 0.05639657259197399, 3.2827428793788653E-6, 5.74061442006224E-4, 0.0, 0.0, 6.737633468726227E-5, 1.3889548045951173E-13], [0.0, 0.0, 9.738022497817259E-5, 2.5597581070956245E-8, 1.9829149925089647E-8, 8.40823512893163E-6, 6.356509403566053E-4, 0.6182666288560446, 4.828003129144731E-4, 1.7990181397087301E-4, 3.2176656702500415E-5, 4.0838349432371217E-10], [7.730215926229196E-7, 1.1920146068037156E-4, 0.028532833810255787, 0.022309993372969517, 0.0, 1.5370158685801272E-6, 0.0, 0.0, 3.0188811450670983E-9, 0.0, 3.864021753545146E-6, 9.149208318460463E-5], [2.4191941706450218E-4, 4.547459529108888E-9, 0.0032628046935147268, 6.819610920334479E-7, 2.6897561566496346E-8, 0.0, 0.08928620496731221, 0.0, 0.0, 0.0, 0.08168482071310239, 4.166257413043113E-12], [0.006721639320765388, 1.3174359189034213E-9, 0.0014864252497284718, 1.519947036139317E-6, 2.5371095706796012E-8, 0.04261586631804659, 0.0, 0.0, 0.002168818653748119, 0.0075764085155296534, 0.012773864030383664, 1.489339185868186E-11], [0.005577134530166989, 2.8453927461513665E-10, 0.011544127497995323, 2.6715982428772124E-4, 6.802283631764406E-5, 1.313935204461103E-5, 0.0, 1.933137847243138E-6, 3.6114766479355964E-5, 0.00766950176356751, 0.0, 0.004815640360879004], [8.192157367935445E-8, 5.573566143630333E-5, 0.004567049552766716, 0.04970364985045672, 1.7701935177320274E-8, 5.792484292629352E-4, 0.0, 0.0, 5.0298910592161405E-8, 1.1063223764207208E-5, 2.124337769097427E-9, 3.367342329004187E-5], [1.2568782135561658E-5, 1.8105029479257888E-9, 1.7753290901344362E-8, 7.180475755589414E-12, 0.0, 0.0, 1.2318877233622267E-5, 0.002795044018633952, 3.96200054294856E-5, 1.565845949766942E-4, 1.0333664070419336E-4, 2.1237615865102794E-13], [5.362681510783841E-10, 4.946745081901508E-4, 2.3404269541700243E-6, 5.227100563093141E-7, 1.4031821399131E-10, 0.2261137185048413, 0.004095376228660184, 1.0804510010009594E-5, 0.004873898890688011, 0.14549629180029988, 4.081704462841256E-6, 3.3939128675657314E-7], [1.6983315330640057E-4, 3.005464287372616E-7, 0.0, 8.190263023252641E-7, 2.4744157485081025E-9, 0.017073137251936266, 0.0, 0.0, 0.0, 0.023211490994396677, 5.98221869128391E-5, 4.016108402204123E-12], [3.9096125202998695E-6, 0.0, 2.8050132571777533E-8, 2.9556476062720506E-8, 0.0, 0.0, 0.009228927404354156, 0.016690988645087557, 0.005085706215393948, 0.0, 2.3008536739542602E-8, 6.170365281046661E-9], [1.4521817515975383E-4, 6.188335088812029E-8, 0.002252747362180699, 1.8589490152734327E-8, 1.8910183414222283E-9, 0.0099254848838225, 0.5386485035243934, 0.0012496697882818826, 0.0, 0.0, 3.808190937730082E-4, 2.1812290793162332E-13], [0.012991109522767903, 8.338369631900451E-10, 0.05442890842265449, 1.6984611539283073E-4, 3.109577922621935E-4, 5.501708592037247E-6, 0.050897039471048955, 3.887078942055311E-7, 3.0716679122133606E-5, 0.04358256336614619, 0.020134635658480726, 0.029967165211739033], [2.1032015844796472E-4, 7.610992608471823E-8, 7.433981684847922E-6, 1.9777302641345582E-10, 0.0, 0.0, 6.430159281233438E-4, 0.5983063475134613, 6.409356755313333E-5, 2.581765115932111E-4, 2.3571159580688136E-4, 1.7350575881161307E-13], [1.2391438157876645E-5, 9.18611661865428E-15, 2.2819019771513576E-4, 6.400422613399858E-4, 4.4402564004497617E-8, 1.2876274831818968E-5, 0.0, 0.0, 0.8839207612710553, 1.915578806688245E-11, 4.762745524489596E-5, 1.1368262282636555E-10], [2.181147732607131E-4, 0.15387308170091785, 2.1088641037980162E-4, 2.302016952720358E-9, 1.0430975318665765E-8, 0.06573200121642442, 0.0075201347894101175, 1.2164747404952436E-6, 2.5380319917123195E-4, 2.8619329063542892E-5, 0.0, 0.0], [0.0, 1.610040197704191E-9, 0.0, 1.5248817563825968E-4, 0.0, 3.8016465341295103E-6, 0.03577589730107955, 1.7585644918050036E-7, 2.3472783905686967E-5, 0.0, 0.0, 0.0], [0.0, 0.0, 2.4515790861188865E-8, 2.4844281389700417E-11, 1.1048358479729056E-11, 0.061450425622215324, 9.851683307494027E-5, 0.0, 0.0, 4.8614658725831816E-4, 1.7564156065032015E-4, 1.0192074142358977E-12], [9.254725302937571E-4, 2.1010093984609022E-8, 0.00996904984650453, 0.01093034220472526, 1.979003169814298E-4, 2.774032172880858E-5, 0.0, 1.6282266852574168E-6, 1.1095284058182386E-7, 0.0, 0.0, 0.0], [0.0, 1.871406577218974E-5, 0.0, 0.0, 1.5750070464395005E-4, 1.1774800912078831E-8, 5.16105486503271E-6, 0.0, 1.1236935104630419E-7, 0.0059350465389456375, 0.27896830156337216, 0.11205042586654543], [6.829142971237583E-8, 1.1152184999327834E-9, 0.0, 0.0, 4.7821201707428865E-11, 0.013681369799664611, 0.0, 0.0, 4.067915555935331E-4, 6.997946770931351E-4, 0.0, 0.0], [0.0, 0.0, 8.806270358028049E-5, 8.531292540745042E-11, 8.222301343463026E-10, 1.736541099583988E-6, 2.9075298720278618E-5, 0.04258725824527686, 3.8044510442851904E-5, 2.3837769408729947E-5, 2.9861952245616304E-4, 1.1506099799356867E-14], [4.7459278210938315E-6, 2.4134475261113863E-10, 0.04056205847325561, 2.2618106750614563E-8, 0.0, 0.0, 0.014129374284675842, 0.07207204191368025, 0.010572756879994188, 6.072328885509126E-5, 0.006193364579547734, 2.3479797497991493E-13], [4.525722571927499E-6, 6.746967861100829E-11, 0.043674021634165665, 5.970320229947936E-8, 4.5285589531428314E-7, 6.048199597253889E-4, 0.03808697174852395, 0.058269694914954956, 0.022674887468842577, 3.038013843892351E-5, 0.0068886373292583285, 3.4676690388344483E-13], [1.214746809075746E-7, 8.58125113366513E-12, 0.0, 1.268296730986716E-4, 1.6925510037163383E-7, 2.6681695956987106E-5, 0.0, 0.0, 0.0, 5.563337724945328E-7, 8.43720171575661E-4, 3.357838011219932E-12], [1.1923399574692169E-4, 1.3199850661677777E-12, 0.0, 1.053355958245233E-6, 4.013374430857748E-8, 5.290429178083089E-4, 0.9648515889625966, 0.09021124860497032, 0.0, 8.95573281090023E-8, 0.002702910651481068, 4.0787238834080924E-10], [0.0, 0.0, 0.006245723584825669, 3.6424512966887104E-4, 0.8372465201853501, 2.410557986554096E-8, 1.7589263590100934E-4, 7.538195983086693E-4, 0.0, 0.0018144634204584342, 1.803515532750044E-5, 0.0], [0.026583763848439444, 4.275712926106245E-11, 0.0024254076464369874, 2.3590226947737313E-4, 5.04446988547336E-5, 0.0, 0.0, 0.04017729796376644, 0.03190862232348344, 3.990005826737253E-6, 0.0, 0.0], [8.535420744612952E-8, 2.770459600929923E-5, 0.016413550822302184, 0.012531138220007731, 6.401507357150457E-8, 3.9482065198548355E-4, 1.1913492936610481E-7, 0.03170687502640362, 6.998730939233866E-8, 6.985479284238316E-6, 5.643624654559978E-9, 4.6456377748701944E-5], [1.2716429490217762E-6, 2.7284075100480823E-10, 0.26975904132535566, 0.0, 0.0, 0.0, 0.6176067026635583, 0.0907540194457799, 0.0, 7.119996988325106E-6, 0.006263281083368112, 7.626982025210458E-10], [0.0017327590859205185, 1.2157447769074466E-7, 2.462171822206938E-7, 3.655361270420086E-7, 1.0303316385279366E-8, 0.0, 0.0, 0.010040771652807812, 0.0, 0.0, 3.159967719538535E-4, 4.129462935557434E-6], [1.106723083573426E-6, 0.12113901249056115, 1.0826810369819671E-9, 2.0184392974219725E-10, 1.8432574303322192E-13, 0.04944691019444436, 6.206791942672704E-7, 2.6786007498058595E-5, 0.5317202702025225, 0.060768677581701146, 3.789531778864348E-5, 4.3117030156358783E-10], [5.540446228344776E-6, 0.0, 0.0, 9.766433319119671E-5, 0.0, 1.5851435961611315E-5, 0.0, 0.0, 1.6260397184275632E-7, 0.10091468643566373, 8.579429610085643E-4, 0.0], [6.217754032782472E-9, 4.2819084589190576E-5, 0.0, 0.0, 1.626870440454727E-6, 2.458388284241053E-4, 1.8425823422596466E-8, 0.0, 6.728331614080929E-8, 5.290101098287536E-7, 5.162610534650488E-10, 0.0], [5.966715032600979E-4, 1.3996872766418072E-9, 1.7404604956599272E-7, 1.2880221489975267E-9, 9.816777432963873E-10, 0.08875128674820418, 0.0, 0.0, 1.0296944151048482E-5, 2.6756779693737354E-4, 8.158883497790907E-4, 1.2858876673274294E-10], [0.0, 3.096277409649437E-7, 0.0029674077105818013, 8.058647986056202E-10, 1.1855273016943641E-7, 5.140487143728834E-7, 0.0, 0.007993769991352408, 0.0010511171166682647, 1.5342571549781248E-5, 0.0039044235368139134, 1.4816139749867615E-13], [8.689356581697811E-8, 5.541606220228359E-5, 3.631879220060194E-7, 2.3351636796687047E-6, 0.0, 0.0, 0.6166506005001725, 0.09218560676099385, 0.0, 0.0, 2.0333916782703903E-6, 2.3375702615278755E-9], [0.0017380435220989564, 4.540046286079752E-10, 0.0, 0.0, 0.15086124982906934, 1.3484107164174475E-8, 2.662292608590633E-11, 4.946393005016284E-10, 2.5608321898851205E-4, 1.6293633109398797E-12, 8.969916017060668E-8, 1.1837253911097691E-4], [1.2023702391977401E-6, 0.1277725902753037, 0.0, 0.0, 1.9102817952817206E-13, 0.0, 6.337231750488279E-7, 2.850632783379936E-5, 0.5293459791693417, 0.0, 3.742763021583518E-5, 4.557059148018687E-10], [0.008450415296175351, 1.1597316660878088E-12, 0.0, 0.0, 0.0, 2.985303604319256E-8, 0.007591100950166796, 1.9807360656098894E-6, 0.14479379367181558, 6.304933899747844E-6, 0.0, 6.526324389939775E-6], [5.1648201250709426E-8, 2.188714414226353E-9, 1.0584202080690085E-10, 0.0, 3.113759288267138E-13, 0.0, 0.0, 0.0, 0.0, 0.0, 4.3830349953465205E-4, 1.7496636329957088E-9], [0.0014002281918199379, 1.2737590578166634E-8, 2.8387789612252915E-7, 8.941718106986293E-10, 0.0, 0.0, 0.008192697555407085, 0.2950981369692339, 7.94413350044779E-5, 0.0010777177574575747, 7.38705126163459E-5, 1.171588051568138E-10], [0.0, 0.0, 6.395182296434823E-6, 1.6187512856847282E-8, 2.2626052148018243E-8, 0.0, 5.579361556458569E-4, 0.0, 0.03162888020654417, 2.2417484746295457E-7, 0.001786309460358256, 2.7410190440858055E-11], [5.1917825622433086E-6, 0.0, 2.349235188136089E-5, 3.620268167841802E-8, 5.789672163820613E-9, 1.9969952974652205E-4, 0.0, 0.0, 0.0, 9.029072439701302E-4, 2.619338043515047E-5, 1.0471836409654422E-9], [1.7560295900992688E-4, 0.0, 1.3661828854224762E-7, 2.7299223779184735E-9, 4.679219136660925E-12, 0.0, 0.0, 0.0, 0.00337807686046232, 0.00181946814261414, 9.507571109559364E-5, 2.5229680128923735E-9], [1.6496796976734424E-5, 0.00990657338589045, 0.0, 0.0, 6.341494850148195E-13, 1.7375774390782084E-4, 4.070569221874765E-8, 0.0023085339595142473, 0.0, 0.0, 4.335870202349035E-5, 9.514093735154418E-13], [3.131615947907826E-7, 0.0019328309203890518, 2.2864781338981288E-8, 4.709467962454826E-9, 0.0, 0.0, 0.0051667429472355645, 0.0016936530270434957, 0.00261702076589021, 1.1951740910396891E-4, 4.2359915249575014E-5, 1.0220982282930144E-9], [4.3661002370948835E-4, 1.8101782171960492E-8, 0.007366723021212463, 1.4312297634237757E-7, 1.3557810349446937E-8, 0.027285648337838975, 0.0, 0.0, 3.695680327619879E-4, 0.06574242485225357, 0.0029163645706167694, 1.0380072163779533E-12], [3.3606021833204687E-7, 0.0, 1.1121319760401478E-8, 2.0786412850078756E-9, 5.899762821365337E-14, 0.07496834125108921, 0.0, 0.001339741598695321, 0.004623618682336406, 9.047836710257413E-5, 0.0, 0.0], [1.1566134708575374E-5, 6.091422485573335E-12, 7.52462467663859E-7, 0.0, 2.016823264530971E-10, 0.0, 0.009918465444691828, 0.0, 0.0, 1.1383032638700996E-7, 7.670465297220287E-5, 2.6989986131102942E-12], [0.015519715523004388, 9.976414484891018E-10, 0.07021045142304197, 1.6767753755633308E-4, 4.2022537399926985E-4, 4.7759912247258285E-6, 0.04659680774303043, 3.162359939468118E-7, 2.5345958361122634E-5, 0.059900669565036924, 0.015443838782335129, 0.04431237196683491], [1.9939333439064168E-5, 1.1379395676686925E-8, 0.006591367955539579, 3.570190836254543E-9, 5.853535528983378E-8, 5.759722250364696E-5, 0.001176788700456879, 0.08712477623555528, 0.001571437649293903, 2.355126540598551E-5, 0.0010320122964832014, 1.4184800752318814E-13], [0.0, 5.759214551967385E-12, 1.73046927661135E-5, 0.0, 3.9578059843705723E-8, 0.0, 0.0, 0.0, 0.0, 3.1080592451937505E-6, 0.002113955277863547, 6.2820649842736E-10], [0.0031117883514005873, 1.3249084393709352E-7, 0.005713339217228762, 5.759236913998903E-8, 7.028326398133725E-9, 0.0057660358567600545, 0.0, 0.0, 0.0010580958792556984, 0.07014685431210654, 9.645108762279577E-4, 9.288777407278262E-13], [0.001534810663703297, 3.8713824158021756E-5, 4.7695837159106714E-4, 1.3486528499974307E-9, 0.0, 0.0, 1.5416864532496333E-4, 0.02846098039032694, 3.3458788449145644E-5, 2.242646907624213E-6, 1.722418887887849E-5, 1.2243584736020284E-12], [6.65599536722852E-5, 0.004947137314085581, 9.358039327874695E-4, 1.0300091572531055E-10, 0.0, 0.0, 0.0, 1.6555519177785527E-9, 5.498505829663047E-4, 5.949984732688917E-7, 0.03662647471210982, 0.0], [6.456070143040152E-5, 0.0022906701256738523, 9.328206744485534E-6, 0.017413515376747735, 0.0, 0.0, 1.4671468040461377E-8, 1.3795729499510578E-4, 1.6701662275409035E-10, 0.03281095214463703, 0.017248454460079582, 1.5906255646858103E-4], [4.585449647374104E-6, 0.0, 5.237397575085971E-4, 1.7841164202767908E-9, 4.033091335310182E-10, 0.0, 0.0, 0.0, 2.3223241299099247E-4, 9.721749833765392E-4, 0.0, 0.0], [2.5532672479129185E-5, 3.2174148718974232E-9, 3.286531450441853E-6, 0.0, 2.296598378424116E-7, 0.0, 0.07251929867358975, 0.006364852620655448, 1.6902712942634679E-6, 1.7345034667692882E-4, 0.0, 0.0], [1.660260936897282E-6, 1.9979049770918288E-8, 5.226229554159767E-4, 1.31275144455799E-9, 2.6953875937721715E-10, 0.007781750589997971, 0.05644576175596623, 0.10646441128958604, 0.0, 0.0, 1.5883099327785916E-4, 1.0768793046557211E-14], [3.7253619060529244E-10, 5.43839327030349E-7, 2.182851638456298E-5, 0.0, 1.5931792149250893E-10, 7.141390729984431E-4, 0.012231858009625896, 0.0, 6.703688862574886E-6, 7.436445969201122E-4, 0.0, 0.0], [2.712694314632975E-6, 0.25846498039356053, 2.774933065523353E-9, 9.688511232658896E-10, 6.901266135780501E-13, 0.08406711544651879, 0.0, 0.0, 0.0, 0.0, 8.588787046554758E-5, 4.010793857713436E-11], [0.006701925641312256, 1.9539794280540777E-6, 4.6447900256963185E-4, 1.5528342669714123E-9, 3.562595022917896E-9, 1.9342465061522596E-5, 0.007771296076363917, 0.0018897686909949735, 0.0, 0.0, 6.950584996813737E-4, 1.3554238060711697E-13], [4.271430013121813E-5, 0.004352030149108888, 9.460491215973477E-6, 0.015948030153539294, 0.0, 0.0, 6.700223709188435E-9, 1.1847944810106092E-4, 3.125859571184719E-10, 0.05977568272067335, 0.012466077320563786, 1.435667697572418E-4], [1.8942960326173308E-5, 1.9233281674427893E-5, 0.05160777008577788, 0.004028394254113031, 1.377742923269369E-4, 1.7450390132900395E-8, 4.602572330258958E-6, 3.618296559926293E-6, 1.2017743000747316E-7, 0.0017721049329943296, 0.0, 0.0], [0.0, 0.0, 9.732568510013255E-7, 5.721997850977256E-11, 7.939785230964911E-11, 0.8642887555853099, 7.096793299920083E-5, 0.02109473345897306, 8.094571326647308E-5, 9.017740172656552E-5, 4.0825937706404205E-4, 8.535775119857624E-14], [0.008103558718650247, 1.1036985481496881E-7, 0.0, 1.3905307865981286E-4, 7.849933439907121E-4, 5.976804237972644E-6, 0.17620758669187153, 1.7754542280812302E-9, 0.0, 0.0, 0.0, 0.06360442978634129], [0.00422154346485918, 1.2656645093556104E-6, 5.432930212145111E-4, 1.9266324628976408E-9, 3.233482209625184E-9, 3.8123334030304434E-5, 0.014666581199879215, 0.0018834159832288085, 1.1653866142688521E-4, 8.027315878003094E-4, 6.857015778327926E-4, 1.2993901902522583E-13], [8.096952591048777E-8, 2.6271543253724557E-5, 0.011988875895264556, 0.01821881528965541, 4.388478961413728E-8, 3.6462723904484573E-4, 1.6276751302335413E-7, 0.033668073970968826, 6.059832380334029E-8, 8.273231872468756E-6, 5.178129451566322E-9, 3.8018670150965524E-5], [0.009067736422361826, 0.009689018419358875, 0.0, 0.0, 2.4167518138117934E-11, 0.007484312499698831, 7.670776272171934E-5, 0.2882282734217032, 0.0019116073898518549, 0.2533835357081874, 3.596713448691484E-7, 1.3758300463275816E-7], [4.307907619656611E-7, 0.04327640513875024, 1.5397818789728328E-8, 4.038140839973968E-9, 0.0, 0.0, 0.008399634420984459, 0.002999565208351207, 0.018681776500394043, 7.846002493124682E-4, 3.2394527015282787E-6, 3.085814439403833E-10], [4.570720020932061E-6, 2.1854833497141574E-9, 0.0, 0.0, 8.659229229699816E-11, 0.3733208235695339, 8.972790558538413E-4, 0.19291378160914052, 3.231881135633407E-5, 2.8762002760918115E-4, 5.190075768704845E-4, 5.0496342687658415E-14], [0.0, 0.0, 0.0, 7.323380556911239E-11, 0.0, 5.660710388373236E-4, 0.001436187099292545, 8.788858973929337E-9, 2.77492285719827E-4, 3.2606034031261674E-7, 0.7222543686974258, 0.002033516261933013], [8.937352168000422E-6, 1.0063194123142323E-9, 1.4678239000468408E-8, 8.630222504825723E-12, 1.0568530812298922E-11, 0.09815427386936904, 0.0, 0.0, 2.9215108263800984E-5, 5.462638620656879E-5, 1.2211540423217047E-4, 4.889565517092272E-13], [0.0011435093331126427, 3.450660901743146E-5, 0.0, 8.999621199417894E-4, 0.0, 4.48757414999168E-5, 0.015768695252012965, 6.83824413760803E-8, 1.2771024238134032E-9, 0.20990128376515538, 0.0, 0.0], [0.0, 0.0, 9.115132282781554E-6, 0.0, 3.1964167437242816E-10, 0.0, 0.0, 0.0, 0.0034367975376891186, 2.192591883165562E-6, 2.171457827863035E-6, 1.8782069811981577E-11], [0.015275287216936771, 9.27894442867621E-10, 0.07071237899915975, 1.543339055743273E-4, 4.1259877251644E-4, 4.622843130408505E-6, 0.049510251997228805, 3.0202841450055473E-7, 2.881514369690308E-5, 0.05592478505588372, 0.014509411627444457, 0.038862882956474054], [0.0016729888714796686, 0.13207326752661275, 2.9587392361811755E-9, 9.455447330600986E-10, 5.60698789721904E-13, 0.026475559770464896, 8.665679266910832E-6, 0.011022519513993134, 0.0, 0.0, 1.3864617968380504E-5, 1.7923769617960795E-9], [3.701493099566333E-6, 7.843372707389885E-5, 0.0, 0.23009251145388304, 0.0, 1.778863623069782E-8, 3.0779755644250173E-7, 1.2167732629242423E-5, 0.0, 0.0, 0.0, 0.0], [5.837610908008041E-5, 0.0, 0.003233761650855538, 0.0, 0.0, 2.113734198783135E-8, 0.0, 0.0, 7.853895311882297E-11, 0.0, 0.001342018089073956, 0.227081290622847], [0.0012139731171568265, 0.0, 5.512088464258983E-4, 0.0, 4.986455803996775E-7, 2.7734318674754732E-5, 0.0, 0.0, 4.502187912835964E-5, 1.1434684286149022E-4, 2.456773951149154E-9, 0.004333431324222488], [0.0, 0.0, 2.6994209226518056E-7, 1.8416394238707982E-6, 1.927450117606294E-10, 0.059394877885192376, 0.006740439125282577, 0.0, 0.02935061878609102, 0.0, 1.4977013504232693E-9, 2.040496177278321E-5], [2.637589851002787E-11, 4.100139862078304E-6, 0.008241558366610618, 0.0, 5.737732773580927E-8, 1.621717251860666E-4, 1.3109643699382723E-5, 0.0, 2.2797457677192767E-7, 3.7453238399542954E-8, 0.0, 0.0], [0.03970573668751769, 2.1809987210658392E-13, 8.299499009593037E-4, 3.1868737095645485E-4, 0.1553758933455599, 9.694713920538334E-10, 0.00386905995059339, 4.1559368194943325E-5, 0.018697635061061813, 1.0464340214344503E-6, 8.087755769689009E-4, 0.005829705420383009], [0.0, 0.0, 2.20623993244188E-5, 0.0, 1.7150728952309464E-10, 3.3559192058241205E-4, 0.0, 7.698117902115165E-4, 2.0898012181747028E-5, 3.3044551128735833E-6, 4.863780364126009E-6, 5.2920179980179324E-9], [8.83446221045719E-7, 1.4365238874664316E-7, 1.241885458924004E-4, 4.587532089262318E-7, 2.279912665197112E-7, 1.744791616218322E-4, 0.0, 0.0, 7.28335142264891E-5, 0.46222496531350643, 0.05855831080852236, 0.005484181210048252], [1.5024951280046488E-4, 1.428848667483081E-7, 9.849167617550715E-4, 5.02303961036416E-10, 8.481645306077584E-9, 9.744635210640062E-6, 1.523335191094758E-4, 0.054601556245457844, 4.023744258514183E-4, 2.6594189411199842E-5, 7.897056212542595E-4, 3.226665533502068E-14], [6.313195932967609E-4, 6.514072338032241E-8, 0.009446373161984444, 2.4306342187485676E-9, 0.0, 0.0, 1.4658100494420473E-4, 0.019890729718927073, 0.002368714686675425, 1.0366035487430203E-5, 0.0023393155521800385, 3.0077641304836087E-13], [0.008510254780960692, 4.761299229742749E-10, 0.024495289777758375, 2.203623228831679E-4, 0.0, 8.649325009879583E-6, 0.06629332478858574, 9.382623090692377E-7, 3.3112758562436895E-5, 0.0, 0.0, 0.0], [0.0013346618537297059, 5.434096388822991E-8, 0.016551935353682153, 2.44677568172841E-7, 2.6989806865849225E-8, 0.011282692250043524, 0.03026098443199976, 1.0326680147720501E-4, 0.0, 0.0, 7.552884813912052E-4, 4.353776549858313E-12], [0.0, 3.5220658279925434E-10, 3.0681519123110235E-6, 0.0, 0.12444620881273583, 8.730038913995486E-11, 8.01868305089215E-9, 0.3307168372182995, 0.026453310728490775, 1.0220820127704311E-4, 0.0, 0.0], [1.658634592357774E-4, 3.799313693783209E-15, 0.0, 0.0, 3.4013601139542332E-6, 8.783075309382049E-6, 0.026260418489865933, 0.0, 0.0, 2.491418182870575E-10, 0.0, 0.0], [0.0, 1.2556319183249077E-7, 0.0, 0.0015274040438635118, 0.0, 1.104655763450868E-5, 1.4017227193863224E-4, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 1.278553227094381E-5, 2.0663217021824667E-4, 4.25109745313528E-10, 0.0, 0.0, 0.0, 0.002357495582575368, 3.958105903392728E-5, 9.27650006194991E-5, 8.715364175112112E-4, 1.0826374685637816E-13], [0.0024631945795000896, 0.0015443961670444928, 1.4520586417711534E-8, 8.793320820236055E-9, 0.0, 0.0, 1.2715097612944531E-4, 0.12347056145670932, 0.015466273261805608, 0.3258957949930141, 4.6423498071267094E-8, 4.166747758665745E-8], [2.5217277012810472E-5, 3.018362625416762E-8, 0.0013087047616545057, 7.3529372904213705E-9, 1.758461739898227E-9, 0.004740527286807961, 0.3324093397317288, 0.012130384152149428, 0.0, 0.0, 3.789632342193789E-4, 9.126204681126756E-14], [2.2625474545940049E-4, 2.2174698747275028E-7, 3.301601362963478E-4, 1.5192989608036265E-9, 1.7039738604384943E-9, 2.1281209603407625E-4, 0.00965345550887052, 0.01983156115272719, 7.892344896156347E-5, 3.807778878583967E-4, 0.0, 0.0], [0.0, 0.0, 1.6596748438901798E-6, 8.225484614765577E-6, 0.1688439969984561, 2.8057374201750918E-9, 6.485034731440464E-12, 1.591455692928527E-10, 5.500198551711133E-5, 3.843592111252292E-13, 4.6978517027176676E-8, 1.2496847415126023E-4], [6.379307893957889E-7, 0.016531081694721842, 0.0, 0.0, 1.9390033837450326E-12, 0.2422687736094337, 0.0, 0.0, 0.0010360387404170224, 0.001153398183873716, 4.086299237827977E-6, 2.9827072723221377E-8], [0.0026398743175414206, 0.0, 0.0, 0.0, 6.594031103327605E-7, 4.651552977000817E-4, 0.0, 9.58863433098145E-9, 2.8323481203740286E-6, 0.09771966080818131, 0.0, 0.0], [0.0, 6.507382725616314E-9, 0.0, 3.312166490625023E-7, 0.0, 1.2437215283989111E-5, 0.0, 5.309530592967349E-12, 6.432077605987851E-4, 0.0, 0.0, 6.160445657715542E-4], [0.0, 0.0, 0.0, 0.0, 9.273165616387774E-10, 0.0, 0.0, 3.272438186988357E-4, 0.0, 0.0, 1.4052786615555992E-4, 7.79969551821251E-12], [1.6639930948562703E-9, 5.8726136802944644E-5, 1.3449919169680067E-8, 2.740590325570821E-9, 1.818810646563046E-13, 0.0, 0.0, 0.0, 0.0, 0.10070798648309119, 1.636274517754086E-4, 2.0969892721143133E-11], [1.964684335036526E-5, 0.0, 0.0, 0.0, 0.09348994707735267, 2.399351994863963E-8, 5.3173173863996226E-8, 0.0, 2.2248463071861124E-9, 0.0016555959276806087, 2.4420831017183385E-5, 0.011308297287798696], [3.95824431966092E-5, 0.0030382240066060343, 3.417946601844102E-8, 1.5658596987701988E-11, 1.735216169048048E-12, 1.8140341723715814E-4, 0.0, 0.0, 0.0, 0.0, 2.6329483880934486E-4, 3.7638792745329753E-13], [1.4464121494049567E-4, 3.332423917689908E-4, 0.0, 2.3921327311062355E-5, 7.27886748668039E-6, 2.605789994891694E-8, 6.13232495912941E-5, 2.4784580657832844E-4, 0.0, 0.0, 0.0, 6.276939145450446E-4], [8.243337923343951E-5, 1.100736782685259E-5, 0.004309335025016625, 0.058737522745638496, 0.0, 4.070921155729934E-9, 3.03661530132171E-6, 1.0351295422705853E-5, 0.0, 0.0, 0.0, 0.39440468277878915], [1.2638780824509798E-8, 5.015234261263334E-7, 0.0, 4.03371760803406E-4, 0.002069759989148096, 2.5529158159676157E-6, 4.389985630570692E-7, 0.6442624564210551, 0.0, 0.0, 1.6747457065657336E-7, 0.0], [0.0, 0.0, 0.006562654280609426, 0.26882158830706393, 0.0, 4.1252531779445434E-7, 7.164998239161946E-8, 0.0, 3.144219029582729E-8, 0.0, 1.7042993589470501E-4, 0.0], [3.7409351169591484E-4, 5.58028343925838E-7, 6.229667763077198E-5, 2.4455142415134447E-10, 3.960651532315568E-10, 2.517709363786258E-4, 0.0, 0.0, 1.0925783517500168E-4, 2.2980521340520976E-4, 1.857937434678428E-4, 4.314115881197361E-14], [0.2951470458792729, 0.0, 5.649732778759795E-4, 4.9829605844356245E-9, 1.0226136280081036E-8, 1.9126968329175043E-6, 0.0, 1.4244416220201633E-5, 0.0, 0.0, 0.0, 0.0], [0.0, 2.8891904463638235E-12, 0.0, 1.2540525989021729E-5, 0.0, 1.633893818020482E-7, 0.03249850650794206, 0.0, 0.0, 0.0, 0.0, 0.0], [4.570822060528479E-5, 1.018585611960927E-12, 0.0, 0.0, 4.2121921484495446E-4, 4.605080983210996E-9, 4.865049918478803E-9, 3.5769043617309003E-7, 0.033884641171083474, 1.3322360992162885E-9, 2.1651537109613763E-5, 3.3015834084745444E-8], [1.879350883107101E-5, 2.006997118510588E-5, 0.052362969229351464, 0.004077100742880551, 1.3618008104223218E-4, 1.7905000260221016E-8, 4.595016291686349E-6, 3.5046336052113602E-6, 1.1602835792157151E-7, 0.0016946880860735035, 0.08850192026420434, 0.07481970880265293], [0.0077300814137947135, 6.277458148021347E-13, 0.0, 4.700766725949767E-6, 0.010893822960461017, 3.569397544200825E-8, 0.02279828915865323, 9.050190502568611E-7, 0.06682058047145184, 4.224183349443855E-6, 2.516451167160483E-4, 0.0]]
+The accuracy is: 0.8294673539518901
+The training accuracy is: 0.9933333333333333
+The total cost is: 1208.0
+FP = 186, FN = 211, teacher cost = 600.0, misclassification cost = 608.0
+Regular round: 1199, training accuracy = 0.7566666666666667.
+Regular round: 1399, training accuracy = 0.7566666666666667.
+Regular round: 1599, training accuracy = 0.7566666666666667.
+Regular round: 1799, training accuracy = 0.7566666666666667.
+Regular round: 1999, training accuracy = 0.7566666666666667.
+Regular round: 2199, training accuracy = 0.7566666666666667.
+Regular round: 2399, training accuracy = 0.7566666666666667.
+Regular round: 2599, training accuracy = 0.7566666666666667.
+Regular round: 2799, training accuracy = 0.76.
+Regular round: 2999, training accuracy = 0.7833333333333333.
+Regular round: 3199, training accuracy = 0.7933333333333333.
+Regular round: 3399, training accuracy = 0.8066666666666666.
+Regular round: 3599, training accuracy = 0.81.
+Regular round: 3799, training accuracy = 0.8133333333333334.
+Regular round: 3999, training accuracy = 0.8166666666666667.
+Regular round: 4199, training accuracy = 0.8166666666666667.
+Regular round: 4399, training accuracy = 0.8166666666666667.
+Regular round: 4599, training accuracy = 0.82.
+Regular round: 4799, training accuracy = 0.82.
+Regular round: 4999, training accuracy = 0.8266666666666667.
+Regular round: 5199, training accuracy = 0.8533333333333334.
+Regular round: 5399, training accuracy = 0.8766666666666667.
+Regular round: 5599, training accuracy = 0.9.
+Regular round: 5799, training accuracy = 0.91.
+Regular round: 5999, training accuracy = 0.9133333333333333.
+Regular round: 6199, training accuracy = 0.9166666666666666.
+Regular round: 6399, training accuracy = 0.9366666666666666.
+Regular round: 6599, training accuracy = 0.94.
+Regular round: 6799, training accuracy = 0.95.
+Regular round: 6999, training accuracy = 0.9633333333333334.
+Regular round: 7199, training accuracy = 0.9666666666666667.
+Regular round: 7399, training accuracy = 0.9633333333333334.
+Regular round: 7599, training accuracy = 0.9733333333333334.
+Regular round: 7799, training accuracy = 0.9766666666666667.
+Regular round: 7999, training accuracy = 0.9766666666666667.
+Regular round: 8199, training accuracy = 0.9833333333333333.
+Regular round: 8399, training accuracy = 0.9866666666666667.
+Regular round: 8599, training accuracy = 0.99.
+Regular round: 8799, training accuracy = 0.9933333333333333.
+The label scarcity array is: [0.11855670103092783, 0.14948453608247422, 0.12886597938144329, 0.06701030927835051, 0.12371134020618557, 0.13402061855670103, 0.10309278350515463, 0.12886597938144329, 0.09278350515463918, 0.16494845360824742, 0.17010309278350516, 0.16494845360824742]
+The label uncertainty matrix is: [[0.0044465868619982096, 0.2042599434844954, 0.08980357837404662, 5.9181663608335636E-5, 0.05395452610254344, 0.001065220043702686, 0.004387141357779845, 0.04152509591668614, 0.9053192962523924, 6.932250087521297E-6, 0.13651220516488416, 0.026131515921511812], [0.10533172120608802, 2.854078099556485E-4, 0.3412065876138335, 0.0, 0.32793830851585726, 0.004766713885254514, 0.11381549940934677, 0.024028338358129453, 0.0, 0.3011467797809386, 1.2013352463329612E-5, 0.0], [0.04152043722969704, 3.3323750992297636E-4, 0.950497733011313, 0.0, 0.10291519724373674, 0.020589354725094378, 0.0, 0.0316667233547423, 0.17899962853157803, 0.6350038859137732, 3.242392011535676E-6, 0.009705729940581238], [0.06535244911423835, 0.059619767255041686, 0.0798414806431017, 2.1033153063238017E-6, 0.00538718920374528, 0.9999098957643993, 0.6173822112821572, 0.0024989380611166734, 9.182828256992792E-4, 1.789539778584981E-7, 0.035562094319541535, 0.8745173178199399], [0.010512515564646267, 0.0013300217102999046, 0.7011755219881655, 0.07306457725120916, 0.16373781939164037, 0.009789868760278764, 0.01749984201344923, 0.0, 0.10149437696623953, 0.7883417336799596, 0.0, 0.0121788776628208], [0.014886227545673862, 7.931200380724186E-4, 0.9373410395053857, 0.08618065922354523, 0.0515141315722867, 0.023325054285012303, 0.051004833605370115, 0.09590739161555117, 0.2077474701096862, 0.7457777497224629, 3.019722158896449E-6, 0.006751622304261117], [0.0018144270465094616, 0.6547068682421747, 0.029340151685944175, 1.1717370935273762E-5, 0.0011917225748413391, 0.6784431197846563, 0.9310400171213176, 0.27855589698933103, 0.6173118687103984, 0.0, 0.0, 0.0014304093946799568], [9.79618520858024E-4, 0.1993848641607041, 0.030693573545699623, 1.2025934210865394E-5, 0.011930155753729087, 0.10474206513687712, 0.09930133031778099, 0.0756735646774025, 0.6020641857506182, 2.4872247303187045E-5, 0.6991544539755341, 0.0023696215200060206], [0.19940240481020569, 0.058144190923670167, 0.09341815303262632, 4.86812171498527E-5, 1.575273621010327E-4, 0.0, 0.031101032712546408, 0.12096797690487504, 0.6302749458302158, 4.2137970712963213E-4, 0.01681748191806621, 0.0], [0.1033331043797608, 0.07845391282110736, 0.20357630311796762, 1.8266420190777085E-5, 3.2937932640607353E-4, 0.013148958039361922, 0.0, 0.06917281878779946, 0.0, 1.0913768444231753E-4, 0.01943249308409245, 0.007085211689375617], [0.9504006934983403, 0.007272510842492818, 0.25986526580923897, 0.7759873624519962, 0.02548722392093615, 0.0, 0.0849145622704256, 0.3361504080321023, 0.20429055286742004, 0.12909675269668786, 0.004498097286019506, 4.404448526523527E-4], [0.38111410414875924, 0.023183862546921164, 0.2822011760818515, 9.234147485023014E-5, 1.1463535631189674E-4, 0.005720580382355024, 0.015949496279205708, 0.0611769506255776, 0.6303597584915865, 5.32865114231007E-4, 0.005933315968007923, 0.0], [0.03497405798073683, 0.1384482529154128, 0.257085552604829, 9.908239615078898E-6, 3.6692409375108125E-4, 0.0, 0.0, 0.09925344577968653, 0.11048032522030315, 6.06868012377193E-5, 0.017830936531246552, 0.008683207105844602], [0.0, 0.04173710419320181, 0.47531706795766526, 0.025259710409025447, 3.710883269371706E-4, 0.0, 0.08537069485153742, 0.17120932107029752, 0.0237639007104036, 0.0, 0.001952381638890266, 1.748628076023034E-4], [0.0, 0.03663980277444648, 0.09383808366043964, 0.0, 1.8272319830347345E-4, 0.6664836350771568, 0.023934546105462046, 0.11350685580146996, 0.0047216681904010726, 0.4509483611456665, 0.002137629197727568, 2.372771568263002E-5], [2.4139367759319467E-4, 0.9166528767252213, 0.0021970522421601527, 5.730034786122617E-4, 0.28921421552988474, 0.004626229828122219, 3.756776169421272E-4, 0.0998254572971102, 0.5372178274691769, 0.009966978241790159, 0.20223293896202038, 0.0], [0.010399411641742424, 0.0013726106108317788, 0.6839164247574182, 0.0, 0.16443083958354765, 0.009749343909824848, 0.01704934598259078, 0.07565679588083651, 0.10312542911996148, 0.7823850331525616, 1.1532997314271976E-5, 0.01212295871241061], [0.05528168451255157, 0.0, 0.07832486857683763, 3.3872398385456123E-6, 0.0065267505351565775, 0.9733178185321886, 0.5310111350655942, 0.0020712178124818736, 7.284183283580159E-4, 2.2948785849408182E-7, 0.03055988106460676, 0.9373162691594721], [0.47979225400395253, 0.007093022711081582, 0.0, 0.361160864091277, 0.0, 0.01848851003065055, 0.07256914178764078, 0.8957129694025505, 0.031321081727727726, 0.25469772585304096, 0.005935418846831983, 9.036778427217471E-4], [0.0, 3.474024585973371E-4, 0.17543024929777096, 0.0012517151465192065, 0.9773123082094993, 0.05153467813084878, 0.03384843274996663, 5.080858698103263E-6, 9.06363990915704E-6, 5.00964332509346E-5, 1.9598954401519827E-4, 0.09409739818223761], [0.7607136718826789, 0.011829256156903844, 0.0, 0.0, 0.0021163363309370407, 0.0, 0.03511615617924526, 0.32126365728445755, 0.004072912136228784, 0.8707372637573818, 0.0037171066205214055, 1.7398784838835204E-4], [0.1170627968685313, 0.07273718981200675, 0.21858598099120674, 1.8155075632888026E-5, 3.6954549601633823E-4, 0.01254688603552202, 0.04714252152976317, 0.05820778780966407, 0.179521200880698, 1.0024982790035608E-4, 0.020451821821623962, 0.007518228535022003], [0.47131049962048766, 0.032717277149971545, 0.0, 0.0, 7.024599997879971E-4, 0.16393248361260804, 0.1211503971317015, 0.15284383773695762, 0.017138936605770944, 0.26510623932796606, 0.0017406481745445971, 0.0], [8.117436436068666E-5, 0.31748420668191457, 0.0015224844680752348, 1.2285743253784244E-4, 0.04816615312437501, 0.027013581309012435, 0.001516247470754628, 0.01771252836756776, 0.9570295157214741, 0.0, 0.36507898447392995, 6.633390331154527E-4], [0.01985368513374445, 3.8484318597687306E-4, 0.0, 3.424846592212045E-4, 0.9933444371514422, 0.05003382302813586, 0.014080675009145116, 4.881054407768204E-6, 4.417068866113816E-6, 0.0, 1.2947344982410698E-4, 0.06746724888762401], [0.0, 0.7519300433070942, 0.28161675565547944, 1.7348574401792455E-4, 0.031642625770982154, 0.0016894014610536745, 0.014374594135729946, 0.0, 0.7667091948437955, 4.279551155006445E-5, 0.7888513579947047, 0.020737030110096397], [0.027446893266804218, 0.6147516517510047, 0.00964116648390204, 0.022674737182999997, 0.3249047795783129, 0.0, 0.0, 0.125657757525384, 0.5317103678840202, 1.1831060290645734E-4, 0.0834039165992232, 0.023729457739707128], [0.02072976196070729, 0.48296717087905827, 0.0030184717126261005, 4.3796189273508177E-4, 0.013335196110109207, 0.12738816068755332, 0.09566635090292974, 0.0, 0.12378885904422757, 5.128794240247814E-4, 0.27438244026447633, 7.070408923971132E-4], [0.005537656502894601, 7.877173541140396E-4, 0.0, 0.0030989591626731606, 0.33497127720274217, 0.0, 0.01113431219331884, 0.004567883112406079, 0.0017536156703904515, 0.0, 4.122306911119183E-6, 0.099971659298249], [0.08368416461716344, 1.2463088461355982E-4, 0.7759173889700992, 0.7172047494036474, 0.8784231434670325, 0.00261311910372386, 0.038715563934760944, 0.0014521115254587658, 0.016574535966455972, 0.7256147653646658, 8.10576292724393E-6, 0.04720075548669346], [0.5401410858780383, 0.007511367366758646, 0.49377821391663435, 0.8376821444140474, 0.02095686824346352, 0.01499138620597873, 0.11998664754278399, 0.5084272965188181, 0.11640463817989959, 0.06813494647550145, 0.008237717162327834, 0.0017395840329664884], [0.002152092300774849, 0.2281489816451111, 1.1144474241287697E-4, 9.4852599614811E-4, 0.0017345660274599032, 0.5926478536110258, 0.06754770499106888, 0.0011629000595882906, 0.00623694211410856, 0.0, 0.7574540571747927, 2.905888864121542E-5], [0.0011771843827180447, 0.11265415065333717, 0.011855149854102133, 3.4587250278706627E-5, 0.014618646030744614, 0.025323557921662188, 0.023832585875424805, 0.01385838122552981, 0.5753705300824706, 4.348203579485066E-5, 0.0, 0.0015147100139394187], [0.03282181774022473, 0.0, 0.1447429327318983, 0.0010053998810950209, 0.959616332073538, 0.04579389404337375, 0.027045288079175722, 4.755005262313539E-6, 7.257906829649663E-6, 4.1223672317514115E-5, 1.7885764175154105E-4, 0.0], [0.00148497447654678, 0.014415188744003549, 0.29066646689193987, 0.014593580732151355, 0.8292182369686271, 5.580048419896455E-4, 1.7555439111205384E-4, 0.06538279469010244, 0.01013305322125202, 0.0, 0.0, 0.0], [0.6649719890570766, 0.0016187658104762912, 0.31753891670270296, 0.23618177617619562, 0.03675458026895403, 0.014712178326600767, 0.33815263930119266, 0.2127695124783845, 0.16547352753997543, 0.5869325930349424, 0.0, 0.002139272075092497], [0.07933011510117713, 0.08164757934927284, 0.44051263327883516, 7.633561366455026E-6, 9.078552070465264E-4, 0.021808466234387265, 0.06483169073977516, 0.0, 0.04407693687163794, 2.669395484600212E-5, 0.0, 0.014013304374747428], [0.7281810195188897, 0.012037438083878728, 0.05990211744778483, 0.2330172338490153, 0.002866130556156912, 0.03551129449582724, 0.04318940256988361, 0.3379050115353863, 0.005291040625201896, 0.9666928859758047, 0.004020793331559228, 0.0], [0.12173801851383714, 0.07410291659829998, 0.16259522814582916, 2.217160425678593E-5, 3.080925468715275E-4, 0.011313964394834248, 0.04210328388111757, 0.07622738852058952, 0.25343145191468874, 1.503314822169921E-4, 0.019621880345948778, 0.005895856638347604], [0.04466749959332792, 0.5415297923039375, 0.035968985961422575, 0.0016369550000428965, 0.0013225682419181367, 0.6960492951300987, 0.6262570105593765, 0.05109545303833854, 0.045067438271653396, 0.009163041686290896, 0.10220237092421364, 8.023489635500223E-5], [0.004767892797087319, 0.0011781750742504513, 0.0, 0.03654909334482936, 0.07312712385728835, 0.0090948874190252, 0.02668313131742661, 0.0773420873013807, 0.0, 0.667807072002174, 2.4967020774189484E-6, 0.0], [0.9045761149175653, 0.02688025767600037, 0.0, 0.0, 0.04309131624006702, 0.10510371179473066, 0.4823776325793717, 0.23000169813020932, 0.578398897484925, 0.004589747098646013, 0.0, 0.003477891982984566], [0.21842888492307683, 0.055878899222532495, 0.1027608127934478, 4.4525679487986776E-5, 2.275059160639932E-4, 0.0072175946344318915, 0.03300263523534486, 0.08963579672169064, 0.5019979152598738, 3.3669597610619384E-4, 0.019845641031128812, 0.0], [0.007878965807960107, 0.17784788847534594, 2.3418625907413863E-4, 0.002964163514378209, 0.011245891370738934, 0.0, 0.07291384812120572, 0.002193933638474005, 0.012138690662348593, 0.00665573275347664, 0.1670599907696495, 1.4103130049789877E-4], [0.0, 0.09345982964447963, 0.00809829575263558, 1.3108999794305548E-4, 0.0, 0.0030594091812085056, 0.010675782154461633, 0.003993927757738597, 0.23993813062216407, 1.2069623661814521E-4, 0.21896921916495615, 0.002704702382643323], [0.5602216264447499, 0.007808309152656286, 0.1819704908116262, 0.5175444366015413, 0.032093590496290424, 0.006152575258315585, 0.505079079953545, 0.7558185788228726, 0.0, 0.40541645128309645, 0.0, 0.0], [0.0, 0.0026450987114980465, 0.043052606212703945, 0.07775423652944188, 0.0021648870719130015, 0.33994514014594696, 0.9900819238537208, 0.9335654435192362, 0.19524975499340763, 0.07357194945873308, 7.720389562177376E-6, 3.127726412109485E-5], [0.0, 0.0, 0.0743030553602921, 1.0061242360998368E-4, 0.09535601518550826, 8.970090810002107E-4, 0.004933933676623425, 0.06350243321657977, 0.7801118326902781, 7.783720838983044E-6, 0.11765801042198654, 0.026361764769695373], [0.001377095825292678, 0.11250272480673507, 0.030362752993399904, 2.926102681768136E-5, 0.0, 0.004953248982753844, 0.011619479517503306, 0.025382483865355656, 0.8937300581721765, 1.629710877226742E-5, 0.18455432766354718, 0.0], [0.013145230358485119, 0.01170112010435755, 0.21521889494037155, 3.889357591565364E-5, 0.001526027467819894, 0.02513641527831793, 0.7679853330591107, 0.009253451561408776, 0.017427871518958082, 0.0012604165587714045, 0.0, 0.022202336256653098], [0.1130947038944759, 0.07339983102751024, 0.2371876193577162, 1.6750929533318773E-5, 0.0, 0.013098021982324761, 0.04881126626299706, 0.05408420907223255, 0.1592357512897462, 8.819261543724366E-5, 0.020713743677373723, 0.0080359296257307], [0.004876415279280207, 0.20253261302581105, 0.030307026813178917, 1.2724681422640876E-4, 0.022431230646698372, 0.0, 0.00781533229052811, 0.0, 0.445949349770591, 3.062957355870477E-5, 0.1722923264917835, 0.0], [0.08525149210179492, 0.09525038759064572, 0.1069531533997759, 3.209798700991144E-5, 1.5009717223344503E-4, 0.012660118691180184, 0.0, 0.1843962224120732, 0.5000418351476421, 0.0, 0.01587447995059634, 0.0043100349476893705], [0.044494503196245, 0.10291974024976638, 0.81286617381144, 0.009029809929646422, 0.005783235946863776, 0.007924858733630247, 0.5500398293319554, 0.3846644230588545, 0.5371191701776804, 0.005361607448722383, 0.006370643616303092, 0.004701656072735905], [0.030989134118788036, 0.2904513828421181, 0.16867182656300472, 0.005078539561385266, 0.0, 0.0, 0.2904610925293505, 0.03173545084696841, 0.03391886468821721, 0.03800699857147216, 0.006204117016718004, 0.0], [4.892559394924805E-4, 0.6326197795261792, 2.3559312219920294E-4, 7.563419555920742E-4, 0.006324710864275218, 0.42096327882531026, 0.008265934488967286, 0.008205729753522415, 0.0762319653465971, 0.06753488768474514, 0.26695673350477817, 9.532819119766002E-5], [0.09141922659683226, 2.3484629896172976E-4, 0.20016467046190756, 0.003829991042235382, 0.8707120051218041, 0.0, 0.040423263967023115, 3.6703729457965295E-6, 1.3965198379928268E-5, 6.123351474318639E-5, 0.0, 0.07990058019563928], [0.3924834328723473, 0.0029868580730261934, 0.4800312999032228, 0.005322279417515183, 0.0, 0.2429994233831153, 0.30902299148073337, 1.811430230894695E-4, 0.0053756012330705705, 6.110503841916248E-6, 0.08451145808777585, 0.6389993369804285], [0.009537869604451781, 0.0010334547263929584, 0.0, 0.08098244892020533, 0.005142343958510886, 0.4478787233851468, 0.4044719809429729, 0.41183405835943065, 0.6194566299763897, 0.03752349045854224, 1.6582714187085032E-6, 6.541552396103782E-5], [0.0, 0.4326656558126575, 0.014800984502790646, 0.06762603337213688, 0.04975834425394279, 0.0036570231375959716, 0.22982507772344418, 0.12844122811931302, 0.08960991780610174, 0.0, 0.7454857976992357, 0.0023662601745544267], [1.7011802052972497E-4, 0.7897921899096962, 0.0, 4.0836469331048577E-4, 0.0890812835050295, 0.024596882032141942, 7.142032773276297E-4, 0.04603789473741457, 0.9918825279425837, 0.017606159202727345, 0.0, 9.944269759037936E-4], [0.5574043891425113, 0.017167633934493966, 0.9986662671555638, 2.0048495253588792E-5, 0.0013517855410438324, 0.01298034093245241, 0.07427071417319553, 0.0026815603515074615, 0.028385177785891336, 0.0, 0.034194821457911806, 0.04691847212002107], [0.03816869796189088, 0.0, 0.7363851274587414, 0.10985228412526803, 0.0, 0.04184389381165177, 0.13662634374081317, 0.0, 0.5893610199610584, 0.7704820826813876, 7.827875201847197E-6, 0.003628384973033413], [0.0, 0.249643456081273, 0.0, 7.958548798888697E-5, 0.008468974166459177, 0.8916402269304473, 0.9535027048409235, 0.22241410666591255, 0.22571161932675998, 0.0, 0.41313607939348573, 0.021320747864439625], [0.750688045014541, 0.018572012471904417, 0.0747722049480311, 0.4242698076548691, 0.01188367112998634, 0.012622768091397396, 0.0, 0.590410729776532, 0.019010529929714737, 0.2620034455416972, 0.019244772161241416, 0.0], [0.03251493006935915, 0.5987158270205667, 0.06891673960366768, 5.252312991600637E-5, 0.0018388903403658027, 0.7271300385302804, 0.7843537521634459, 0.8411758305715374, 0.8835944034334778, 7.00648637407264E-5, 0.45620740186034464, 0.004680042822769272], [0.03018100849593177, 0.9282177394118806, 0.07444590219120399, 1.4302007965265692E-4, 0.029244563320567924, 0.054727715461330706, 0.13135926091877115, 0.7225605375832929, 0.5491543508451114, 2.556155723298925E-5, 0.6860799215727047, 0.016424566299435166], [0.04115974071366042, 0.1161267920144747, 0.4522441042742574, 5.570972374842372E-6, 0.0, 0.029327054789547165, 0.07358039096479488, 0.03995398920580295, 0.0, 2.3233197090521962E-5, 0.021105385251312163, 0.013853443704043119], [0.4087206107356198, 0.0, 0.18075737093989108, 0.00943705201930799, 1.4628986402824306E-5, 0.0, 0.0, 0.00207482083615107, 0.6988408235958081, 0.048128503437699144, 2.542370877749717E-6, 0.0], [0.0, 0.5233353729486147, 2.1047460863363328E-4, 7.70202400729786E-4, 0.005867088379612636, 0.2981662890808825, 0.005128335009713103, 0.005001605988128478, 0.07315768600435932, 0.08310543086335409, 0.2221483472153615, 9.088909816621142E-5], [0.0, 0.0, 0.0061092431940616455, 2.045134359077012E-5, 0.0020743897479541425, 0.5963481357919761, 0.38559097285534305, 0.025533638047617997, 0.6042999217200812, 2.1588045089460106E-4, 0.8043847292155191, 4.1862664814402203E-4], [0.0, 0.03567968830342273, 0.0, 1.538378250276969E-5, 0.025078460949268473, 0.11502018206752784, 0.944190739212215, 0.0010381875389341433, 4.700941904316469E-4, 1.479839123463833E-7, 0.049895849655669205, 0.0], [2.8475768419744307E-4, 0.9752424128442682, 2.525755420950256E-4, 0.0, 0.02028553412251779, 0.24059343427677704, 0.0018167912691972044, 0.02124906448907343, 0.0, 0.0, 0.11266205796771027, 1.7055520559472394E-4], [0.025979232896026532, 0.6319345339346729, 0.0034124538652855457, 0.0025334209604739007, 0.0672351118334961, 0.005437511984390242, 0.025184022281900753, 0.02852764058995398, 0.1327587170614861, 0.0016551517971729046, 0.36814834670794316, 0.001860115715638403], [0.006156273530024323, 0.2217129022182216, 0.013452605375110067, 3.428251024965318E-4, 0.06943074844883083, 0.0010661594779090011, 0.0074688645972835754, 0.019625194207822716, 0.46433037667223276, 7.550665735434059E-5, 0.0, 0.008489591628460132], [0.0022545337735296374, 0.0, 0.0, 5.4958860612423914E-5, 0.08722944518775319, 0.00106719812756495, 0.005804888963939714, 0.027478196685015208, 0.8694429917351701, 1.2376338038966317E-5, 0.12344138546182026, 0.012440880307776389], [1.9435158434035084E-4, 0.5796644298743798, 2.565139933756815E-4, 6.327361500921626E-4, 0.010218761446863091, 0.234101399973911, 0.0032331813858034186, 0.008189846963628664, 0.1418735944760052, 0.0681290225828397, 0.19472633326555894, 0.0], [0.0196384550521385, 0.352367443206277, 0.0, 2.8728432613477905E-5, 2.2695542658092774E-4, 0.06190884931490118, 0.1572472674734327, 0.845295181578609, 0.7667087990023391, 2.832960942429352E-4, 0.042776902616185455, 0.0023270665738317196], [0.048128932750329145, 0.005290038226289111, 0.015534496106029878, 0.4398018026020639, 0.0, 6.93857810946108E-4, 6.57627908378089E-5, 0.012321076914493356, 0.0, 0.029088195736893252, 0.05422477353079072, 0.1934536097057061], [0.11884527393002867, 2.2907212978595328E-4, 0.0, 0.29428163752033976, 0.14020348273342603, 0.014380186158955643, 0.13687279635262828, 0.05318152662708209, 0.839773305254088, 0.06747457453522779, 5.093359086053457E-6, 0.003804867257322549], [4.958096968203033E-4, 0.6307568118194619, 2.3349330171368145E-4, 7.616831753626857E-4, 0.0, 0.42332731281117075, 0.008375185293233667, 0.008098546885774074, 0.0, 0.06784098524633642, 0.2698146851117538, 9.430857052470279E-5], [0.2152340215767236, 0.853328780335183, 0.0019276018046826611, 0.04909226834343733, 0.03224366582149424, 0.010793568463625114, 0.0, 0.04277060750938127, 0.02050399435888072, 0.004206884355776097, 0.23303536493979438, 0.0015059489964987108], [0.24243988851983211, 0.06643032704652288, 0.0, 0.025915529667769197, 6.455833841374192E-5, 0.2044824304185145, 0.0, 0.04186582985510814, 0.0026865752325739498, 0.5928647886356296, 0.0, 7.099919494903908E-6], [0.41475234070180034, 0.0625256353195675, 0.4950276854980683, 0.008333651244291557, 0.0010435242816392984, 0.43910047243573214, 0.22307833654302123, 0.36708478079400686, 0.06844138059590642, 0.0, 0.011733869810357372, 3.339651244317939E-4], [0.011608728270575578, 0.0, 0.10127078496049562, 1.465769669504765E-4, 0.030042476272751625, 0.0029887077500958537, 0.014801103560812656, 0.0, 0.7417104612562058, 2.36578990372438E-5, 0.0, 0.013188986056212652], [0.002011912662530996, 0.10131859687290556, 9.127198825034429E-4, 1.4262050136639224E-4, 0.010714904018223108, 0.09258641195045714, 0.061812042313131976, 0.0036230234622929656, 0.07901781687583567, 8.232581190071864E-4, 0.21474924606766588, 1.6784865645776316E-4], [0.4031364941927714, 1.1718243398387842E-4, 0.12933389059566636, 0.05731442839366108, 0.0, 0.016156110658313683, 0.23425019796176505, 0.03341803677877442, 0.7396617714214568, 0.04016997677790948, 0.0, 0.0036396532816396323], [0.010054162094372557, 0.0015879166970753787, 0.5952142062353722, 0.06833898658813697, 0.16591087000666416, 0.009699430925234398, 0.0, 0.08838581426297887, 0.11487362470821205, 0.7704443221303069, 1.455233337289031E-5, 0.011609961228381739], [0.34928639515594784, 2.2257679681780465E-4, 0.21007962072571992, 0.22506923213511876, 0.6835794909020191, 0.007838793245548925, 0.16262560019344174, 0.011513814942083145, 0.390347522976801, 0.32999506749566115, 3.682229689363267E-5, 0.006822768891300712], [6.799903371491386E-4, 0.0, 0.006841234028170261, 4.9455871233682264E-5, 0.05659829523422073, 0.007170397167407194, 0.01659553664285751, 0.015762372735484156, 0.9194761762115373, 9.214479519281671E-5, 0.30540238370634254, 0.0017372792009824824], [0.933669477037991, 0.001625078654586242, 0.06952992215906582, 0.07523624620468117, 0.01933432856489765, 0.01602039650195053, 0.424578927968559, 0.6451133691144341, 0.04378662562562089, 0.2536694953246324, 3.0397814393511317E-4, 8.282141689936614E-4], [0.01235076859721345, 0.43387004876654356, 0.07936887369882423, 1.5933528980815187E-4, 0.029088150333837978, 0.0033463389414640776, 0.013870182076847093, 0.05393956242205926, 0.6482584979418078, 2.6596250154220513E-5, 0.0, 0.011991084713426765], [0.04210291936315015, 6.71431273700631E-4, 0.7580913144714807, 0.10627918455059399, 0.0, 0.0768235930447061, 0.11743580700322465, 0.1227115114521744, 0.5414383256044512, 0.5811820349376883, 4.484313795092781E-6, 0.00327094691445172], [0.9706516156669536, 0.02316857893037372, 0.20651037587774845, 0.5700661775079184, 0.0015614966452726505, 0.05506197380951561, 0.1152069528648238, 0.2810295950903209, 0.012692505561713288, 0.2030369929614505, 0.005740216158012358, 4.5855686200136156E-4], [0.02424441121137219, 0.9920622085721237, 0.35851285037372327, 6.365964525500189E-5, 0.052180601660711805, 0.009013354294818088, 0.0394760235442031, 0.9537392992064901, 0.18451774054196235, 3.6222239039318538E-6, 0.5641973535566994, 0.0], [0.0, 0.42969076723113797, 0.06875971977604597, 1.7012876399833966E-4, 0.028183398587438447, 0.003661447762963177, 0.013698122365239596, 0.05066082144445043, 0.5902574658757368, 2.923883049177345E-5, 0.27543284806834534, 0.011150149384793157], [0.5519443637446005, 0.00863493651226231, 0.11441425583965881, 0.21427052204521568, 0.002787274634676303, 0.0, 0.058657649435401575, 0.47728461670382966, 0.006601986824448651, 0.71729311487394, 0.003941320655281949, 0.0], [0.008396960324988113, 0.3447274254621715, 0.08902298529960193, 1.15171736379902E-4, 0.03599974611238818, 0.002108626021042559, 0.009724750939469007, 0.05043229067940798, 0.8199366070955181, 1.6679506485317575E-5, 0.24705416500006205, 0.01609322658871419], [0.024229417864911056, 3.2986000374267486E-4, 0.9342025352280346, 0.8203843815399475, 0.2729441664441754, 0.0, 0.0, 0.017403178581041234, 0.08174508376775458, 0.7659078917094069, 3.889178659311107E-6, 0.0], [0.16092810020976567, 0.1944252421544321, 0.015140777598811321, 0.012118280496369725, 1.7115876477009228E-4, 0.35731007708333073, 0.09797394997064149, 0.02801731405762177, 0.0035304156452372333, 0.0, 0.017391824630586736, 1.384766973736573E-5], [0.025334163261222065, 0.0013308695689875005, 0.06964121392163541, 0.10664388880075631, 0.004298077299362036, 0.6186960755566635, 0.64204132495686, 0.5544882650367565, 0.35648389339962716, 0.0, 4.449316365530981E-6, 7.60804081885538E-5], [0.05623417346665556, 0.11483236481000517, 0.8218171987904346, 8.230504541365165E-6, 0.0, 0.10057233459034681, 0.25110778011896606, 0.04456633479398542, 0.046022166465448766, 8.702018640560638E-6, 0.041417602870358464, 0.036443026966726286], [0.1711535485164434, 0.0, 0.8360505862482159, 1.24533169005437E-5, 5.156355251962373E-4, 0.024558027472354797, 0.09718764752091055, 0.01646611647937557, 0.05515801853992419, 1.5189725740438753E-5, 0.02344121136583301, 0.03433124812867103], [0.004518999384959683, 0.0, 0.41922224519110696, 0.02433299545802771, 0.022612748645500877, 0.06819091061392357, 0.06760436156986116, 0.40375859294985394, 0.4036302920831154, 0.8956286768436178, 8.385320142048502E-6, 0.001786327227538695], [0.03218722105193515, 9.563430133272786E-4, 0.8260187879700476, 0.0, 0.031505170851804154, 0.0, 0.0, 0.14366803838039321, 0.4503618309886743, 0.8086289070962649, 6.234925401152329E-6, 0.004483863511225842], [0.0, 3.897667658003071E-4, 0.10346875481926199, 0.0013193758185688269, 1.2063748477399324E-4, 0.007295866624847302, 0.0012124912032605317, 6.048406425361863E-4, 0.13692986294839204, 4.2910128362205757E-4, 1.506123345665574E-4, 0.03316948958093549], [0.018730189181957596, 0.010013639683158194, 0.33762329730134855, 0.006917428203535886, 0.00881291056735076, 0.01711460935431397, 0.35373014221568067, 0.4899318008341328, 0.3754230478841257, 0.027209621572236053, 7.661012249116146E-5, 0.007551737990909224], [0.0, 0.6562866564126164, 0.00297005435378999, 0.002898869939089687, 0.0, 0.006575594862271217, 0.029467081378959037, 0.02632791932613422, 0.11001816295228822, 0.0022125546858327017, 0.4054474773453357, 0.0015206307543994932], [0.013493314935776931, 8.927536488436863E-4, 0.39617512940845445, 0.10657849593508564, 0.0, 0.0, 0.08833817094478846, 0.20043741668758808, 0.5145068890581697, 0.21720539882127837, 2.307781573361916E-6, 0.0017177731569002603], [0.12509550492228705, 0.0, 0.4211816761689692, 0.0034092544250011346, 0.001092593833392868, 0.06272322419474918, 0.0, 0.47109031660607725, 0.0, 0.0031382418733051365, 0.00242152519794805, 0.001484016958596222], [0.0034351629145084736, 0.00878415009107717, 0.028754863844789, 0.020040491069565847, 0.003840069104567472, 0.7058476464150056, 0.2967628200982759, 0.7881398209786148, 0.4476991722332626, 0.0, 0.0, 5.887024335110126E-5], [0.1011238778175407, 0.9248221774877108, 0.0117209304840885, 0.0053335637343059385, 0.0, 0.0, 0.04458975918723895, 0.3278603227967104, 0.4872483754156162, 1.701446789413863E-4, 0.17967427119537027, 0.011417309078730455], [1.2992422842570843E-4, 0.8592171151410833, 0.004722468106121659, 2.1949065218817356E-4, 0.4365216717391289, 0.0028462906120904075, 2.1301050687960732E-4, 0.0, 0.1995762690131747, 0.004042626081434464, 0.0, 0.006163531935630927], [0.21226273411227586, 0.0, 0.4598853246684389, 0.016050673141984283, 2.924896818665802E-4, 0.6963692843424178, 0.09976473896628052, 0.2006106520597048, 0.032585269389308086, 0.105540900484271, 0.0011060204513969403, 1.2225293776302809E-4], [0.2574826668308058, 0.0, 0.26636608237242787, 4.671159682095235E-5, 2.0610784873530933E-4, 0.009142916264618921, 0.03437404610254592, 0.057762647531297784, 0.3860963697076779, 0.0, 0.013355946777781597, 0.006256724486357163], [0.3066680447910757, 9.087482244072217E-5, 0.06899930944567624, 0.02846550619005428, 0.2484607839514551, 0.012097518883030567, 0.1751715673478118, 0.0, 0.7980806823739328, 0.0, 4.710983177935271E-6, 0.0030568685317901335], [0.022305150978407334, 2.5426823584044525E-4, 0.10708776993144342, 6.338841727091015E-4, 0.8495017485453651, 0.04978232257542203, 0.01409367503324388, 2.9711768211315714E-6, 3.634660873053086E-6, 0.0, 9.231646114085897E-5, 0.060678756691178726], [0.003152987767098972, 0.010858692574624773, 0.02613956292893156, 0.017710227031276955, 0.0038690575740219072, 0.7542565396458412, 0.2745566525634491, 0.7081638062283956, 0.4341299593224014, 0.30701227697797506, 2.7762901281135772E-5, 6.0480386338170965E-5], [0.004669282684827946, 0.19490463946025594, 0.03743973336875794, 1.42447088374012E-4, 0.030974606575888797, 0.0, 0.005667843483817325, 0.0, 0.5493397364546077, 2.3438889550142505E-5, 0.15789279604934225, 0.01508223968287646], [0.30707860438783247, 0.04572431100426384, 0.32351117592317263, 0.010259446946995578, 1.291680637185887E-4, 0.0, 0.03607111702549528, 0.18062344141127454, 0.01567113028272473, 0.08160853582338001, 0.0, 3.6429195922549966E-5], [0.014596436111541438, 8.210933774797508E-4, 0.2827454297163453, 0.027451846110159973, 0.05849265767920021, 0.013978589331372082, 0.040096078177611294, 0.03561932219807018, 0.0517186160878319, 0.21925243839758735, 4.490415813831626E-6, 0.02428338248250487], [0.0038616956447879826, 0.16274794243062163, 0.0022259077571940883, 2.6121759826166135E-4, 0.0037583337180416626, 0.07353284851880815, 0.04171775817626633, 0.003368455750666962, 0.0, 0.0, 0.26774396689089197, 3.908779450004853E-4], [4.193244496963753E-5, 0.49576568829533796, 0.0, 2.2405457709450297E-4, 0.026768257575716416, 0.0784163905605586, 0.0010119424457740722, 0.01629600017781467, 0.7482569374988455, 0.023753845266381135, 0.11196090256750993, 3.3601895605409103E-4], [0.43739753729751574, 0.0014893489645638792, 0.9442750309996704, 0.5798156982978029, 0.020927655805613773, 0.23703196774733615, 0.027339635115472397, 0.021421364203653148, 0.9283641867119896, 0.0, 0.0013351645705140843, 0.00302204015876327], [0.085333520071493, 0.09530390638906636, 0.10644082351891615, 3.225340834872054E-5, 1.495503821646899E-4, 0.012654479315758502, 0.04238723924059146, 0.18541432429317706, 0.5031428320689075, 0.0, 0.015882412802330638, 0.004293805912264503], [0.9022803725418871, 0.01570889630638423, 0.0, 0.0, 0.0016130075723064623, 0.0, 0.06517108707000217, 0.03457945290518771, 0.746811939550094, 7.914463219630408E-4, 0.035989067356659785, 0.01208966219658823], [0.15337154680311893, 1.8233898087875738E-4, 0.16792387065179848, 0.46766895028463273, 0.1083612788090896, 0.031749524753128644, 0.12957059030073537, 0.05633651709250198, 0.9726819008531525, 0.04202096892955382, 3.6726491838941034E-6, 0.0], [0.34210686184448236, 0.0014192846874675465, 0.9996178108400973, 0.00796995556636836, 0.0, 0.2333296366624661, 0.026204222083317352, 2.3005834242362244E-4, 0.02732307193007022, 9.402075226527806E-5, 0.0, 0.16175664735169168], [0.572630624801587, 0.009086869270673469, 0.10567054647181107, 0.23663504568248483, 0.0022822079186481806, 0.033835705544825956, 0.05304201165558248, 0.43420132918344434, 0.005735702649433891, 0.7401095539190334, 0.0038680657182529957, 3.79266609736268E-4], [0.012397307908152423, 0.4329128837856022, 0.07760691167555106, 1.6053853490678434E-4, 0.0287960047591517, 0.003406811662695519, 0.013895483759682303, 0.05325678945173669, 0.6384368865296196, 2.704800295671994E-5, 0.0, 0.011801745210656939], [0.002159728678824856, 0.6860949657953659, 0.0015775182369700306, 0.002888513221329549, 0.007943418218305744, 0.0, 0.025178476026100682, 0.02551968900735123, 0.09658363386812677, 0.10990204797354797, 0.0, 1.858541578932853E-4], [0.0, 0.0, 0.0, 0.007762289264318262, 9.756837782857855E-4, 0.14493884711975924, 0.19650089042760083, 0.0, 0.13996424460955728, 0.007902036796837764, 0.0, 0.0], [0.0, 0.0, 0.5277727324022218, 0.15674759717493258, 0.0011723657738947585, 0.14786497574789426, 0.08513620448469858, 0.4875114698915505, 0.026075711034262344, 0.09350548956924531, 0.0, 4.438300637965778E-4], [0.09274996155854501, 0.024578697839251422, 0.7161503475949673, 1.4409968508723428E-5, 0.005084766953563959, 0.053265782657663456, 0.20666973573163383, 0.003089481258620408, 0.006948923474544788, 2.5923092247692736E-5, 0.010918148921018164, 0.0], [0.1808285294300348, 0.7343273825509702, 0.011662395283762159, 0.055910948703300004, 0.3386118771876339, 7.314941277584142E-4, 0.024661559932734, 0.3706869435010619, 0.36428722096464183, 2.611217955104106E-4, 0.12145020999396516, 0.017143357826983976], [0.03615768589856395, 0.07692030336248329, 0.0, 2.4205405734014776E-6, 0.002161376612539073, 0.1800533900096173, 0.2569889813655863, 0.004338073951486554, 0.002148866915860803, 6.862892092396322E-7, 0.024383288639683975, 0.0], [0.0023651089087038074, 0.8772178110124011, 3.142640744529778E-4, 0.0025476433715049783, 0.012680499482188662, 0.0, 0.012767764047213248, 0.0116688859910959, 0.04924010363007114, 0.08736513919613886, 0.3828810311905845, 1.3536175889204824E-4], [0.010119853733518685, 0.0, 0.0, 1.370585174181202E-4, 0.019499070417182233, 0.003282903069023013, 0.061666748134625804, 0.14180599647459974, 0.0, 0.0, 0.0, 0.013230570282919737], [0.7607421494061047, 0.0, 0.04645112908238473, 0.14108009940072908, 0.004649299571812152, 0.018649081919052013, 0.05458701648888563, 0.0, 0.0055988080522098365, 0.766550812914234, 0.003592159571795977, 2.6545571614267484E-4], [0.00601061797124218, 0.3677622422976623, 0.7264515343470572, 2.322099208729631E-6, 0.0012790820561940468, 0.2290255082457252, 0.30222746151423246, 0.0, 0.016418403733531095, 5.651802227890634E-6, 0.03497504574414621, 0.02641467788424896], [0.19286234765869825, 0.05970983938935294, 0.10945478085170038, 3.970100821003625E-5, 2.2901773082527533E-4, 0.007830347688850253, 0.0, 0.09172399328146918, 0.46346363121271805, 3.0117668006279796E-4, 0.01948403871940679, 0.004422501538641002], [0.36834981467844136, 0.041750959262996754, 0.47426020044435985, 0.025281790386980585, 3.70598362232022E-4, 0.3859843430816521, 0.08525135500818486, 0.17093578183932467, 0.0, 0.09124192192052538, 0.0, 1.7431922135109824E-4], [0.0013589692756440083, 0.06654698631001858, 0.020176543992043834, 0.06840950311153562, 0.12874356704927814, 7.227366493423037E-5, 2.7077953297816038E-5, 0.0, 0.01252487977541894, 0.0041919807773016515, 0.087774678168031, 0.2856722750588815], [0.0, 1.1859488184584798E-4, 0.3580929192019457, 0.16810489595382616, 0.3348965854814151, 0.0, 0.08692290380410927, 0.012479834244005561, 0.33876544548696996, 0.1371821612677502, 4.499410647104931E-6, 0.010065528852937596], [0.018123962583494736, 0.9786863773404291, 0.0034769137549813946, 0.00303190057896585, 2.6647912051846063E-4, 0.80637352546386, 0.48387505079462023, 0.004143786613147416, 0.003970553361332347, 0.08654387069278147, 0.10203123040678361, 1.3392411501377698E-5], [0.0, 0.390691810577782, 0.9105006879452814, 1.1360111842498163E-5, 0.0055957312738936105, 0.44299046611755066, 0.47037389950435726, 0.21220311750890208, 0.05417632240834447, 2.474441948008277E-6, 0.33422568746136627, 0.09269659065681826], [0.34125638617526566, 0.04613865757447756, 0.2804367513273942, 0.029435739104380177, 2.7314643881067263E-4, 0.629767991089795, 0.06139631861308818, 0.11809185810903404, 0.013648152312802354, 0.0, 0.0, 8.528154840617271E-5], [0.023600181389208857, 0.7189849890167541, 0.004207994969947556, 0.0024482444782937644, 0.08052539611851042, 0.004867135229754904, 0.020137217014150388, 0.03864185053015401, 0.1843801643199406, 0.0016468694625855207, 0.46160969703266397, 0.002292594614822576], [0.04026262897681476, 0.12259314414721147, 0.8233088850150567, 3.7032222598218586E-6, 0.0, 0.1539207496825377, 0.30431434138915603, 0.020017024155420282, 0.012214176696868306, 2.6730853230905183E-6, 0.0, 0.06212946222201876], [0.1790704341853797, 0.13642054608252696, 0.1024109132406677, 1.1768456368456164E-4, 0.0, 0.27906221262841335, 0.40699535404942366, 0.0, 0.35528683987258547, 8.820384652541424E-5, 0.21042478154815836, 0.009179287317982916], [0.945679643306133, 0.020090708894059343, 0.6667349644997526, 0.05902920753654914, 0.0, 0.2814489923625467, 0.0, 0.4164812056761454, 0.026808090633828486, 0.0, 0.003012257898726096, 3.7120358024494635E-4], [0.0, 0.9481738066766496, 0.4771550093752953, 1.695431400508335E-5, 0.024269981360400886, 0.031703942685260667, 0.0664881242090124, 0.9710834672326363, 0.1161624675780133, 0.0, 0.8403816187747801, 0.0653408388358801], [0.006284580758140541, 0.0012598138138118602, 0.0, 0.050021867839700376, 0.0, 0.06059011984238449, 0.07329612338013602, 0.20336683350125273, 0.30283299536204944, 0.46951717764650697, 2.0472262923848254E-6, 0.0023507094033211277], [0.07331989139132056, 0.0045494738276300704, 0.9071646387087898, 0.0017811162479731597, 0.6739023097135043, 0.01965415492302902, 0.017401026015349652, 5.132563300143111E-4, 7.442921210933928E-4, 5.5815102077638734E-5, 0.010728845201223273, 0.6936663811697308], [0.8804515371905424, 0.0012080551202267903, 0.40273796307127074, 0.24265328661047791, 0.03103920637779424, 0.011554160445999329, 0.7019486330540661, 0.0, 0.0, 0.7784310318783703, 3.2284543111644456E-4, 0.0033945011210918864], [0.012596123816189613, 0.0, 0.07855980887646469, 1.6351788835129965E-4, 0.02840416216634122, 0.0034545170795983182, 0.014284639755583695, 0.053695458402543056, 0.6341012999977091, 0.0, 0.3014888625165766, 0.011685739350723165], [0.23858515468611563, 0.05187640443963373, 0.10487692775158762, 0.0, 0.0, 0.006492675387145711, 0.031078589702291978, 0.08638454004867135, 0.5219778317989165, 3.418799311518672E-4, 0.018867313566176505, 0.0040780410133834984], [0.01710169214893579, 4.066534059354677E-4, 0.27896453607974636, 0.06781972121591412, 0.1841818814600964, 0.008226658329698378, 0.023749095902431905, 0.010105269532906025, 0.0, 0.26391070383536064, 3.4772742790163047E-6, 0.04119391497876583], [0.2630025131942597, 0.009446594575024078, 0.13651617639025648, 5.397324430339108E-4, 0.0941597371745293, 0.04562877969300749, 0.9103313129980204, 2.583113088759914E-4, 0.0, 9.785203159973221E-7, 0.0300515857347362, 0.2669875200123625], [5.297614214412301E-4, 0.05417601620831147, 0.006940570165368485, 2.7459892906958064E-5, 0.02941402296935696, 0.012194393505718715, 0.01720688275689286, 0.006656894140549784, 0.6251265904167316, 5.8028208994809205E-5, 0.1801949685127604, 0.0010329827859745877], [2.561406777407843E-4, 0.04211122330952011, 0.0022597635876097305, 2.2709132225676577E-5, 0.00980341250332151, 0.08109010923883342, 0.05168248599877434, 0.0033921971106359384, 0.3450758398255782, 1.8673467972529778E-4, 0.0, 2.144360197162147E-4], [6.82368172850236E-4, 0.0, 0.0029565402033115227, 0.03804040658861067, 0.0, 1.7464686795842788E-4, 3.643614447523813E-5, 0.5217295800090884, 0.04920094084686233, 0.04741876986874294, 0.05285520201384805, 0.0], [0.005008479913221345, 0.20340626537206308, 0.024397403815234524, 1.490546784164271E-4, 0.01884719522567091, 0.0031804870638306726, 0.008849795902275304, 0.014179507647382027, 0.0, 4.178066747795306E-5, 0.18251784133355675, 0.007213544923212798], [0.0037336354896875335, 0.6675682423750507, 0.009178910466543733, 4.2927593451381506E-5, 6.60512260690119E-4, 0.5828028985660572, 0.9819159010666423, 0.09502039287898992, 0.46408186537307283, 4.2929951938575073E-4, 0.3553724665641458, 6.277425666385526E-4], [0.008046680281006942, 0.5047978103332207, 0.32623898805603824, 3.3818221511222634E-5, 0.0503794323324362, 0.003194870214450307, 0.013814583680000214, 0.3298435141590965, 0.2548957505183169, 2.878936714911795E-6, 0.3711630562587853, 0.07674309954052566], [0.019611178214319822, 0.0, 0.04187223917011084, 0.07762137765231969, 0.002063416340085882, 0.0, 0.9580219098451215, 0.9608416926468384, 0.1833236672437304, 0.0, 8.075000516474362E-6, 2.9743375664302037E-5], [0.12550868418656635, 0.11539000438983861, 0.01694366417485422, 0.03818277790437477, 1.0643808238702575E-4, 0.26886024964455, 0.018984893253618865, 0.0, 0.0021696612469387245, 0.9928105542038352, 0.002161864710081532, 0.0], [0.011788084001092956, 0.4369782709534916, 0.08953120188542059, 1.5014382502686577E-4, 0.02993420631207882, 0.0031064109336366164, 0.0, 0.0, 0.7010572925430409, 2.4468469131733173E-5, 0.3133286586439641, 0.0], [0.6684617296719175, 0.0, 0.9962271661696205, 0.32637051802418354, 0.012093066889357466, 0.028796376176738248, 0.1338745986028652, 0.0, 0.20752534074984708, 0.0, 0.006674895834763413, 0.0020822539542187215], [5.741733435503263E-4, 0.04919116912480631, 0.0, 0.001589716703106317, 0.6179102393465281, 0.0011324051849159744, 9.542385600957992E-5, 0.35188854361278055, 0.0218158070765041, 0.009942062942632002, 0.002197872776789642, 0.09142178499597993], [0.7571203753107703, 0.025866624442044565, 0.5936975827692941, 0.03626660955729384, 3.241055555389484E-4, 0.48880089278712957, 0.0, 0.26693253334546485, 0.018391690587486628, 0.07010273800604994, 0.0025648742608904047, 2.32536004532754E-4], [0.8501234463670926, 0.0629687556331471, 0.04993004540871529, 0.6111203724618728, 0.13622886180676394, 0.004277737688219041, 0.6184593928270656, 0.8828733859120381, 0.150022990936821, 0.005914947164433415, 0.6459252990021098, 0.0], [0.037562599907131684, 0.0011796212503375415, 0.09401034222611886, 0.07932821958157124, 0.0033349361680247063, 0.37077576452356015, 0.7894490466002307, 0.4203219498581987, 0.36518832225271186, 0.11797825868534095, 0.0, 6.995788438797694E-5], [0.004814595851555243, 0.5791568574278002, 0.21428083190380418, 4.2641100654644484E-6, 0.001027511949684984, 0.20868644251195217, 0.3040142756155373, 0.4025723398298172, 0.07432635127017184, 2.319098027603328E-5, 0.05527311618648981, 0.0], [0.2203007324519634, 0.05617982705171771, 0.08582152731912275, 0.053606108184106625, 2.6559467648715527E-4, 0.8062115786982115, 0.0, 0.0593420416256651, 0.0, 0.6394631514517033, 0.0013121884602190865, 3.0806089108166256E-5], [0.14901068739928244, 0.0, 0.42714560003433655, 0.03305127021382301, 9.732364161980075E-4, 0.30193931252272843, 0.3326556885470083, 0.4043485566619345, 0.08363902149450128, 0.31590392447833937, 3.367530298054233E-4, 2.655336397980833E-4], [0.01985368513374445, 3.8484318597687306E-4, 0.0, 3.424846592212045E-4, 0.9933444371514422, 0.05003382302813586, 0.014080675009145116, 0.0, 4.417068866113816E-6, 2.7601520043996075E-5, 1.2947344982410698E-4, 0.06746724888762401], [0.8184721091002207, 0.0, 0.0, 0.029615629813745374, 0.2117150414164654, 0.010830481541203585, 0.2388520459240342, 0.0, 0.4664320333561671, 7.745954972893099E-5, 0.6892865506564095, 0.0], [0.0, 0.0, 0.5052494367192975, 0.0014471576623490813, 0.010006746434991623, 0.011984388659807665, 0.0, 0.2704993270649053, 0.0, 3.299424245433169E-4, 0.23152941554846723, 0.005567758364330417], [0.0, 0.7613957477520515, 0.0, 0.010130679462008324, 0.021743350384562623, 0.004026167735897035, 0.0260115486780369, 0.023766969272258028, 0.041593516433928335, 8.413110133109747E-4, 0.1945951900167675, 0.004286406225121953], [0.10716969919613786, 0.0, 0.4025653799402917, 2.9802624998342102E-5, 0.003918620767056078, 0.07656136619841589, 0.09818834447307571, 0.0, 0.02040708193535201, 3.514514312963346E-5, 0.02437448268501405, 0.02734511992060021], [0.46350025401813244, 0.031134303086407245, 0.0999553597590701, 1.0877292147111226E-4, 3.556043711119034E-4, 0.006285773935196756, 0.028518827585909335, 0.041800630177630804, 0.5125581824931454, 3.983522695402142E-4, 0.0, 0.004952715428542291], [0.0020042104012505135, 0.20495380505287208, 0.06756262865941262, 2.2033297767885724E-5, 0.037374006889450334, 0.009267757089638007, 0.0, 0.07984761718720168, 0.5184580130530269, 1.0178721528530943E-5, 0.3347240148699332, 0.0], [0.16792302904479242, 0.0, 0.10376787058341232, 3.552791483074259E-5, 0.0, 0.011159276769382135, 0.04625941514269326, 0.10473346582403897, 0.44281575986433075, 2.4285293328818458E-4, 0.0256888025114936, 0.004147165331308537], [0.9750683771148934, 0.018289565335650057, 0.017213210062944746, 0.130298344954614, 0.002566859152557582, 0.040913103754590785, 0.0286169920282285, 0.0, 0.002336043232128077, 0.4332827074126132, 0.0037160316408934137, 8.256673647556317E-5], [0.005256696381291845, 0.2479399014974386, 0.05936386030091861, 5.1794827923784786E-5, 0.0395265830211491, 0.0, 0.008607226154961012, 0.05393497009697233, 0.976599819597843, 0.0, 0.0, 0.010775945415206689], [0.0011854500666234288, 0.6007992776964214, 0.03802107057220756, 1.6212908000531117E-4, 0.21694037014405537, 7.20708004936732E-4, 6.05222489612478E-4, 0.0, 0.3563820856719241, 1.1759875268135822E-4, 0.961255408144901, 0.03192875209031693], [0.04813511219187651, 0.0, 0.06782230786817212, 1.8287812164918121E-6, 0.005710977048532911, 0.9311602825486044, 0.6238361074226837, 0.002652549077234556, 7.138767926193612E-4, 1.675017707869486E-7, 0.032318523628444146, 0.9429335805729061], [0.22340271575671408, 1.147451059068111E-4, 0.217254368211359, 0.18773525967981852, 0.1601642920563382, 0.0, 0.12371393756349902, 0.025926509750516247, 0.8216601995956384, 0.0, 0.0, 0.004791411317644156], [0.2507358918664855, 0.03017441967394252, 0.5899761593032038, 5.83135780910957E-6, 0.0015240251001440326, 0.03492216821115516, 0.14009311233316207, 0.0, 0.012252046837242458, 2.8693148358405196E-6, 0.03286992586620521, 0.07488933671281736], [0.0, 0.8890978400987573, 0.003556572256795968, 0.0, 0.11133999531443323, 8.701642138542187E-4, 0.041933742940439944, 0.07581673413963791, 0.06870215126073453, 0.001979585861734634, 0.21131907685479423, 0.0061693283269393835], [0.001783414827882927, 0.020488342283271725, 0.18425574945832113, 0.014821031356921414, 0.2104361997116087, 0.0021812784710691924, 0.001595947416798138, 0.5139327426822633, 0.12854310256139012, 0.10647232389233663, 3.939328011722189E-4, 0.024129476283578484], [0.14066604709231453, 1.1706593778065191E-4, 0.3317852668019312, 0.0, 0.3287033539203638, 0.007078142982481883, 0.0901639272243393, 0.013084322578054808, 0.3692550024277812, 0.0, 4.503081338224239E-6, 0.009434157335923378], [0.008319646251838578, 0.0, 0.024092255739060875, 2.381501288682585E-4, 0.02198994099549905, 0.0022572863006667943, 0.007765288951193439, 0.016607147509715106, 0.3070555992039579, 4.575831432584998E-5, 0.15892109859411652, 0.009815719544293567]]
+The accuracy is: 0.7577319587628866
+The training accuracy is: 0.9933333333333333
+The total cost is: 1143.0
+FP = 285, FN = 279, teacher cost = 300.0, misclassification cost = 843.0

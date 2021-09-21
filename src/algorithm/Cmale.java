@@ -1,6 +1,7 @@
 package algorithm;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 
@@ -36,34 +37,14 @@ public class Cmale {
 	int numLabels;
 
 	/**
-	 * The predicted label matrix. int[][] predictedLabelMatrix;
+	 * The output file for tracking the learning process.
 	 */
+	RandomAccessFile outputFile;
 
 	/**
-	 * The misclassification cost for classifying an instance without a label as
-	 * with. double falsePositiveCost;
+	 * The neural network for classification.
 	 */
-
-	/**
-	 * The misclassification cost for classifying an instance with a label as
-	 * without. double falseNegativeCost;
-	 */
-
-	/**
-	 * The number of queries. int numQueries;
-	 */
-
-	/**
-	 * The teacher cost for each query. double teacherCost;
-	 */
-
-	/**
-	 * The nueual network for regression. AnnNetwork annRegressor;
-	 */
-
-	/**
-	 * The matrix factorization regressor. MatrixFactorization mfRegressor;
-	 */
+	MultiLabelAnn multiLabelAnn;
 
 	/**
 	 * Representativeness of each instance.
@@ -76,94 +57,161 @@ public class Cmale {
 	int[] representativenessRankArray;
 
 	/**
-	 * The number of queries for respective labels. int[] labelQueryCountArray;
-	 */
-
-	/**
 	 ********************** 
 	 * The first constructor. Data and labels are stored in one file.
 	 * 
-	 * @paraDataFilename The data filename.
+	 * @param paraDataFilename
+	 *            The data filename.
+	 * @param paraNumConditions
+	 *            The number of conditional attributes.
+	 * @param paraNumLabels
+	 *            The number of labels.
 	 ********************** 
 	 */
 	public Cmale(String paraArffFilename, int paraNumConditions, int paraNumLabels) {
+		// Step 1. Read the data from file
 		dataset = new MultiLabelData(paraArffFilename, paraNumConditions, paraNumLabels);
-
-		// Data matrix initialization.
+		// Basic information of the data.
 		numInstances = dataset.getNumInstances();
 		numConditions = dataset.getNumConditions();
 		numLabels = paraNumLabels;
 
-		// Predicted label matrix initialization.
-		// predictedLabelMatrix = new int[numInstances][numLabels];
-
-		// numQueries = 0;
+		// Step 2. Compute instance representativeness.
 		representativenessArray = new double[numInstances];
 		representativenessRankArray = new int[numInstances];
-		// labelQueryCountArray = new int[numLabels];
-	}// Of the second constructor
+
+		// Step 2. Prepare output file.
+		File tempFile = new File("data/learn-results.txt");
+		if (tempFile.exists()) {
+			tempFile.delete();
+		} // Of if
+		try {
+			outputFile = new RandomAccessFile("data/learn-results.txt", "rw");
+		} catch (Exception ee) {
+			System.out.println("Error occurred in Cmale constructor: " + ee);
+			System.exit(0);
+		} // Of try
+	}// Of the first constructor
 
 	/**
 	 ********************** 
-	 * Compute the total cost. Including the teacher cost and misclassification
-	 * cost.
-	 ********************** 
-	 * public double computeTotalCost() { double resultCost = 0; for (int i = 0;
-	 * i < numInstances; i++) { for (int j = 0; j < numLabels; j++) { if
-	 * ((predictedLabelMatrix[i][j] == -1) && (dataset.getLabel(i, j) == 1)) {
-	 * resultCost += falseNegativeCost; } else if ((predictedLabelMatrix[i][j]
-	 * == 1) && (dataset.getLabel(i, j) == -1)) { resultCost +=
-	 * falsePositiveCost; } else if ((predictedLabelMatrix[i][j] == 0)) {
-	 * System.out.println("Internal error! The predicted label should be either
-	 * -1 or +1, position: (" + i + ", " + j + ")."); System.exit(0); } // Of if
-	 * } // Of for j } // Of for i
+	 * Initialize ANN.
 	 * 
-	 * resultCost += numQueries * teacherCost; return resultCost; }// Of
-	 * computeTotalCost
+	 * @param paraFullConnectLayerNodes
+	 *            Full connect layer nodes, e.g., {4, 8, 6}. The first one
+	 *            should be equal to numConditions.
+	 * @param paraParallelLayerNodes
+	 *            Parallel connect layer nodes, e.g., {4, 2}. The last one
+	 *            should always be 2.
+	 * @param paraLearningRate
+	 *            The learning rate, such as 0.02.
+	 * @param paraMobp
+	 *            Mobp.
+	 * @param paraActivators,
+	 *            e.g., "sssss".
+	 ********************** 
 	 */
+	public void initializeMultiLabelAnn(int[] paraFullConnectLayerNodes,
+			int[] paraParallelLayerNodes, double paraLearningRate, double paraMobp,
+			String paraActivators) {
+		multiLabelAnn = new MultiLabelAnn(dataset, paraFullConnectLayerNodes,
+				paraParallelLayerNodes, paraLearningRate, paraMobp, paraActivators);
+	}// Of initializeMultiLabelAnn
 
 	/**
 	 ********************** 
-	 * Predict for a given label of an instance.
+	 * Bounded train. Control the training rounds.
 	 * 
-	 * @param paraI
-	 *            The instance index.
-	 * @param paraJ
-	 *            The label index.
+	 * @param paraLowerRounds
+	 *            The training round lower bound.
+	 * @param paraLowerRounds
+	 *            The training round upper bound.
+	 * @param paraCheckingRounds
+	 *            For every some bounds we need to check the convergence of the
+	 *            classifier.
+	 * @param paraAccuracyThreshold
+	 *            When the training accuracy threshold is reached, the training
+	 *            process terminates.
 	 ********************** 
-	 *            public double predict(int paraI, int paraJ) { // double[]
-	 *            tempPredictions = classifier.predict(dataMatrix[paraI]); //
-	 *            return tempPredictions[paraJ]; return 0; }// Of predict
 	 */
+	public void boundedTrain(int paraLowerRounds, int paraUpperRounds, int paraCheckingRounds,
+			double paraAccuracyThreshold) throws IOException {
+		System.out.printf("boundedTrain(%d, %d, %d, %f)\r\n", paraLowerRounds, paraUpperRounds,
+				paraCheckingRounds, paraAccuracyThreshold);
+		// Step 1. Train according to the lower bound.
+		int round = 0;
+		for (; round < paraLowerRounds; round++) {
+			if (round % 1000 == 999) {
+				System.out.println("Round: " + round);
+			} // Of if
+			multiLabelAnn.train();
+		} // Of for round
+
+		// Step 2. Train and check.
+		double tempTrainingAccuracy;
+		for (; round < paraUpperRounds; round++) {
+			if (round % paraCheckingRounds == paraCheckingRounds - 1) {
+				multiLabelAnn.test();
+				tempTrainingAccuracy = dataset.computeTrainingAccuracy();
+				System.out.printf("Regular round: %d, training accuracy = %f \r\n", round,
+						tempTrainingAccuracy);
+				outputFile.writeBytes("Regular round: " + round + ", training accuracy = "
+						+ tempTrainingAccuracy + ".\r\n");
+
+				if (tempTrainingAccuracy > paraAccuracyThreshold) {
+					break;
+				} // Of if
+			} // Of if
+			multiLabelAnn.train();
+		} // Of for n
+	}// Of boundedTrain
 
 	/**
 	 ********************** 
-	 * Predict for all labels.
+	 * Bounded train emphasizing on some instances.
+	 * 
+	 * @param paraLowerRounds
+	 *            The training round lower bound.
+	 * @param paraLowerRounds
+	 *            The training round upper bound.
+	 * @param paraCheckingRounds
+	 *            For every some bounds we need to check the convergence of the
+	 *            classifier.
+	 * @param paraEmphasizeTimes
+	 *            How many times the new instances should be emphasized.
+	 * @param paraInstanceIndices
+	 *            Which instances are emphasized.
+	 * @param paraAccuracyThreshold
+	 *            When the training accuracy threshold is reached, the training
+	 *            process terminates.
 	 ********************** 
-	 * public double[][] predict() { double[][] resultMatrix = null; // for (int
-	 * i = ) // double[] tempPredictions =
-	 * classifier.predict(dataMatrix[paraI]); // return tempPredictions[paraJ];
-	 * return resultMatrix; }// Of predict
 	 */
+	public void boundedEmphasizedTrain(int paraUpperRounds, int paraCheckingRounds,
+			int paraEmphasizeTimes, int[] paraInstanceIndices, double paraAccuracyThreshold)
+			throws IOException {
+		// Step 1. Compute the original training accuracy.
+		double tempTrainingAccuracy = dataset.computeTrainingAccuracy();
+		System.out.printf("Emphasized train. Before retrain, training accuracy = %f \r\n",
+				tempTrainingAccuracy);
+		outputFile.writeBytes("Emphasized train. Before retrain, training accuracy = "
+				+ tempTrainingAccuracy + "\r\n");
 
-	/**
-	 ********************** 
-	 * Predict for all labels.
-	 ********************** 
-	 * public double[][] matrixFactorizationPredict() { double[][] resultMatrix
-	 * = null; // resultMatrix = mfRegressor.predict(); return resultMatrix; }//
-	 * Of predict
-	 */
-
-	/**
-	 ********************** 
-	 * Train.
-	 ********************** 
-	 */
-	public void train() {
-		// Step 1. Train the ANN regressor
-		// Step 2. Train the matrix factorization regressor
-	}// Of train
+		// Step 2. Train and check.
+		for (int round = 0; round < paraUpperRounds; round++) {
+			if (round % paraCheckingRounds == paraCheckingRounds - 1) {
+				multiLabelAnn.test();
+				tempTrainingAccuracy = dataset.computeTrainingAccuracy();
+				System.out.printf("Regular round: %d, training accuracy = %f \r\n", round,
+						tempTrainingAccuracy);
+				outputFile.writeBytes("Regular round: " + round + ", training accuracy = "
+						+ tempTrainingAccuracy + "\r\n");
+				if (tempTrainingAccuracy > paraAccuracyThreshold) {
+					break;
+				} // Of if
+			} // Of if
+			multiLabelAnn.emphasizedTrain(paraEmphasizeTimes, paraInstanceIndices);
+		} // Of for n
+	}// Of boundedEmphasizedTrain
 
 	/**
 	 ********************** 
@@ -174,26 +222,18 @@ public class Cmale {
 	 ********************** 
 	 */
 	public void computeInstanceRepresentativeness(double paraDc) {
-		// Step 1. Calculate the representativeness of each instance.
-		// Calculate density using Gaussian kernel.
+		// Step 1. Calculate density using Gaussian kernel.
 		double[] tempDensityArray = new double[numInstances];
 		double tempDistance = 0;
 		for (int i = 0; i < numInstances; i++) {
 			tempDensityArray[i] = 0;
 			for (int j = 0; j < numInstances; j++) {
 				tempDistance = dataset.distance(i, j);
-				// System.out.println("tempDistance = " + tempDistance);
 				tempDensityArray[i] += Math.exp(-tempDistance * tempDistance / paraDc / paraDc);
-				// System.out.printf("tempDensityArray[%d] = %f\r\n", i,
-				// tempDensityArray[i]);
 			} // Of for j
 		} // Of for i
 
-		// System.out.println("Gaussian, dc = " + paraDc);
-		// System.out.println("tempDensityArray = " +
-		// Arrays.toString(tempDensityArray));
-
-		// Calculate distance to its master.
+		// Step 2. Calculate distance to its master.
 		int[] tempMasterArray = new int[numInstances];
 		double tempNewDistance = 0;
 		double[] tempDistanceToMasterArray = new double[numInstances];
@@ -215,16 +255,12 @@ public class Cmale {
 			} // Of for j
 		} // Of for i
 
-		// Representativeness.
-		// System.out.println("tempDensityArray = " +
-		// Arrays.toString(tempDensityArray));
-		// System.out.println("tempDistanceToMasterArray = " +
-		// Arrays.toString(tempDistanceToMasterArray));
+		// Step 3. Representativeness.
 		for (int i = 0; i < numInstances; i++) {
 			representativenessArray[i] = tempDensityArray[i] * tempDistanceToMasterArray[i];
 		} // Of for i
 
-		// Sort instances according to representativeness.
+		// Step 4. Sort instances according to representativeness.
 		representativenessRankArray = SimpleTools.mergeSortToIndices(representativenessArray);
 	}// Of computeInstanceRepresentativeness
 
@@ -234,138 +270,135 @@ public class Cmale {
 	 * 
 	 * @param paraColdStartRounds
 	 *            Cold start rounds not considering label uncertainty.
+	 * @param paraNumAdditionalQueries
+	 *            Additional queries.
+	 * @param paraNumQueryBatchSize
+	 *            How many labels are queried each time.
+	 * @param paraDc
+	 *            For representativeness computation.
+	 * 
 	 * @param paraI
 	 *            The second index.
 	 ********************** 
 	 */
 	public void learn(int paraColdStartRounds, int paraNumAdditionalQueries,
-			int paraNumQueryBatchSize, double paraDc, int[] paraFullConnectLayerNodes,
-			int[] paraParallelLayerNodes, int paraPretrainRounds) throws Exception {
-		// Step 1. Reset the dataset to clear learning inforamtion.
+			int paraNumQueryBatchSize, double paraDc, int paraPretrainRounds,
+			double paraAccuracyThreshold) throws IOException {
+		// Step 1. Reset the dataset to clear learning information.
 		dataset.reset();
 
-		// Step 2. Prepare output file.
-		File tempFile = new File("data/learn-results.txt");
-		if (tempFile.exists()) {
-			tempFile.delete();
-		} // Of if
-		RandomAccessFile tempRAFile = new RandomAccessFile("data/learn-results.txt", "rw");
-
-		// Step 3. Calculate the representativeness of each instance.
+		// Step 2. Calculate the representativeness of each instance.
 		computeInstanceRepresentativeness(paraDc);
 
-		// Step 4. Cold start stage. Only consider instance representativeness
-		// and label diversity
+		// Step 3. Cold start stage. Only consider instance representativeness
+		// and label scarcity/diversity
 		int[] tempLabelIndices = new int[paraNumQueryBatchSize];
 
-		tempRAFile.writeBytes("Here is the whole process of learn(): \r\n");
-		tempRAFile.writeBytes("Cold start: \r\n");
+		outputFile.writeBytes("Here is the whole process of learn(): \r\n");
+		outputFile.writeBytes("Cold start: \r\n");
+		// Query the scare k labels of most representative p instances.
 		for (int i = 0; i < paraColdStartRounds; i++) {
-			// Cold start query here.
 			tempLabelIndices = dataset.getScareLabels(paraNumQueryBatchSize);
-			// System.out.println("tempLabelIndices = " +
-			// Arrays.toString(tempLabelIndices));
 			dataset.queryLabels(representativenessRankArray[i], tempLabelIndices);
-			tempRAFile.writeBytes("Query instance #" + representativenessRankArray[i]
+			outputFile.writeBytes("Query instance #" + representativenessRankArray[i]
 					+ " with labels #" + Arrays.toString(tempLabelIndices) + "\r\n");
 		} // Of for i
 
-		// Step 3. Pre-train an ANN.
-		MultiLabelAnn tempAnn = new MultiLabelAnn(dataset, paraFullConnectLayerNodes,
-				paraParallelLayerNodes, 0.05, 0.6, "sssss");
-		for (int round = 0; round < paraPretrainRounds; round++) {
-			if (round % 1000 == 999) {
-				System.out.println("Round: " + round);
-			} // Of if
-			tempAnn.train();
-		} // Of for n
+		// Pre-train an ANN. At least 1000 rounds.
+		boundedTrain(1000, paraPretrainRounds, 200, paraAccuracyThreshold);
 
-		int[] tempInstanceIndices = new int[1];
-		tempRAFile.writeBytes("Learning process: \r\n");
 		// Step 4. Regular learning.
+		// Now only one instance at a time.
+		int[] tempInstanceIndices = new int[1];
+		outputFile.writeBytes("Query and learning process: \r\n");
+		int[] tempIndices;
 		for (int q = 0; q < paraNumAdditionalQueries; q++) {
-			int[] tempIndices = tempAnn.getMostUncertainLabelIndices(paraNumQueryBatchSize);
-			int[] tempLabelIndices2 = new int[paraNumQueryBatchSize];
-			for (int j = 0; j < tempLabelIndices2.length; j++) {
-				tempLabelIndices2[j] = tempIndices[j + 1];
+			tempIndices = multiLabelAnn.getMostUncertainLabelIndices(paraNumQueryBatchSize);
+			for (int j = 0; j < tempLabelIndices.length; j++) {
+				tempLabelIndices[j] = tempIndices[j + 1];
 			} // Of for j
-			tempLabelIndices2[0] = tempIndices[1];
-			dataset.queryLabels(tempIndices[0], tempLabelIndices2);
-			tempRAFile.writeBytes("Query instance #" + tempIndices[0] + " with labels #"
-					+ Arrays.toString(tempLabelIndices2) + "\r\n");
+			dataset.queryLabels(tempIndices[0], tempLabelIndices);
+			outputFile.writeBytes("Query instance #" + tempIndices[0] + " with labels #"
+					+ Arrays.toString(tempLabelIndices) + "\r\n");
 
 			tempInstanceIndices[0] = tempIndices[0];
-			for (int round = 0; round < 1000; round++) {
-				// if (round % 1000 == 999) {
-				// System.out.println("EmphasizedTrain round: " + round);
-				// } // Of if
-				tempAnn.emphasizedTrain(10, tempInstanceIndices);
-			} // Of for n
+			boundedEmphasizedTrain(5000, 200, 10, tempInstanceIndices, paraAccuracyThreshold);
 		} // Of for q
 
-		double tempAccuray = tempAnn.test();
-		System.out.println("The label scarcity array is: "
-				+ Arrays.toString(dataset.computeLabelScarcityArray()));
-		System.out.println("The label uncertainty matrix is: "
-				+ Arrays.deepToString(tempAnn.computeLabelUncertaintyMatrix()));
-
-		System.out.println("The accuracy is: " + tempAccuray);
-		System.out.println("The training accuracy is: " + dataset.computeTrainingAccuracy());
-		System.out.println("The total cost is: " + dataset.computeTotalCost());
-		System.out.println(dataset.getCostDetail() + "\r\n");
-
-		tempRAFile.writeBytes("The label scarcity array is: "
-				+ Arrays.toString(dataset.computeLabelScarcityArray()) + "\r\n");
-		tempRAFile.writeBytes("The label uncertainty matrix is: "
-				+ Arrays.deepToString(tempAnn.computeLabelUncertaintyMatrix()) + "\r\n");
-		tempRAFile.writeBytes("The accuracy is: " + tempAccuray + "\r\n");
-		tempRAFile.writeBytes(
-				"The training accuracy is: " + dataset.computeTrainingAccuracy() + "\r\n");
-		tempRAFile.writeBytes("The total cost is: " + dataset.computeTotalCost() + "\r\n");
-		tempRAFile.writeBytes(dataset.getCostDetail() + "\r\n");
-
-		tempRAFile.close();
+		outputSummary();
 	}// Of learn
 
 	/**
 	 ********************** 
 	 * Learn with randomly selected labels.
 	 * 
-	 * @param paraColdStartRounds
-	 *            Cold start rounds not considering label uncertainty.
+	 * @param paraNumQueriedLabels
+	 *            The number of queried labels.
+	 * @param paraTrainRounds
+	 *            The number of train rounds, the upper bound.
+	 * @param paraAccuracyThreshold
+	 *            The training accuracy threshold. Terminate the learning
+	 *            process if this threshold is reached.
 	 * @param paraI
 	 *            The second index.
 	 ********************** 
 	 */
-	public void randomSelectionLearn(int paraNumQueriedLabels, int[] paraFullConnectLayerNodes,
-			int[] paraParallelLayerNodes, int paraTrainRounds) {
+	public void randomSelectionLearn(int paraNumQueriedLabels, int paraTrainRounds,
+			double paraAccuracyThreshold) throws IOException {
 		dataset.reset();
 
 		// Step 1. randomly select labels to query.
-		// Here I present a trick to assure the number of queries.
+		// Here I present a trick converting the matrix to an array to assure
+		// the number of queries.
 		dataset.randomQuery(paraNumQueriedLabels);
 
 		// Step 2. Train an ANN.
-		MultiLabelAnn tempAnn = new MultiLabelAnn(dataset, paraFullConnectLayerNodes,
-				paraParallelLayerNodes, 0.05, 0.6, "sssss");
-		for (int round = 0; round < paraTrainRounds; round++) {
-			if (round % 1000 == 999) {
-				System.out.println("Round: " + round);
-			} // Of if
-			tempAnn.train();
-		} // Of for n
+		boundedTrain(1000, paraTrainRounds, 200, paraAccuracyThreshold);
 
-		double tempAccuray = tempAnn.test();
+		outputSummary();
+	}// Of randomSelectionLearn
+
+	/**
+	 ********************** 
+	 * Output the summary of the model.
+	 ********************** 
+	 */
+	public void outputSummary() throws IOException {
+		double tempAccuray = multiLabelAnn.test();
 		System.out.println("The label scarcity array is: "
 				+ Arrays.toString(dataset.computeLabelScarcityArray()));
 		System.out.println("The label uncertainty matrix is: "
-				+ Arrays.deepToString(tempAnn.computeLabelUncertaintyMatrix()));
+				+ Arrays.deepToString(multiLabelAnn.computeLabelUncertaintyMatrix()));
 
 		System.out.println("The accuracy is: " + tempAccuray);
 		System.out.println("The training accuracy is: " + dataset.computeTrainingAccuracy());
 		System.out.println("The total cost is: " + dataset.computeTotalCost());
 		System.out.println(dataset.getCostDetail() + "\r\n");
-	}// Of randomSelectionLearn
+
+		outputFile.writeBytes("The label scarcity array is: "
+				+ Arrays.toString(dataset.computeLabelScarcityArray()) + "\r\n");
+		outputFile.writeBytes("The label uncertainty matrix is: "
+				+ Arrays.deepToString(multiLabelAnn.computeLabelUncertaintyMatrix()) + "\r\n");
+		outputFile.writeBytes("The accuracy is: " + tempAccuray + "\r\n");
+		outputFile.writeBytes(
+				"The training accuracy is: " + dataset.computeTrainingAccuracy() + "\r\n");
+		outputFile.writeBytes("The total cost is: " + dataset.computeTotalCost() + "\r\n");
+		outputFile.writeBytes(dataset.getCostDetail() + "\r\n");
+	}// Of outputSummary
+
+	/**
+	 ********************** 
+	 * Test reading data.
+	 ********************** 
+	 */
+	public void closeOutputFile() {
+		try {
+			outputFile.close();
+		} catch (IOException ee) {
+			System.out.println("Error occurred in Cmale.closeOutputFile(): " + ee);
+			System.exit(0);
+		} // Of try
+	}// Of closeOutputFile
 
 	/**
 	 ********************** 
@@ -394,18 +427,22 @@ public class Cmale {
 	 */
 	public static void irisTest() {
 		Cmale tempCmale = new Cmale("data/mliris.arff", 4, 3);
-		int[] tempFullConnectLayerNodes = { 4, 8, 8 };
+		int[] tempFullConnectLayerNodes = { 4, 8, };
 		int[] tempParallelLayerNodes = { 4, 2 };
 		try {
-			tempCmale.learn(30, 10, 1, 0.12, tempFullConnectLayerNodes, tempParallelLayerNodes,
-					15000);
+			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
+					0.02, 0.6, "ssssss");
+			tempCmale.learn(30, 10, 1, 0.12, 20000, 0.99);
+
+			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
+					0.02, 0.6, "ssssss");
+			tempCmale.randomSelectionLearn(40, 15000, 0.99);
 		} catch (Exception ee) {
 			System.out.println(ee);
 			System.exit(0);
 		} // Of try
 
-		tempCmale.randomSelectionLearn(40, tempFullConnectLayerNodes, tempParallelLayerNodes,
-				15000);
+		tempCmale.closeOutputFile();
 	}// Of irisTest
 
 	/**
@@ -416,17 +453,23 @@ public class Cmale {
 	public static void flagTest() {
 		Cmale tempCmale = new Cmale("data/flags.arff", 14, 12);
 		int[] tempFullConnectLayerNodes = { 14, 14, 14 };
-		int[] tempParallelLayerNodes = { 8, 2 };
+		int[] tempParallelLayerNodes = { 2 };
+
 		try {
-			tempCmale.learn(150, 150, 1, 0.12, tempFullConnectLayerNodes, tempParallelLayerNodes,
-					15000);
+			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
+					0.02, 0.6, "ssssss");
+			tempCmale.learn(150, 150, 2, 0.12, 15000, 0.99);
+
+			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
+					0.02, 0.6, "ssssss");
+			tempCmale.randomSelectionLearn(300, 15000, 0.99);
 		} catch (Exception ee) {
 			System.out.println(ee);
 			System.exit(0);
 		} // Of try
-		tempCmale.randomSelectionLearn(300, tempFullConnectLayerNodes, tempParallelLayerNodes,
-				15000);
-	}// Of irisTest
+
+		tempCmale.closeOutputFile();
+	}// Of flagTest
 
 	/**
 	 ********************** 
@@ -435,8 +478,8 @@ public class Cmale {
 	 */
 	public static void main(String[] args) {
 		// readDataTest();
-		irisTest();
-		// flagTest();
+		// irisTest();
+		flagTest();
 		System.out.println("Finish.");
 	}// Of main
 
