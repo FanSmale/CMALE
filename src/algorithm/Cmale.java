@@ -153,9 +153,9 @@ public class Cmale {
 			if (round % paraCheckingRounds == paraCheckingRounds - 1) {
 				multiLabelAnn.test();
 				tempTrainingAccuracy = dataset.computeTrainingAccuracy();
-				System.out.printf("Regular round: %d, training accuracy = %f \r\n", round,
+				System.out.printf("Regular round: %d, training accuracy = %f \r\n", (round + 1),
 						tempTrainingAccuracy);
-				outputFile.writeBytes("Regular round: " + round + ", training accuracy = "
+				outputFile.writeBytes("Regular round: " + (round + 1) + ", training accuracy = "
 						+ tempTrainingAccuracy + ".\r\n");
 
 				if (tempTrainingAccuracy > paraAccuracyThreshold) {
@@ -201,9 +201,9 @@ public class Cmale {
 			if (round % paraCheckingRounds == paraCheckingRounds - 1) {
 				multiLabelAnn.test();
 				tempTrainingAccuracy = dataset.computeTrainingAccuracy();
-				System.out.printf("Regular round: %d, training accuracy = %f \r\n", round,
+				System.out.printf("Regular round: %d, training accuracy = %f \r\n", (round + 1),
 						tempTrainingAccuracy);
-				outputFile.writeBytes("Regular round: " + round + ", training accuracy = "
+				outputFile.writeBytes("Regular round: " + (round + 1) + ", training accuracy = "
 						+ tempTrainingAccuracy + "\r\n");
 				if (tempTrainingAccuracy > paraAccuracyThreshold) {
 					break;
@@ -272,7 +272,7 @@ public class Cmale {
 	 *            Cold start rounds not considering label uncertainty.
 	 * @param paraNumAdditionalQueries
 	 *            Additional queries.
-	 * @param paraNumQueryBatchSize
+	 * @param paraLabelBatch
 	 *            How many labels are queried each time.
 	 * @param paraDc
 	 *            For representativeness computation.
@@ -282,7 +282,7 @@ public class Cmale {
 	 ********************** 
 	 */
 	public void twoStageLearn(int paraColdStartRounds, int paraNumAdditionalQueries,
-			int paraNumQueryBatchSize, double paraDc, int paraPretrainRounds,
+			int paraInstanceBatch, int paraLabelBatch, double paraDc, int paraPretrainRounds,
 			double paraAccuracyThreshold) throws IOException {
 		// Step 1. Reset the dataset to clear learning information.
 		dataset.reset();
@@ -292,13 +292,13 @@ public class Cmale {
 
 		// Step 3. Cold start stage. Only consider instance representativeness
 		// and label scarcity/diversity
-		int[] tempLabelIndices = new int[paraNumQueryBatchSize];
+		int[] tempLabelIndices = new int[paraLabelBatch];
 
 		outputFile.writeBytes("Here is the whole process of learn(): \r\n");
 		outputFile.writeBytes("Cold start: \r\n");
 		// Query the scare k labels of most representative p instances.
 		for (int i = 0; i < paraColdStartRounds; i++) {
-			tempLabelIndices = dataset.getScareLabels(paraNumQueryBatchSize);
+			tempLabelIndices = dataset.getScareLabels(paraLabelBatch);
 			dataset.queryLabels(representativenessRankArray[i], tempLabelIndices);
 			outputFile.writeBytes("Query instance #" + representativenessRankArray[i]
 					+ " with labels #" + Arrays.toString(tempLabelIndices) + "\r\n");
@@ -311,17 +311,27 @@ public class Cmale {
 		// Now only one instance at a time.
 		int[] tempInstanceIndices = new int[1];
 		outputFile.writeBytes("Query and learning process: \r\n");
-		int[] tempIndices;
+		//int[] tempIndices;
+		int[][] tempInstanceLabelIndicesMatrix;
+		int tempInstanceIndex;
 		for (int q = 0; q < paraNumAdditionalQueries; q++) {
-			tempIndices = multiLabelAnn.getMostUncertainLabelIndices(paraNumQueryBatchSize);
-			for (int j = 0; j < tempLabelIndices.length; j++) {
-				tempLabelIndices[j] = tempIndices[j + 1];
-			} // Of for j
-			dataset.queryLabels(tempIndices[0], tempLabelIndices);
-			outputFile.writeBytes("Query instance #" + tempIndices[0] + " with labels #"
-					+ Arrays.toString(tempLabelIndices) + "\r\n");
+			//tempIndices = multiLabelAnn.getMostUncertainLabelIndices(paraLabelBatchSize);
+			//for (int j = 0; j < tempLabelIndices.length; j++) {
+			//	tempLabelIndices[j] = tempIndices[j + 1];
+			//} // Of for j
+			tempInstanceLabelIndicesMatrix = multiLabelAnn.getUncertainLabelBatch(paraInstanceBatch, paraLabelBatch);
+			for (int i = 0; i < paraInstanceBatch; i++) {
+				tempInstanceIndex = tempInstanceLabelIndicesMatrix[i][0];
+				for (int j = 0; j < paraLabelBatch; j++) {
+					tempLabelIndices[j] = tempInstanceLabelIndicesMatrix[i][j + 1];
+				} // Of for j
+				
+				dataset.queryLabels(tempInstanceIndex, tempLabelIndices);
+				outputFile.writeBytes("Query instance #" + tempInstanceIndex + " with labels #"
+						+ Arrays.toString(tempLabelIndices) + "\r\n");
+			}//Of for i
 
-			tempInstanceIndices[0] = tempIndices[0];
+			//tempInstanceIndices[0] = tempIndices[0];
 			boundedEmphasizedTrain(5000, 200, 10, tempInstanceIndices, paraAccuracyThreshold);
 		} // Of for q
 
@@ -432,7 +442,7 @@ public class Cmale {
 		try {
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
-			tempCmale.twoStageLearn(30, 10, 1, 0.12, 20000, 0.99);
+			tempCmale.twoStageLearn(10, 10, 2, 2, 0.12, 20000, 0.99);
 
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
@@ -452,17 +462,17 @@ public class Cmale {
 	 */
 	public static void flagTest() {
 		Cmale tempCmale = new Cmale("data/flags.arff", 14, 12);
-		int[] tempFullConnectLayerNodes = { 14, 14, 14 };
-		int[] tempParallelLayerNodes = { 2 };
+		int[] tempFullConnectLayerNodes = { 14, 14 };
+		int[] tempParallelLayerNodes = { 7, 2 };
 
 		try {
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
-			tempCmale.twoStageLearn(150, 150, 2, 0.12, 15000, 0.99);
+			tempCmale.twoStageLearn(100, 75, 2, 2, 0.12, 15000, 0.99);
 
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
-			tempCmale.randomSelectionLearn(300, 15000, 0.99);
+			tempCmale.randomSelectionLearn(300, 1000, 0.99);
 		} catch (Exception ee) {
 			System.out.println(ee);
 			System.exit(0);
@@ -478,7 +488,7 @@ public class Cmale {
 	 */
 	public static void main(String[] args) {
 		// readDataTest();
-		// irisTest();
+		//irisTest();
 		flagTest();
 		System.out.println("Finish.");
 	}// Of main

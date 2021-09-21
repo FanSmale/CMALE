@@ -2,6 +2,8 @@ package algorithm.ann;
 
 import java.util.Arrays;
 
+import org.omg.Messaging.SyncScopeHelper;
+
 import data.MultiLabelData;
 import util.SimpleTools;
 
@@ -251,28 +253,88 @@ public class MultiLabelAnn {
 		for (int i = 0; i < tempMatrix.length; i++) {
 			tempSortedIndices = SimpleTools.mergeSortToIndices(tempMatrix[i]);
 			if (dataset.getLabelQueried(i, tempSortedIndices[paraNumLabels - 1])) {
-				//No enough unknown labels to query.
+				// No enough unknown labels to query.
 				continue;
-			}//Of if
-			
+			} // Of if
+
 			tempTotal = 0;
 			for (int j = 0; j < paraNumLabels; j++) {
 				tempTotal += tempMatrix[i][tempSortedIndices[j]];
-			}//Of for j
-			
+			} // Of for j
+
 			if (tempMax < tempTotal) {
 				tempMax = tempTotal;
-				
+
 				resultArray[0] = i;
 				for (int j = 0; j < paraNumLabels; j++) {
 					resultArray[j + 1] = tempSortedIndices[j];
-				}//Of for j
+				} // Of for j
 			} // Of if
 		} // Of for i
 
 		System.out.println("Most uncertain: " + Arrays.toString(resultArray) + ": " + tempMax);
 		return resultArray;
 	}// Of getMostUncertainLabelIndices
+
+	/**
+	 ********************
+	 * Compute a batch of uncertain instances and respective labels.
+	 * 
+	 * @param paraInstanceBatch
+	 *            How many instances should be selected.
+	 * @param paraLabelBatch
+	 *            How many labels should be selected for each instance.
+	 * @return Instance indices and label indices in one matrix, where the first
+	 *         column is for the instance indices.
+	 ********************
+	 */
+	public int[][] getUncertainLabelBatch(int paraInstanceBatch, int paraLabelBatch) {
+		int[][] resultMatrix = new int[paraInstanceBatch][1 + paraLabelBatch];
+
+		// Step 1. Get the uncertainty for all instance-label pairs.
+		double[][] tempUncertaintyMatrix = computeLabelUncertaintyMatrix();
+
+		// Step 2. Get the uncertainty sum for each instance according to the
+		// label batch.
+		double[] tempInstanceUncertainArray = new double[dataset.getNumInstances()];
+		int[] tempSortedLabelIndices;
+		for (int i = 0; i < tempInstanceUncertainArray.length; i++) {
+			tempSortedLabelIndices = SimpleTools.mergeSortToIndices(tempUncertaintyMatrix[i]);
+			if (dataset.getLabelQueried(i, tempSortedLabelIndices[paraLabelBatch - 1])) {
+				// No enough unknown labels to query.
+				tempInstanceUncertainArray[i] = 0;
+			} else {
+				for (int j = 0; j < paraLabelBatch; j++) {
+					tempInstanceUncertainArray[i] += tempUncertaintyMatrix[i][tempSortedLabelIndices[j]];
+				} // Of for j
+			} // Of if
+		} // Of for i
+
+		// Step 3. Sort the instance uncertainty.
+		int[] tempSortedInstanceIndices = SimpleTools
+				.mergeSortToIndices(tempInstanceUncertainArray);
+
+		// Step 4. Copy data.
+		for (int i = 0; i < resultMatrix.length; i++) {
+			resultMatrix[i][0] = tempSortedInstanceIndices[i];
+
+			tempSortedLabelIndices = SimpleTools
+					.mergeSortToIndices(tempUncertaintyMatrix[tempSortedInstanceIndices[i]]);
+			for (int j = 0; j < paraLabelBatch; j++) {
+				resultMatrix[i][j + 1] = tempSortedLabelIndices[j];
+			}//Of for j
+		} // Of for i
+
+		System.out.print("Most uncertain: " + Arrays.deepToString(resultMatrix));
+		for (int i = 0; i < resultMatrix.length; i++) {
+			for (int j = 1; j < resultMatrix[0].length; j++) {
+				System.out.print(", " + tempUncertaintyMatrix[resultMatrix[i][0]][resultMatrix[i][j]]);
+			}//Of for j
+		}//Of for i
+		System.out.println();
+		
+		return resultMatrix;
+	}// Of getUncertainLabelBatch
 
 	/**
 	 ********************
@@ -286,13 +348,9 @@ public class MultiLabelAnn {
 	 */
 	public double[] forward(double[] paraInput) {
 		double[] resultArray = paraInput;
-		// System.out.println("numLayers = " + numLayers);
 		for (int i = 0; i < layers.length; i++) {
-			// System.out.println("layer = " + i + ", resultArray = " +
-			// Arrays.toString(resultArray));
 			resultArray = layers[i].forward(resultArray);
 		} // Of for i
-
 		return resultArray;
 	}// Of forward
 
@@ -306,8 +364,6 @@ public class MultiLabelAnn {
 	 ********************
 	 */
 	public void backPropagation(int[] paraTarget) {
-		// System.out.println("backPropagation paraTarget = " +
-		// Arrays.toString(paraTarget));
 		// Pre-processing.
 		int[] tempTarget = new int[paraTarget.length * 2];
 		for (int i = 0; i < paraTarget.length; i++) {
@@ -324,15 +380,8 @@ public class MultiLabelAnn {
 		} // Of for i
 
 		double[] tempErrors = layers[layers.length - 1].getLastLayerErrors(tempTarget);
-		// System.out.println("paraLabelKnownArray error = " +
-		// Arrays.toString(paraLabelKnownArray));
-		// System.out.println("original error = " +
-		// Arrays.toString(tempErrors));
 		for (int i = layers.length - 1; i >= 0; i--) {
 			tempErrors = layers[i].backPropagation(tempErrors);
-
-			// System.out.println("layer " + i + ", error = " +
-			// Arrays.toString(tempErrors));
 		} // Of for i
 	}// Of backPropagation
 
