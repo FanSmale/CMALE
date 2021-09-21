@@ -281,7 +281,7 @@ public class Cmale {
 	 *            The second index.
 	 ********************** 
 	 */
-	public void learn(int paraColdStartRounds, int paraNumAdditionalQueries,
+	public void twoStageLearn(int paraColdStartRounds, int paraNumAdditionalQueries,
 			int paraNumQueryBatchSize, double paraDc, int paraPretrainRounds,
 			double paraAccuracyThreshold) throws IOException {
 		// Step 1. Reset the dataset to clear learning information.
@@ -432,7 +432,7 @@ public class Cmale {
 		try {
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
-			tempCmale.learn(30, 10, 1, 0.12, 20000, 0.99);
+			tempCmale.twoStageLearn(30, 10, 1, 0.12, 20000, 0.99);
 
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
@@ -458,7 +458,7 @@ public class Cmale {
 		try {
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
-			tempCmale.learn(150, 150, 2, 0.12, 15000, 0.99);
+			tempCmale.twoStageLearn(150, 150, 2, 0.12, 15000, 0.99);
 
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
