@@ -311,27 +311,29 @@ public class Cmale {
 		// Now only one instance at a time.
 		int[] tempInstanceIndices = new int[1];
 		outputFile.writeBytes("Query and learning process: \r\n");
-		//int[] tempIndices;
+		// int[] tempIndices;
 		int[][] tempInstanceLabelIndicesMatrix;
 		int tempInstanceIndex;
 		for (int q = 0; q < paraNumAdditionalQueries; q++) {
-			//tempIndices = multiLabelAnn.getMostUncertainLabelIndices(paraLabelBatchSize);
-			//for (int j = 0; j < tempLabelIndices.length; j++) {
-			//	tempLabelIndices[j] = tempIndices[j + 1];
-			//} // Of for j
-			tempInstanceLabelIndicesMatrix = multiLabelAnn.getUncertainLabelBatch(paraInstanceBatch, paraLabelBatch);
+			// tempIndices =
+			// multiLabelAnn.getMostUncertainLabelIndices(paraLabelBatchSize);
+			// for (int j = 0; j < tempLabelIndices.length; j++) {
+			// tempLabelIndices[j] = tempIndices[j + 1];
+			// } // Of for j
+			tempInstanceLabelIndicesMatrix = multiLabelAnn.getUncertainLabelBatch(paraInstanceBatch,
+					paraLabelBatch);
 			for (int i = 0; i < paraInstanceBatch; i++) {
 				tempInstanceIndex = tempInstanceLabelIndicesMatrix[i][0];
 				for (int j = 0; j < paraLabelBatch; j++) {
 					tempLabelIndices[j] = tempInstanceLabelIndicesMatrix[i][j + 1];
 				} // Of for j
-				
+
 				dataset.queryLabels(tempInstanceIndex, tempLabelIndices);
 				outputFile.writeBytes("Query instance #" + tempInstanceIndex + " with labels #"
 						+ Arrays.toString(tempLabelIndices) + "\r\n");
-			}//Of for i
+			} // Of for i
 
-			//tempInstanceIndices[0] = tempIndices[0];
+			// tempInstanceIndices[0] = tempIndices[0];
 			boundedEmphasizedTrain(5000, 200, 10, tempInstanceIndices, paraAccuracyThreshold);
 		} // Of for q
 
@@ -488,7 +490,7 @@ public class Cmale {
 	 */
 	public static void main(String[] args) {
 		// readDataTest();
-		//irisTest();
+		// irisTest();
 		flagTest();
 		System.out.println("Finish.");
 	}// Of main
