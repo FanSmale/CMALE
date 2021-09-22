@@ -56,6 +56,26 @@ public abstract class GeneralAnnLayer {
 		mobp = paraMobp;
 		activator = new Activator(paraActivator);
 	}// Of the first constructor
+
+	/**
+	 ********************
+	 * Set learning rate.
+	 * @param paraLearningRate The new learning rate.
+	 ********************
+	 */
+	public void setLearningRate(double paraLearningRate) {
+		learningRate = paraLearningRate;
+	}//Of setLearningRate
+	
+	/**
+	 ********************
+	 * Set mobp.
+	 * @param paraMobp The new mobp.
+	 ********************
+	 */
+	public void setMobp(double paraMobp) {
+		mobp = paraMobp;
+	}//Of setMobp
 	
 	/**
 	 ********************

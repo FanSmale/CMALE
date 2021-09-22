@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 
+import org.omg.Messaging.SyncScopeHelper;
+
 import algorithm.ann.MultiLabelAnn;
 import data.*;
 import util.SimpleTools;
@@ -286,6 +288,12 @@ public class Cmale {
 			double paraAccuracyThreshold) throws IOException {
 		// Step 1. Reset the dataset to clear learning information.
 		dataset.reset();
+		if (paraColdStartRounds >= dataset.getNumInstances()) {
+			System.out.println(
+					"Error: the cold start rounds should not exceed the number of instances: "
+					+ dataset.getNumInstances() + ".");
+			System.exit(0);
+		} // Of if
 
 		// Step 2. Calculate the representativeness of each instance.
 		computeInstanceRepresentativeness(paraDc);
@@ -309,6 +317,7 @@ public class Cmale {
 
 		// Step 4. Regular learning.
 		// Now only one instance at a time.
+		//multiLabelAnn.setLearningRate(0.02);
 		int[] tempInstanceIndices = new int[1];
 		outputFile.writeBytes("Query and learning process: \r\n");
 		// int[] tempIndices;
@@ -439,12 +448,12 @@ public class Cmale {
 	 */
 	public static void irisTest() {
 		Cmale tempCmale = new Cmale("data/mliris.arff", 4, 3);
-		int[] tempFullConnectLayerNodes = { 4, 8 };
-		int[] tempParallelLayerNodes = { 4, 2 };
+		int[] tempFullConnectLayerNodes = { 4, 8, 8 };
+		int[] tempParallelLayerNodes = { 2 };
 		try {
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
-			tempCmale.twoStageLearn(30, 10, 2, 2, 0.12, 20000, 0.99);
+			tempCmale.twoStageLearn(30, 10, 1, 1, 0.12, 20000, 0.99);
 
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
@@ -459,22 +468,22 @@ public class Cmale {
 
 	/**
 	 ********************** 
-	 * Test on the iris dataset.
+	 * Test on the flag dataset.
 	 ********************** 
 	 */
 	public static void flagTest() {
 		Cmale tempCmale = new Cmale("data/flags.arff", 14, 12);
-		int[] tempFullConnectLayerNodes = { 14 };
-		int[] tempParallelLayerNodes = { 14, 8, 2 };
+		int[] tempFullConnectLayerNodes = { 14, 14 };
+		int[] tempParallelLayerNodes = { 4, 2 };
 
 		try {
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
-					0.02, 0.6, "ssssss");
-			tempCmale.twoStageLearn(100, 75, 1, 1, 0.12, 15000, 0.99);
+					0.04, 0.6, "ssssss");
+			tempCmale.twoStageLearn(150, 300, 1, 2, 0.12, 15000, 0.99);
 
-			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
-					0.02, 0.6, "ssssss");
-			tempCmale.randomSelectionLearn(300, 1000, 0.99);
+			//tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
+			//		0.04, 0.6, "ssssss");
+			//tempCmale.randomSelectionLearn(1500, 100000, 0.995);
 		} catch (Exception ee) {
 			System.out.println(ee);
 			System.exit(0);
@@ -485,13 +494,67 @@ public class Cmale {
 
 	/**
 	 ********************** 
+	 * Test on the yeast dataset.
+	 ********************** 
+	 */
+	public static void yeastTest() {
+		Cmale tempCmale = new Cmale("d:/data/multilabel/yeast.arff", 103, 14);
+		int[] tempFullConnectLayerNodes = { 103, 40, 20 };
+		int[] tempParallelLayerNodes = { 8, 2 };
+
+		try {
+			//tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
+			//		0.04, 0.6, "ssssss");
+			//tempCmale.twoStageLearn(150, 150, 1, 2, 0.12, 15000, 0.99);
+
+			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
+					0.04, 0.6, "ssssss");
+			tempCmale.randomSelectionLearn(1500, 100000, 0.995);
+		} catch (Exception ee) {
+			System.out.println(ee);
+			System.exit(0);
+		} // Of try
+
+		tempCmale.closeOutputFile();
+	}// Of yeastTest
+
+	/**
+	 ********************** 
+	 * Test on the yeast dataset.
+	 ********************** 
+	 */
+	public static void emotionsTest() {
+		Cmale tempCmale = new Cmale("d:/data/multilabel/emotions.arff", 72, 6);
+		int[] tempFullConnectLayerNodes = { 72, 22 };
+		int[] tempParallelLayerNodes = { 2 };
+
+		try {
+			//tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
+			//		0.04, 0.6, "ssssss");
+			//tempCmale.twoStageLearn(150, 150, 1, 2, 0.12, 15000, 0.99);
+
+			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
+					0.03, 0.6, "ssssss");
+			tempCmale.randomSelectionLearn(500, 100000, 0.995);
+		} catch (Exception ee) {
+			System.out.println(ee);
+			System.exit(0);
+		} // Of try
+
+		tempCmale.closeOutputFile();
+	}// Of emotionsTest
+	
+	/**
+	 ********************** 
 	 * The entrance.
 	 ********************** 
 	 */
 	public static void main(String[] args) {
 		// readDataTest();
 		// irisTest();
-		flagTest();
+		//flagTest();
+		//yeastTest();
+		emotionsTest();
 		System.out.println("Finish.");
 	}// Of main
 

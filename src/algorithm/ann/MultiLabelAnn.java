@@ -23,16 +23,6 @@ public class MultiLabelAnn {
 	int numLayers;
 
 	/**
-	 * Momentum coefficient.
-	 */
-	public double mobp;
-
-	/**
-	 * Learning rate.
-	 */
-	public double learningRate;
-
-	/**
 	 * The layers.
 	 */
 	GeneralAnnLayer[] layers;
@@ -61,9 +51,6 @@ public class MultiLabelAnn {
 
 		// Step 2. Accept parameters.
 		numLayers = paraFullConnectLayerNumNodes.length + paraParallelLayerNumNodes.length;
-		// Adjust if necessary.
-		learningRate = paraLearningRate;
-		mobp = paraMobp;
 
 		// Initialize layers.
 		layers = new GeneralAnnLayer[numLayers - 1];
@@ -75,9 +62,6 @@ public class MultiLabelAnn {
 					paraMobp);
 		} // Of for i
 
-		// System.out.println(
-		// "Building ParallelAnnLayer " + (paraFullConnectLayerNumNodes.length -
-		// 1));
 		layers[paraFullConnectLayerNumNodes.length - 1] = new FullConnectAnnLayer(
 				paraFullConnectLayerNumNodes[paraFullConnectLayerNumNodes.length - 1],
 				paraParallelLayerNumNodes[0] * tempNumParts,
@@ -85,9 +69,6 @@ public class MultiLabelAnn {
 				paraMobp);
 
 		for (int i = 0; i < paraParallelLayerNumNodes.length - 1; i++) {
-			// System.out.println(
-			// "Building ParallelAnnLayer " +
-			// (paraFullConnectLayerNumNodes.length + i));
 			layers[paraFullConnectLayerNumNodes.length + i] = new ParallelAnnLayer(tempNumParts,
 					paraParallelLayerNumNodes[i], paraParallelLayerNumNodes[i + 1],
 					paraActivators.charAt(paraFullConnectLayerNumNodes.length + i),
@@ -95,6 +76,32 @@ public class MultiLabelAnn {
 		} // Of for i
 	}// Of the first constructor
 
+	/**
+	 ********************
+	 * Set learning rate.
+	 * @param paraLearningRate The new learning rate.
+	 ********************
+	 */
+	public void setLearningRate(double paraLearningRate) {
+		System.out.println("Before setLearningRate");
+		for (int i = 0; i < layers.length; i++) {
+			layers[i].setLearningRate(paraLearningRate);
+		}//Of for i
+		System.out.println("After setLearningRate");
+	}//Of setLearningRate
+	
+	/**
+	 ********************
+	 * Set mobp.
+	 * @param paraMobp The new mobp.
+	 ********************
+	 */
+	public void setMobp(double paraMobp) {
+		for (int i = 0; i < layers.length; i++) {
+			layers[i].setMobp(paraMobp);
+		}//Of for i
+	}//Of setMobp
+	
 	/**
 	 ********************
 	 * Train using the dataset.
