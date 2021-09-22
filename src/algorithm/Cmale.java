@@ -439,12 +439,12 @@ public class Cmale {
 	 */
 	public static void irisTest() {
 		Cmale tempCmale = new Cmale("data/mliris.arff", 4, 3);
-		int[] tempFullConnectLayerNodes = { 4, 8, };
+		int[] tempFullConnectLayerNodes = { 4, 8 };
 		int[] tempParallelLayerNodes = { 4, 2 };
 		try {
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
-			tempCmale.twoStageLearn(10, 10, 2, 2, 0.12, 20000, 0.99);
+			tempCmale.twoStageLearn(30, 10, 2, 2, 0.12, 20000, 0.99);
 
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
@@ -464,13 +464,13 @@ public class Cmale {
 	 */
 	public static void flagTest() {
 		Cmale tempCmale = new Cmale("data/flags.arff", 14, 12);
-		int[] tempFullConnectLayerNodes = { 14, 14 };
-		int[] tempParallelLayerNodes = { 7, 2 };
+		int[] tempFullConnectLayerNodes = { 14 };
+		int[] tempParallelLayerNodes = { 14, 8, 2 };
 
 		try {
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");
-			tempCmale.twoStageLearn(100, 75, 2, 2, 0.12, 15000, 0.99);
+			tempCmale.twoStageLearn(100, 75, 1, 1, 0.12, 15000, 0.99);
 
 			tempCmale.initializeMultiLabelAnn(tempFullConnectLayerNodes, tempParallelLayerNodes,
 					0.02, 0.6, "ssssss");

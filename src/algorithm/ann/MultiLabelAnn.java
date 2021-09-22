@@ -2,8 +2,6 @@ package algorithm.ann;
 
 import java.util.Arrays;
 
-import org.omg.Messaging.SyncScopeHelper;
-
 import data.MultiLabelData;
 import util.SimpleTools;
 
